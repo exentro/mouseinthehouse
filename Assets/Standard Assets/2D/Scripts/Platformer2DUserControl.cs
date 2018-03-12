@@ -38,7 +38,7 @@ namespace UnityStandardAssets._2D
                 if (!m_Jump)
                 {
                     // Read the jump input in Update so button presses aren't missed.
-                    m_Jump = m_player.GetButton("Jump");
+                    m_Jump = m_player.GetButtonDown("Jump");
                 }
             }
         }
