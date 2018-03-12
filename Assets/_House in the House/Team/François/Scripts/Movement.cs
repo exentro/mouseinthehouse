@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float m_JumpForce = 400f;
     [SerializeField] private LayerMask m_WhatIsGround;
     private bool m_Grounded;
-    const float k_GroundedRadius = .2f;
+    const float k_GroundedRadius = .25f;
 
     [Header("Climb")]
     [SerializeField] private bool m_FaceOnClimbable; 
@@ -122,7 +122,8 @@ public class Movement : MonoBehaviour
     
     public void MoveY(float move)
     {
-        if(m_FaceOnClimbable)
+        //if(m_FaceOnClimbable)
+        if(m_FeetOnClimbable)
         {
             Vector3 newPosition = m_transform.position;
 
