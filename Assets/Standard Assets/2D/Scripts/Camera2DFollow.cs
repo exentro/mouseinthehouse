@@ -21,8 +21,6 @@ namespace UnityStandardAssets._2D
         // Use this for initialization
         private void Start()
         {
-
-            
             m_LastTargetPosition = m_midPoint;
             m_OffsetZ = (transform.position - m_midPoint).z;
             transform.parent = null;
@@ -60,6 +58,5 @@ namespace UnityStandardAssets._2D
             m_midPoint.x = target1.position.x + (target2.position.x - target1.position.x) * .5f;
             m_midPoint.y = target1.position.y + (target2.position.y - target1.position.y) * .5f;
         }
-
     }
 }
