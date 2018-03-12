@@ -20,8 +20,10 @@ public class InputController : MonoBehaviour
     {
         bool jump = Input.GetButtonDown("Jump");
         float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
 
         if (jump) m_movement.Jump();
         m_movement.MoveX(h);
+        m_movement.MoveY(v);
     }
 }
