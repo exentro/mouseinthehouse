@@ -5,7 +5,8 @@ namespace UnityStandardAssets._2D
 {
     public class Camera2DFollow : MonoBehaviour
     {
-        public Transform target;
+        public Transform target1;
+        public Transform target2;
         public float damping = 1;
         public float lookAheadFactor = 3;
         public float lookAheadReturnSpeed = 0.5f;
@@ -15,12 +16,15 @@ namespace UnityStandardAssets._2D
         private Vector3 m_LastTargetPosition;
         private Vector3 m_CurrentVelocity;
         private Vector3 m_LookAheadPos;
+        private Vector3 m_midPoint;
 
         // Use this for initialization
         private void Start()
         {
-            m_LastTargetPosition = target.position;
-            m_OffsetZ = (transform.position - target.position).z;
+
+            
+            m_LastTargetPosition = m_midPoint;
+            m_OffsetZ = (transform.position - m_midPoint).z;
             transform.parent = null;
         }
 
@@ -28,8 +32,9 @@ namespace UnityStandardAssets._2D
         // Update is called once per frame
         private void Update()
         {
+            GetMidPoint();
             // only update lookahead pos if accelerating or changed direction
-            float xMoveDelta = (target.position - m_LastTargetPosition).x;
+            float xMoveDelta = (m_midPoint - m_LastTargetPosition).x;
 
             bool updateLookAheadTarget = Mathf.Abs(xMoveDelta) > lookAheadMoveThreshold;
 
@@ -42,12 +47,19 @@ namespace UnityStandardAssets._2D
                 m_LookAheadPos = Vector3.MoveTowards(m_LookAheadPos, Vector3.zero, Time.deltaTime*lookAheadReturnSpeed);
             }
 
-            Vector3 aheadTargetPos = target.position + m_LookAheadPos + Vector3.forward*m_OffsetZ;
+            Vector3 aheadTargetPos = m_midPoint + m_LookAheadPos + Vector3.forward*m_OffsetZ;
             Vector3 newPos = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref m_CurrentVelocity, damping);
 
             transform.position = newPos;
 
-            m_LastTargetPosition = target.position;
+            m_LastTargetPosition = m_midPoint;
         }
+
+        private void GetMidPoint()
+        {
+            m_midPoint.x = target1.position.x + (target2.position.x - target1.position.x) * .5f;
+            m_midPoint.y = target1.position.y + (target2.position.y - target1.position.y) * .5f;
+        }
+
     }
 }
