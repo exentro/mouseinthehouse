@@ -2325,6 +2325,7 @@ GameObject:
   - component: {fileID: 1118577495}
   - component: {fileID: 1118577494}
   - component: {fileID: 1118577498}
+  - component: {fileID: 1118577499}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2408,10 +2409,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target1: {fileID: 743173416}
   target2: {fileID: 1789425078}
-  damping: 1
-  lookAheadFactor: 3
-  lookAheadReturnSpeed: 0.5
-  lookAheadMoveThreshold: 0.1
+  damping: 0.5
+  lookAheadFactor: 0
+  lookAheadReturnSpeed: 0
+  lookAheadMoveThreshold: 0
+--- !u!114 &1118577499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1118577493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d3762e923d022a40bd1cf860fa01ad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colDepth: 1
+  zPosition: 0
+  m_cameraEdge: {fileID: 61835360056734356, guid: f78d8f47de92e134898e101fe1207795,
+    type: 2}
 --- !u!1001 &1218798908
 Prefab:
   m_ObjectHideFlags: 0
