@@ -4,33 +4,39 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    [SerializeField]
+    private bool m_debug = true;
+    private Transform m_transform;
+    private Rigidbody2D m_rigidbody2d;
+    private Animator m_animator;
+
+    private void Start()
+    {
+        if (m_player == null) Debug.LogError("MousePlayer not set!");
+        else
+        {
+            m_transform = m_player.Transform;
+            m_rigidbody2d = m_player.Rigidbody2D;
+            m_animator = m_player.Animator;
+        }
+    }
+
     [Header("Dependencies")]
-    [SerializeField] private Animator m_Anim;
-    [SerializeField] private Rigidbody2D m_Rigidbody2D;
-    [SerializeField] private Transform m_transform;
-    [SerializeField] private Transform m_GroundCheck;
-    [SerializeField] private Transform m_ClimbFaceCheck;
-    [SerializeField] private Transform m_ClimbFeetCheck;
+    [SerializeField] private MousePlayer m_player;
 
-    [Header("Debug")]
-    [SerializeField] private bool m_debug = true;
-
-    [Header("Left-Right Movement")]
-    [SerializeField] private float m_MaxSpeed = 10f;
+    //Moving
     private bool m_FacingRight = true;
-    
-    [Header("Jump")]
-    [SerializeField] private bool m_CanJump = true;
-    [SerializeField] private bool m_AirControl = false;
-    [SerializeField] private float m_JumpForce = 400f;
-    [SerializeField] private LayerMask m_WhatIsGround;
-    private bool m_Grounded;
+
+    //Jumping
+    [SerializeField] private Transform m_GroundCheck;
+    private bool m_Grounded = true;
     const float k_GroundedRadius = .25f;
 
-    [Header("Climb")]
-    [SerializeField] private bool m_FaceOnClimbable; 
-    [SerializeField] private bool m_FeetOnClimbable;
-    [SerializeField] [Range(0.01f, 0.1f)] private float m_ClimbingSpeedMultiplier;
+    //Climbing
+    [SerializeField] private Transform m_ClimbFaceCheck;
+    [SerializeField] private Transform m_ClimbFeetCheck;
+    private bool m_FaceOnClimbable; 
+    private bool m_FeetOnClimbable;
     const float k_ClimbingCheckRadius = .05f;
 
     private void Awake()
@@ -43,36 +49,27 @@ public class Movement : MonoBehaviour
 
         if (m_ClimbFeetCheck == null) m_ClimbFeetCheck = transform.Find("ClimbFeetCheck");
         if (m_debug && m_ClimbFeetCheck == null) Debug.LogError("Can't find Transform \"ClimbFeetCheck\"");
-
-        if (m_Anim == null) m_Anim = GetComponent<Animator>();
-        if (m_debug && m_Anim == null) Debug.LogError("Can't find Component Animator");
-
-        if (m_Rigidbody2D == null) m_Rigidbody2D = GetComponent<Rigidbody2D>();
-        if (m_debug && m_Rigidbody2D == null) Debug.LogError("Can't find Component Rigidbody2D");
-
-        if (m_transform == null) m_transform = GetComponent<Transform>();
-        if (m_debug && m_transform == null) Debug.LogError("Can't find Component Transform");
     }
 
     private void FixedUpdate()
     {
         CheckGrounded();
         CheckClimbable();
-        m_Anim.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);
+        m_animator.SetFloat("vSpeed", m_rigidbody2d.velocity.y);
     }
 
     private void CheckGrounded()
     {
         m_Grounded = false;
 
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_player.PlayerData.WhatIsGround);
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].gameObject != gameObject)
                 m_Grounded = true;
         }
 
-        m_Anim.SetBool("Ground", m_Grounded);
+        m_animator.SetBool("Ground", m_Grounded);
     }
 
     private void CheckClimbable()
@@ -102,12 +99,12 @@ public class Movement : MonoBehaviour
     }
 
     public void MoveX(float move)
-    {     
-        if (m_Grounded || m_AirControl)
+    {
+        if (m_Grounded || m_player.PlayerData.AirControl)
         {
-            m_Anim.SetFloat("Speed", Mathf.Abs(move));
-            
-            m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
+            m_animator.SetFloat("Speed", Mathf.Abs(move));
+
+            m_rigidbody2d.velocity = new Vector2(move * m_player.PlayerData.HorizontalSpeed, m_rigidbody2d.velocity.y);
             
             if (move > 0 && !m_FacingRight)
             {
@@ -122,23 +119,22 @@ public class Movement : MonoBehaviour
     
     public void MoveY(float move)
     {
-        //if(m_FaceOnClimbable)
         if(m_FeetOnClimbable)
         {
             Vector3 newPosition = m_transform.position;
 
-            newPosition.y += move * m_ClimbingSpeedMultiplier;
+            newPosition.y += move * m_player.PlayerData.ClimbSpeed;
             m_transform.position = newPosition;
         }
     }
 
     public void Jump()
     {
-        if (m_CanJump && m_Grounded && m_Anim.GetBool("Ground"))
+        if (m_player.PlayerData.CanJump && m_Grounded && m_animator.GetBool("Ground"))
         {
             m_Grounded = false;
-            m_Anim.SetBool("Ground", false);
-            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+            m_animator.SetBool("Ground", false);
+            m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
         }
     }
     
