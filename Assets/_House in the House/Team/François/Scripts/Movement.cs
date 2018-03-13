@@ -30,7 +30,7 @@ public class Movement : MonoBehaviour
     //Jumping
     [SerializeField] private Transform m_GroundCheck;
     private bool m_Grounded = true;
-    const float k_GroundedRadius = .25f;
+    const float k_GroundedRadius = .15f;
 
     //Climbing
     [SerializeField] private Transform m_ClimbFaceCheck;
@@ -134,6 +134,7 @@ public class Movement : MonoBehaviour
         {
             m_Grounded = false;
             m_animator.SetBool("Ground", false);
+            m_animator.SetBool("Jump", true);
             m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
         }
     }
