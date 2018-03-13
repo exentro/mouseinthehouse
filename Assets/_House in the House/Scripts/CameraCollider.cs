@@ -18,26 +18,11 @@ public class CameraCollider : MonoBehaviour
 
     #region System
 
-    private void Awake() 
-	{
-		
-	}
-
 	private void Start() 
 	{
         SetEdgeCollider();
 	}
 	
-	private void Update()
-	{
-		
-	}
-
-	private void FixedUpdate()
-	{
-		
-	}
-
     #endregion
 
     #region Class Methods
