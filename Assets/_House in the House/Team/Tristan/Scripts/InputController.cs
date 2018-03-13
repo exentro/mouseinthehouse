@@ -2,12 +2,15 @@ using System;
 using UnityEngine;
 using Rewired;
 
-public class Control : MonoBehaviour
+public class InputController : MonoBehaviour
 {
     private Player m_player;
     private Movement m_movement;
+
+    [SerializeField] private MousePlayer m_mousePlayer;
+
     private bool m_initialized;
-    public int m_playerId;
+
     private float m_moveX;
     private float m_moveY;
     private bool m_jump;
@@ -16,13 +19,17 @@ public class Control : MonoBehaviour
     private void Awake()
     {
         m_initialized = false;
-        m_movement = new Movement();
+
+        if (m_mousePlayer == null) gameObject.GetComponent<MousePlayer>();
+        if (m_mousePlayer == null) Debug.LogError("Can't find Component \"MousePlayer\"");
+        
+        m_movement = m_mousePlayer.Movement;
     }
 
     private void Initialize()
     {
         // Get the Rewired Player object for this player.
-        m_player = ReInput.players.GetPlayer(m_playerId);
+        m_player = ReInput.players.GetPlayer(m_mousePlayer.PlayerID);
         m_initialized = true;
     }
     
@@ -40,12 +47,6 @@ public class Control : MonoBehaviour
             m_moveX = m_player.GetAxis("MoveHorizontal");
             m_moveY = m_player.GetAxis("MoveVertical");
             Move();
-            //{
-            //    float h = m_player.GetAxis("MoveHorizontal");
-            //    // Pass all parameters to the character control script.
-            //    m_Character.Move(h, crouch, m_jump);
-            //    m_jump = false;
-            //}
         }
     }
 
