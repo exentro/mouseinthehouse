@@ -5,6 +5,10 @@ using UnityEngine;
 public class MousePlayer : MonoBehaviour
 {
     private static List<MousePlayer> m_players;
+    public static MousePlayer GetPlayer(int id)
+    {
+        return m_players[id];
+    }
     private void Awake()
     {
         if (m_players == null) m_players = new List<MousePlayer>();
@@ -13,6 +17,10 @@ public class MousePlayer : MonoBehaviour
 
         if (m_Anim == null) m_Anim = GetComponent<Animator>();
         if (m_debug && m_Anim == null) Debug.LogError("Can't find Component Animator");
+        if (m_Anim != null)
+        {
+            m_Anim.SetInteger("PlayerId", m_playerId);
+        }
 
         if (m_Rigidbody2D == null) m_Rigidbody2D = GetComponent<Rigidbody2D>();
         if (m_debug && m_Rigidbody2D == null) Debug.LogError("Can't find Component Rigidbody2D");

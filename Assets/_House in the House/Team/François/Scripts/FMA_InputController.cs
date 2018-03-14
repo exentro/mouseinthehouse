@@ -6,7 +6,7 @@ public class FMA_InputController : MonoBehaviour
 {
     [Header("Dependencies")]
     [SerializeField] private MousePlayer m_player;
-    private Movement m_movement;
+    private PlayerMovementInput m_playerMovementInput;
 
     [Header("Debug")]
     [SerializeField] private bool m_debug = true;
@@ -19,18 +19,15 @@ public class FMA_InputController : MonoBehaviour
     
     private void Start()
     {
-        m_movement = m_player.Movement;
-        if (m_debug && m_movement == null) Debug.LogError("Can't find Component Movement");
+        if (m_debug && m_player.Movement == null) Debug.LogError("Can't find Component Movement");
+        m_playerMovementInput = m_player.Movement.MovementInput;
+        if (m_debug && m_playerMovementInput == null) Debug.LogError("Can't retrieve Movement.MovementInput reference");
     }
 
     void Update ()
     {
-        bool jump = Input.GetButtonDown("Jump");
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-
-        if (jump) m_movement.Jump();
-        m_movement.MoveX(h);
-        m_movement.MoveY(v);
+        m_playerMovementInput.Jump = Input.GetButtonDown("Jump");
+        m_playerMovementInput.InputHorizontal = Input.GetAxis("Horizontal");
+        m_playerMovementInput.InputVertical = Input.GetAxis("Vertical");
     }
 }

@@ -5,15 +5,16 @@ using Rewired;
 public class InputController : MonoBehaviour
 {
     private Player m_player;
-    private Movement m_movement;
+    private PlayerMovementInput m_playerMovementInputs;
 
     [SerializeField] private MousePlayer m_mousePlayer;
 
     private bool m_initialized;
-
+    /*
     private float m_moveX;
     private float m_moveY;
     private bool m_jump;
+    */
     private bool m_crouch;
 
     private void Awake()
@@ -22,8 +23,8 @@ public class InputController : MonoBehaviour
 
         if (m_mousePlayer == null) GetComponent<MousePlayer>();
         if (m_mousePlayer == null) Debug.LogError("Can't find Component \"MousePlayer\"");
-        
-        m_movement = m_mousePlayer.Movement;
+
+        m_playerMovementInputs = m_mousePlayer.Movement.MovementInput;
     }
 
     private void Initialize()
@@ -44,26 +45,18 @@ public class InputController : MonoBehaviour
     {
         if (m_initialized)
         {
-            m_moveX = m_player.GetAxis("MoveHorizontal");
-            m_moveY = m_player.GetAxis("MoveVertical");
-            Move();
+            m_playerMovementInputs.InputHorizontal = m_player.GetAxis("MoveHorizontal");
+            m_playerMovementInputs.InputVertical = m_player.GetAxis("MoveVertical");
         }
     }
 
     private void GetInput()
     {
-        if (!m_jump) m_jump = m_player.GetButtonDown("Jump");
-        m_crouch = m_player.GetButtonDown("Crouch");
-    }
+        //m_playerMovementInputs.Reset();
 
-    private void Move()
-    {
-        m_movement.MoveX(m_moveX);
-        m_movement.MoveY(m_moveY);
-        if (m_jump)
-        {
-            m_movement.Jump();
-            m_jump = false;
-        }
+        //if (!m_playerMovementInputs.Jump)
+            m_playerMovementInputs.Jump = m_player.GetButtonDown("Jump");
+        
+        //m_crouch = m_player.GetButtonDown("Crouch");
     }
 }
