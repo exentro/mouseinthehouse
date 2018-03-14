@@ -21,6 +21,7 @@ public class Camera2DFollow : MonoBehaviour
     private float m_screenLength;
     private float m_PlayerDistX;
     private bool m_splited;
+    private bool m_merging;
 
     // Use this for initialization
     private void Start()
@@ -30,6 +31,7 @@ public class Camera2DFollow : MonoBehaviour
         transform.parent = null;
         m_screenLength = Vector2.Distance(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)), Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)));
         m_splited = false;
+        m_merging = false;
         m_camera1 = GetComponent<Camera>();
     }
 
@@ -43,22 +45,31 @@ public class Camera2DFollow : MonoBehaviour
             m_camera2.transform.position = m_camera1.transform.position;
             m_camera1.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
             m_camera2.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
+            if (player1.position.x < player2.position.x)
+            {
+                m_camera1.transform.position = new Vector3(player1.position.x, m_camera1.transform.position.y, m_camera1.transform.position.z);
+                m_camera2.transform.position = new Vector3(player2.position.x, m_camera2.transform.position.y, m_camera2.transform.position.z);
+            }
+            else
+            {
+                m_camera1.transform.position = new Vector3(player2.position.x, m_camera1.transform.position.y, m_camera1.transform.position.z);
+                m_camera2.transform.position = new Vector3(player1.position.x, m_camera2.transform.position.y, m_camera2.transform.position.z);
+            }
+            m_merging = false;
             m_splited = true;
         }
         else if (m_splited && m_PlayerDistX < m_screenLength * .5)
         {   // Merge Screens
-            m_camera1.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
-            m_camera2.rect = new Rect(0.0f, 0.0f, 0.0f, 0.0f);
-            // do stuff
-            m_splited = false;
+            m_merging = true;
+            MergeScreens();
         }
 
-        if (!m_splited) LookPoint(m_camera1, GetMidPoint());
-        else LookEachPlayer();
+        if (!m_splited) SmoothLookPoint(m_camera1, GetMidPoint());
+        else if (!m_merging) SmoothLookEachPlayer();
         // Debug.DrawLine(target1.position, target2.position, Color.blue, 0);
     }
 
-    private void LookPoint(Camera camera, Vector3 target)
+    private void SmoothLookPoint(Camera camera, Vector3 target)
     {
         // only update lookahead pos if accelerating or changed direction
         float xMoveDelta = (target - m_LastTargetPosition).x;
@@ -93,17 +104,66 @@ public class Camera2DFollow : MonoBehaviour
         return target;
     }
 
-    private void LookEachPlayer()
+    private void SmoothLookEachPlayer()
     {
         if (player1.position.x < player2.position.x)
         {
-            LookPoint(m_camera1, player1.position);
-            LookPoint(m_camera2, player2.position);
+            SmoothLookPoint(m_camera1, player1.position);
+            SmoothLookPoint(m_camera2, player2.position);
         }
         else
         {
-            LookPoint(m_camera1, player2.position);
-            LookPoint(m_camera2, player1.position);
+            SmoothLookPoint(m_camera1, player2.position);
+            SmoothLookPoint(m_camera2, player1.position);
+        }
+    }
+
+    private void MergeScreens()
+    {
+        float midVerticalDist = Math.Abs(player1.position.y - player2.position.y) *.5f;
+
+        Vector3 player1Merge = new Vector3();
+        Vector3 player2Merge = new Vector3();
+        if (player1.position.y > player2.position.y)
+        {
+            player1Merge = new Vector3(player1.position.x, player1.position.y - midVerticalDist, 0f);
+            player2Merge = new Vector3(player2.position.x, player2.position.y + midVerticalDist, 0f);
+        }
+        else
+        {
+            player1Merge = new Vector3(player1.position.x, player1.position.y + midVerticalDist, 0f);
+            player2Merge = new Vector3(player2.position.x, player2.position.y - midVerticalDist, 0f);
+        }
+
+        if (player1.position.x < player2.position.x)
+        {
+            SmoothLookPoint(m_camera1, player1Merge);
+            SmoothLookPoint(m_camera2, player2Merge);
+        }
+        else
+        {
+            SmoothLookPoint(m_camera1, player2Merge);
+            SmoothLookPoint(m_camera2, player1Merge);
+        }
+
+
+        print(midVerticalDist);
+        print(player1Merge.y);
+        print(player1.position.y);
+        print(player2Merge.y);
+        print(player2.position.y);
+        //if (Math.Round(player1Merge.y, 3) == Math.Round(m_camera1.transform.position.y, 3) && Math.Round(player2Merge.y, 3) == Math.Round(player2.position.y, 3))
+        if(Math.Round(m_camera1.transform.position.y, 1) == Math.Round(m_camera2.transform.position.y, 1))
+        {
+
+
+
+            m_camera1.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+            m_camera2.rect = new Rect(0.0f, 0.0f, 0.0f, 0.0f);
+            Vector3 midPoint = GetMidPoint();
+            m_camera1.transform.position = new Vector3(midPoint.x, midPoint.y, m_camera1.transform.position.z);
+            m_splited = false;
+            m_merging = false;
         }
     }
 
