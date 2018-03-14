@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    [SerializeField] private bool Pushable;
-    [SerializeField] private bool Climbable;
+    [SerializeField] public bool Pushable;
+    [SerializeField] public bool Climbable;
 }

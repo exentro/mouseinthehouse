@@ -179,8 +179,7 @@ MonoBehaviour:
     m_jump: 0
   m_player: {fileID: 1275853964}
   m_groundCheckCollisionScript: {fileID: 364068509}
-  m_ClimbFaceCheck: {fileID: 622138815}
-  m_ClimbFeetCheck: {fileID: 1891302324}
+  m_climbCheckCollisionScript: {fileID: 622138817}
 --- !u!4 &346122665
 Transform:
   m_ObjectHideFlags: 0
@@ -193,7 +192,6 @@ Transform:
   m_Children:
   - {fileID: 364068507}
   - {fileID: 622138815}
-  - {fileID: 1891302324}
   m_Father: {fileID: 1275853961}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -221,7 +219,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 364068506}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.007, y: -0.144, z: 0.004821811}
+  m_LocalPosition: {x: 0, y: -0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 346122665}
@@ -233,7 +231,7 @@ CircleCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 364068506}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -382,9 +380,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 371235816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bda7e72263c929544b9bbcd67b11a01b, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ca201eb4e31e6149b22cdb935ae6ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Pushable: 1
+  Climbable: 0
 --- !u!1 &479115477
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,6 +492,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 622138815}
+  - component: {fileID: 622138816}
+  - component: {fileID: 622138817}
   m_Layer: 8
   m_Name: ClimbFaceCheck
   m_TagString: Untagged
@@ -506,12 +508,48 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 622138814}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3073147, y: 0.23508954, z: 0.004821811}
+  m_LocalPosition: {x: 0.25, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 346122665}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &622138816
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 622138814}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.025, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.05, y: 0.8}
+  m_EdgeRadius: 0
+--- !u!114 &622138817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 622138814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ade985d34e4c7c8479e22f0638336700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &843731290
 Prefab:
   m_ObjectHideFlags: 0
@@ -717,7 +755,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.03}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -728,7 +766,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.53, y: 0.71}
+  m_Size: {x: 0.5, y: 0.8}
   m_EdgeRadius: 0
 --- !u!1 &1396699883
 GameObject:
@@ -739,8 +777,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1396699886}
   - component: {fileID: 1396699885}
-  - component: {fileID: 1396699884}
   - component: {fileID: 1396699887}
+  - component: {fileID: 1396699884}
   m_Layer: 0
   m_Name: WallLeft
   m_TagString: Untagged
@@ -756,9 +794,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1396699883}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bda7e72263c929544b9bbcd67b11a01b, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ca201eb4e31e6149b22cdb935ae6ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Pushable: 0
+  Climbable: 1
 --- !u!212 &1396699885
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -841,34 +881,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 1.28}
   m_EdgeRadius: 0
---- !u!1 &1891302323
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1891302324}
-  m_Layer: 8
-  m_Name: ClimbFeetCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: -982381405332843317, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1891302324
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1891302323}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3073147, y: -0.20591044, z: 0.004821811}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 346122665}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1965973921
 GameObject:
   m_ObjectHideFlags: 0
