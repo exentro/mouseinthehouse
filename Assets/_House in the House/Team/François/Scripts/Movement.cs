@@ -66,9 +66,11 @@ public class Movement : MonoBehaviour
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].gameObject != gameObject)
+            {
                 m_Grounded = true;
+                m_animator.SetBool("Jump", false);
+            }
         }
-
         m_animator.SetBool("Ground", m_Grounded);
     }
 
