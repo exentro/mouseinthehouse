@@ -732,6 +732,7 @@ GameObject:
   - component: {fileID: 1118577495}
   - component: {fileID: 1118577494}
   - component: {fileID: 1118577498}
+  - component: {fileID: 1118577499}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -810,19 +811,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 1118577493}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 973e6ede5b9bf1c489ac140d97114dd5, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d8238cc53530b64fbb7828c3d3bb591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_player1: {fileID: 1002969308}
-  m_player2: {fileID: 272908445}
-  m_damping: 0.2
+  player1: {fileID: 1002969308}
+  player2: {fileID: 272908445}
+  damping: 0.04
+  lookAheadFactor: 0
+  lookAheadReturnSpeed: 0
+  lookAheadMoveThreshold: 0
   m_camera2: {fileID: 2072759638}
-  m_animCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+--- !u!114 &1118577499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1118577493}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d3762e923d022a40bd1cf860fa01ad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colDepth: 1
+  zPosition: 0
+  m_cameraEdge: {fileID: 61835360056734356, guid: f78d8f47de92e134898e101fe1207795,
+    type: 2}
 --- !u!1001 &1125817708
 Prefab:
   m_ObjectHideFlags: 0
@@ -1187,7 +1200,6 @@ GameObject:
   - component: {fileID: 2072759639}
   - component: {fileID: 2072759638}
   - component: {fileID: 2072759637}
-  - component: {fileID: 2072759636}
   m_Layer: 0
   m_Name: Aux Camera
   m_TagString: Untagged
@@ -1195,18 +1207,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2072759636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2072759635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 863c30a9e88cb4848977a564830f476c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_damping: 0.2
 --- !u!124 &2072759637
 Behaviour:
   m_ObjectHideFlags: 0

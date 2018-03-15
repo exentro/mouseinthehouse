@@ -3,172 +3,145 @@ using UnityEngine;
 
 public class Camera2DFollow : MonoBehaviour
 {
-    public Transform player1;
-    public Transform player2;
-    public float damping = 1;
-    public float lookAheadFactor = 3;
-    public float lookAheadReturnSpeed = 0.5f;
-    public float lookAheadMoveThreshold = 0.1f;
-    public Camera m_camera2;  
+    #region Public Members
 
-    private float m_OffsetZ;
-    private Vector3 m_LastTargetPosition;
-    private Vector3 m_CurrentVelocity;
-    private Vector3 m_LookAheadPos;
-    private Vector3 m_midPoint;
+    public Transform m_player1;
+    public Transform m_player2;
+    public float m_damping = 0.2f;
+    public Camera m_camera2;
+    public AnimationCurve m_animCurve;
 
-    private Camera m_camera1;
-    private float m_screenLength;
-    private float m_PlayerDistX;
-    private bool m_splited;
-    private bool m_merging;
-
-    // Use this for initialization
+    #endregion
+    
     private void Start()
     {
-        m_LastTargetPosition = m_midPoint;
-        m_OffsetZ = (transform.position - m_midPoint).z;
-        transform.parent = null;
+        m_offsetZ = transform.position.z;
         m_screenLength = Vector2.Distance(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)), Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)));
-        m_splited = false;
-        m_merging = false;
         m_camera1 = GetComponent<Camera>();
+        m_camera2Follow = m_camera2.GetComponent<Camera2DAuxFollow>();
     }
-
-
-    // Update is called once per frame
-    private void Update()
+    
+    private void LateUpdate()
     {
-        m_PlayerDistX = Math.Abs(player1.position.x - player2.position.x);
-        if(!m_splited && m_PlayerDistX > m_screenLength * .5)
-        {   // Split Screen
-            m_camera2.transform.position = m_camera1.transform.position;
-            m_camera1.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
-            m_camera2.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
-            if (player1.position.x < player2.position.x)
-            {
-                m_camera1.transform.position = new Vector3(player1.position.x, m_camera1.transform.position.y, m_camera1.transform.position.z);
-                m_camera2.transform.position = new Vector3(player2.position.x, m_camera2.transform.position.y, m_camera2.transform.position.z);
-            }
-            else
-            {
-                m_camera1.transform.position = new Vector3(player2.position.x, m_camera1.transform.position.y, m_camera1.transform.position.z);
-                m_camera2.transform.position = new Vector3(player1.position.x, m_camera2.transform.position.y, m_camera2.transform.position.z);
-            }
-            m_merging = false;
-            m_splited = true;
-        }
-        else if (m_splited && m_PlayerDistX < m_screenLength * .5)
-        {   // Merge Screens
-            m_merging = true;
-            MergeScreens();
-        }
+        float m_deltaX = Math.Abs(m_player1.position.x - m_player2.position.x);
 
-        if (!m_splited) SmoothLookPoint(m_camera1, GetMidPoint());
-        else if (!m_merging) SmoothLookEachPlayer();
-        // Debug.DrawLine(target1.position, target2.position, Color.blue, 0);
+        if (!m_splited && m_deltaX > m_screenLength * .5)
+            SplitScreen();
+        else if (m_splited)
+            if (m_deltaX < m_screenLength * .5)
+                MergeScreens();
+            else
+                m_merging = false;
+
+        if (!m_splited) // 2 Players on same screen
+            SmoothLookPoint(m_camera1, GetMidPoint(m_player1.position, m_player2.position));
+        else if (!m_merging) // 2 players on differents screens
+            SmoothLookEachPlayer();
     }
 
     private void SmoothLookPoint(Camera camera, Vector3 target)
     {
-        // only update lookahead pos if accelerating or changed direction
-        float xMoveDelta = (target - m_LastTargetPosition).x;
-
-        bool updateLookAheadTarget = Mathf.Abs(xMoveDelta) > lookAheadMoveThreshold;
-
-        if (updateLookAheadTarget)
-        {
-            m_LookAheadPos = lookAheadFactor * Vector3.right * Mathf.Sign(xMoveDelta);
-        }
-        else
-        {
-            m_LookAheadPos = Vector3.MoveTowards(m_LookAheadPos, Vector3.zero, Time.deltaTime * lookAheadReturnSpeed);
-        }
-
-        Vector3 aheadTargetPos = target + m_LookAheadPos + Vector3.forward * m_OffsetZ;
-        Vector3 newPos = Vector3.SmoothDamp(camera.transform.position, aheadTargetPos, ref m_CurrentVelocity, damping);
-
+        Vector3 aheadTargetPos = target + Vector3.forward * m_offsetZ;
+        Vector3 newPos = Vector3.SmoothDamp(camera.transform.position, aheadTargetPos, ref m_currentVelocity, m_damping);
+        if(m_splited)
+            newPos.x = Mathf.Min(newPos.x, m_camera2.transform.position.x - m_screenLength * 0.5f);
         camera.transform.position = newPos;
-
-        m_LastTargetPosition = target;
     }
 
-    private Vector2 GetMidPoint()
+    private Vector2 GetMidPoint(Vector3 point1, Vector3 point2)
     {
         Vector3 target = new Vector3
         {
-            x = player1.position.x + (player2.position.x - player1.position.x) * .5f,
-            y = player1.position.y + (player2.position.y - player1.position.y) * .5f,
-            z = 0f
+            x = point1.x + (point2.x - point1.x) * .5f,
+            y = point1.y + (point2.y - point1.y) * .5f,
+            z = point1.z + (point2.z - point1.z)
         };
         return target;
     }
 
     private void SmoothLookEachPlayer()
-    {
-        if (player1.position.x < player2.position.x)
+    {   // Camera1 always follow player on the left
+        if (m_player1.position.x < m_player2.position.x)
         {
-            SmoothLookPoint(m_camera1, player1.position);
-            SmoothLookPoint(m_camera2, player2.position);
+            SmoothLookPoint(m_camera1, m_player1.position);
+            m_camera2Follow.SmoothLookPoint(m_camera2, m_player2.position, m_screenLength, m_camera1);
         }
         else
         {
-            SmoothLookPoint(m_camera1, player2.position);
-            SmoothLookPoint(m_camera2, player1.position);
+            SmoothLookPoint(m_camera1, m_player2.position);
+            m_camera2Follow.SmoothLookPoint(m_camera2, m_player1.position, m_screenLength, m_camera1);
+        }
+    }
+
+    private void SplitScreen()
+    {
+        m_splited = true;
+        m_merging = false;
+        m_camera2.transform.position = m_camera1.transform.position;
+        m_camera1.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
+        m_camera2.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
+        if (m_player1.position.x < m_player2.position.x)
+        {
+            m_camera1.transform.position = new Vector3(m_player1.position.x, m_camera1.transform.position.y, m_camera1.transform.position.z);
+            m_camera2.transform.position = new Vector3(m_player2.position.x, m_camera2.transform.position.y, m_camera2.transform.position.z);
+        }
+        else
+        {
+            m_camera1.transform.position = new Vector3(m_player2.position.x, m_camera1.transform.position.y, m_camera1.transform.position.z);
+            m_camera2.transform.position = new Vector3(m_player1.position.x, m_camera2.transform.position.y, m_camera2.transform.position.z);
         }
     }
 
     private void MergeScreens()
     {
-        float midVerticalDist = Math.Abs(player1.position.y - player2.position.y) *.5f;
+        m_merging = true;
+        float halfDeltaY = Math.Abs(m_player1.position.y - m_player2.position.y) * 0.5f;
 
         Vector3 player1Merge = new Vector3();
         Vector3 player2Merge = new Vector3();
-        if (player1.position.y > player2.position.y)
+        if (m_player1.position.y > m_player2.position.y)
         {
-            player1Merge = new Vector3(player1.position.x, player1.position.y - midVerticalDist, 0f);
-            player2Merge = new Vector3(player2.position.x, player2.position.y + midVerticalDist, 0f);
+            player1Merge = new Vector3(m_player1.position.x, m_player1.position.y - halfDeltaY, 0f);
+            player2Merge = new Vector3(m_player2.position.x, m_player2.position.y + halfDeltaY, 0f);
         }
         else
         {
-            player1Merge = new Vector3(player1.position.x, player1.position.y + midVerticalDist, 0f);
-            player2Merge = new Vector3(player2.position.x, player2.position.y - midVerticalDist, 0f);
+            player1Merge = new Vector3(m_player1.position.x, m_player1.position.y + halfDeltaY, 0f);
+            player2Merge = new Vector3(m_player2.position.x, m_player2.position.y - halfDeltaY, 0f);
         }
 
-        if (player1.position.x < player2.position.x)
+        if (m_player1.position.x < m_player2.position.x)
         {
             SmoothLookPoint(m_camera1, player1Merge);
-            SmoothLookPoint(m_camera2, player2Merge);
+            m_camera2Follow.SmoothLookPoint(m_camera2, player2Merge, m_screenLength, m_camera1);
         }
         else
         {
             SmoothLookPoint(m_camera1, player2Merge);
-            SmoothLookPoint(m_camera2, player1Merge);
+            m_camera2Follow.SmoothLookPoint(m_camera2, player1Merge, m_screenLength, m_camera1);
         }
 
-
-        print(midVerticalDist);
-        print(player1Merge.y);
-        print(player1.position.y);
-        print(player2Merge.y);
-        print(player2.position.y);
-        //if (Math.Round(player1Merge.y, 3) == Math.Round(m_camera1.transform.position.y, 3) && Math.Round(player2Merge.y, 3) == Math.Round(player2.position.y, 3))
         if(Math.Round(m_camera1.transform.position.y, 1) == Math.Round(m_camera2.transform.position.y, 1))
         {
-
-
-
             m_camera1.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
             m_camera2.rect = new Rect(0.0f, 0.0f, 0.0f, 0.0f);
-            Vector3 midPoint = GetMidPoint();
-            m_camera1.transform.position = new Vector3(midPoint.x, midPoint.y, m_camera1.transform.position.z);
+            m_camera1.transform.position = GetMidPoint(m_camera1.transform.position, m_camera2.transform.position);
             m_splited = false;
             m_merging = false;
         }
     }
 
-    private void OnGUI()
-    {
-        GUILayout.Button(m_PlayerDistX + "");
-    }
+    #region Private an Protected Members
+
+    private float m_offsetZ;
+    private Vector3 m_currentVelocity;
+
+    private Camera m_camera1;
+    private Camera2DAuxFollow m_camera2Follow;
+    private float m_screenLength;
+    private bool m_splited = false;
+    private bool m_merging = false;
+
+    #endregion
+
 }
