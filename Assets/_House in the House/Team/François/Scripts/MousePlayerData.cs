@@ -6,12 +6,17 @@ using UnityEngine;
 public class MousePlayerData : ScriptableObject
 {
     [Header("Left-Right Movement")]
-    [SerializeField] private float m_MaxSpeed = 10f;
-    public float HorizontalSpeed
+    [SerializeField] private float m_MaxHorizontalSpeed = 10f;
+    public float MaxHorizontalSpeed
     {
-        get { return m_MaxSpeed; }
+        get { return m_MaxHorizontalSpeed; }
     }
-    
+    [SerializeField] private float m_SpeedMultiplier = 1f;
+    public float SpeedMultiplier
+    {
+        get { return m_SpeedMultiplier; }
+    }
+
     [Header("Jump")]
     [SerializeField] private bool m_canJump = true;
     public bool CanJump
@@ -31,16 +36,17 @@ public class MousePlayerData : ScriptableObject
         get { return m_JumpForce; }
     }
 
-    [SerializeField] private LayerMask m_WhatIsGround;
-    public LayerMask WhatIsGround
-    {
-        get { return m_WhatIsGround; }
-    }
-
     [Header("Climb")]
     [SerializeField] [Range(0.01f, 0.1f)] private float m_ClimbingSpeedMultiplier;
     public float ClimbSpeed
     {
         get { return m_ClimbingSpeedMultiplier; }
+    }
+
+    [Header("Push")]
+    [SerializeField] private bool m_canPush = true;
+    public bool CanPush
+    {
+        get { return m_canPush; }
     }
 }

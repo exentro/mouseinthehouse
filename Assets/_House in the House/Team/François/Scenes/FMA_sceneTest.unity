@@ -179,6 +179,7 @@ MonoBehaviour:
     m_jump: 0
   m_player: {fileID: 1275853964}
   m_groundCheckCollisionScript: {fileID: 364068509}
+  m_PushCheckCollisionScript: {fileID: 622138818}
   m_climbCheckCollisionScript: {fileID: 622138817}
 --- !u!4 &346122665
 Transform:
@@ -203,7 +204,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 364068507}
-  - component: {fileID: 364068508}
   - component: {fileID: 364068509}
   m_Layer: 8
   m_Name: GroundCheck
@@ -225,21 +225,6 @@ Transform:
   m_Father: {fileID: 346122665}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &364068508
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 364068506}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.25
 --- !u!114 &364068509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +236,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603195bfdc1c287469ba90ec060a89b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_WhatIsGround:
+    serializedVersion: 2
+    m_Bits: 1
+  bodyCollider: {fileID: 1275853965}
+  m_BoxCastDistance: 0.05
 --- !u!1 &371235816
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,8 +484,9 @@ GameObject:
   - component: {fileID: 622138815}
   - component: {fileID: 622138816}
   - component: {fileID: 622138817}
+  - component: {fileID: 622138818}
   m_Layer: 8
-  m_Name: ClimbFaceCheck
+  m_Name: FaceCheck
   m_TagString: Untagged
   m_Icon: {fileID: -982381405332843317, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -548,6 +539,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ade985d34e4c7c8479e22f0638336700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &622138818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 622138814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47b5f79a040fde478fac41987dec8d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &843731290

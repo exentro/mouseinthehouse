@@ -2,30 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClimbCheckCollision : MonoBehaviour
+public class PushCheckCollision : MonoBehaviour
 {
     private void Start()
     {
-        m_climbing = false;
+        m_pushing = false;
     }
-    
-    private bool m_climbing;
-    public bool Climbing
+
+    private bool m_pushing;
+    public bool Pushing
     {
-        get { return m_climbing; }
+        get { return m_pushing; }
     }
 
     //private void OnCollisionEnter2D(Collision2D collision) { }
     private void OnCollisionStay2D(Collision2D collision)
     {
         Interactable coll = collision.gameObject.GetComponent<Interactable>();
-        if(coll != null)
+        if (coll != null)
         {
-            m_climbing = coll.Climbable;
+            m_pushing = coll.Pushable;
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        m_climbing = false;
+        m_pushing = false;
     }
 }

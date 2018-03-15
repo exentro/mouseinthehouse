@@ -2,59 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
 public class GroundCheckCollision : MonoBehaviour
 {
-    private Transform m_transform;
+    [SerializeField] private LayerMask m_WhatIsGround;
+    [SerializeField] private Collider2D bodyCollider;
+    [SerializeField] private float m_BoxCastDistance = .05f;
 
-    private int m_layerMask;
+    private Transform m_transform;
+    private RaycastHit2D m_Hit;
     private Vector2 m_boxCastSize;
 
-    private void Start()
-    {
-        m_grounded = false;
-        m_transform = transform;
-
-        m_layerMask = LayerMask.GetMask("Default");
-        m_boxCastSize = new Vector2(0.45f, 0.3f);
-    }
-
-    [SerializeField]
     private bool m_grounded;
     public bool Grounded
     {
         get { return m_grounded; }
     }
 
-    /*
-    //private void OnCollisionEnter2D(Collision2D collision) { }
-    private void OnCollisionStay2D(Collision2D collision)
+    private void Start()
     {
-        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Default"))
-        {
-            m_grounded = true;
-        }
+        m_grounded = false;
+        m_transform = transform;
+        
+        //m_boxCastSize = new Vector2(0.45f, 0.3f);        
+        m_boxCastSize = new Vector2(bodyCollider.bounds.size.x, 0.1f);
     }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Default"))
-        {
-            m_grounded = false;
-        }
-    }
-    */
-    
-    private RaycastHit2D m_Hit;
+
     private void FixedUpdate()
     {
         m_grounded = false;
-        m_Hit = Physics2D.BoxCast(m_transform.position, m_boxCastSize, 0f, -transform.up, .05f, m_layerMask);
-
+        
+        m_Hit = Physics2D.BoxCast(m_transform.position, m_boxCastSize, 0f, -transform.up, m_BoxCastDistance, m_WhatIsGround);
         if (m_Hit.collider != null)
         {
             m_grounded = true;
         }
     }
-
-
 }

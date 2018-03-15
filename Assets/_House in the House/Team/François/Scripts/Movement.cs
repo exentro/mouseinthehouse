@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    [Header("Debug")]
     [SerializeField]
     private bool m_debug = true;
     private Transform m_transform;
@@ -43,10 +44,24 @@ public class Movement : MonoBehaviour
     private void FixedUpdate()
     {
         SetStateFalse();
+
         CheckGrounded();
         CheckClimbing();
+        CheckPushing();
+
+        //HopingMovement();
     }
     #endregion
+
+    private void HopingMovement()
+    {
+        if(!m_animator.GetBool(animator_climb))
+        {
+            Vector3 newPosition = m_transform.position;
+            newPosition.y += m_MovementInput.InputVertical * .2f;
+            m_transform.position = newPosition;
+        }
+    }
 
     #region Run
     private bool m_FacingRight = true;
@@ -54,12 +69,16 @@ public class Movement : MonoBehaviour
 
     public void Run()
     {
-        if (m_animator.GetBool(animator_ground) || (m_animator.GetBool(animator_jump) && m_player.PlayerData.AirControl))
+        if (m_animator.GetBool(animator_ground) 
+            || (m_animator.GetBool(animator_jump) && m_player.PlayerData.AirControl) 
+            || m_animator.GetBool(animator_climb))
         {
-            //m_animator.SetFloat(animator_VelocityX, Mathf.Abs(m_MovementInput.InputHorizontal));
             m_animator.SetFloat(animator_VelocityX, m_MovementInput.InputHorizontal);
 
-            m_rigidbody2d.velocity = new Vector2(m_MovementInput.InputHorizontal * m_player.PlayerData.HorizontalSpeed, m_rigidbody2d.velocity.y);
+            float maxSpeed = m_player.PlayerData.MaxHorizontalSpeed;
+            float speed = m_MovementInput.InputHorizontal * m_player.PlayerData.SpeedMultiplier;
+
+            m_rigidbody2d.velocity = new Vector2(Mathf.Clamp(speed, -maxSpeed, maxSpeed), m_rigidbody2d.velocity.y);
 
             if (m_MovementInput.InputHorizontal > 0 && !m_FacingRight)
             {
@@ -104,18 +123,43 @@ public class Movement : MonoBehaviour
     }
     #endregion
 
+    #region Push
+    [SerializeField] PushCheckCollision m_PushCheckCollisionScript;
+    const string animator_push = "Push";
+
+    public void Push()
+    {
+        if (m_player.PlayerData.CanPush)
+        {
+
+        }
+    }
+
+    private void CheckPushing()
+    {
+        if (m_PushCheckCollisionScript.Pushing)
+        {
+            m_animator.SetBool(animator_push, true);
+        }
+    }
+
+
+    #endregion
+
     #region Climb
     [SerializeField] ClimbCheckCollision m_climbCheckCollisionScript;
     const string animator_climb = "Climb";
 
     public void Climb()
     {
-        Vector3 newPosition = m_transform.position;
-        newPosition.y += m_MovementInput.InputVertical * m_player.PlayerData.ClimbSpeed;
-        m_transform.position = newPosition;
         if (m_animator.GetBool(animator_climb))
         {
-            m_rigidbody2d.velocity = new Vector2(m_rigidbody2d.velocity.x, m_MovementInput.InputVertical * m_player.PlayerData.ClimbSpeed);
+            
+            Vector3 newPosition = m_transform.position;
+            newPosition.y += m_MovementInput.InputVertical * m_player.PlayerData.ClimbSpeed;
+            m_transform.position = newPosition;
+            
+           // m_rigidbody2d.velocity = new Vector2(m_rigidbody2d.velocity.x, m_MovementInput.InputVertical * m_player.PlayerData.ClimbSpeed);
         }
     }
     private void CheckClimbing()
@@ -132,6 +176,7 @@ public class Movement : MonoBehaviour
         m_animator.SetBool(animator_ground, false);
         m_animator.SetBool(animator_jump, false);
         m_animator.SetBool(animator_climb, false);
+        m_animator.SetBool(animator_push, false);
     }
 }
 
