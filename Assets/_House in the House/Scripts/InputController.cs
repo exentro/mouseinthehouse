@@ -23,7 +23,10 @@ public class InputController : MonoBehaviour
 
         if (m_mousePlayer == null) gameObject.GetComponent<MousePlayer>();
         if (m_mousePlayer == null) Debug.LogError("Can't find Component \"MousePlayer\"");
+    }
 
+    private void Start()
+    {
         m_playerMovementInputs = m_mousePlayer.Movement.MovementInput;
     }
 

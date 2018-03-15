@@ -43,11 +43,17 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        SetStateFalse();
+        bool ground = m_groundCheckCollisionScript.Grounded;
+        if(m_animator.GetBool(animator_ground) != ground) m_animator.SetBool(animator_ground, ground);
 
-        CheckGrounded();
-        CheckClimbing();
-        CheckPushing();
+        bool jump = !m_animator.GetBool(animator_ground) && !m_animator.GetBool(animator_climb);
+        if(m_animator.GetBool(animator_jump) != jump) m_animator.SetBool(animator_jump, jump);
+
+        bool climb = m_climbCheckCollisionScript.Climbing;
+        if (m_animator.GetBool(animator_climb) != climb) m_animator.SetBool(animator_climb, climb);
+
+        bool push = m_PushCheckCollisionScript.Pushing;
+        if (m_animator.GetBool(animator_push) != push) m_animator.SetBool(animator_push, push);
 
         // HopingMovement();
     }
@@ -107,18 +113,15 @@ public class Movement : MonoBehaviour
 
     public void Jump()
     {
-        if (m_player.PlayerData.CanJump && m_animator.GetBool(animator_ground) && m_MovementInput.Jump)
+        if (m_MovementInput.Jump && m_player.PlayerData.CanJump)
         {
-            m_animator.SetBool(animator_ground, false);
-            m_animator.SetBool(animator_jump, true);
-            m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
-        }
-    }
-    private void CheckGrounded()
-    {
-        if (m_groundCheckCollisionScript.Grounded)
-        {
-            m_animator.SetBool(animator_ground, true);
+            if (m_animator.GetBool(animator_ground))
+            {
+                m_animator.SetBool(animator_ground, false);
+                m_animator.SetBool(animator_jump, true);
+                m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
+            }
+            m_MovementInput.Jump = false;
         }
     }
     #endregion
@@ -134,16 +137,6 @@ public class Movement : MonoBehaviour
 
         }
     }
-
-    private void CheckPushing()
-    {
-        if (m_PushCheckCollisionScript.Pushing)
-        {
-            m_animator.SetBool(animator_push, true);
-        }
-    }
-
-
     #endregion
 
     #region Climb
@@ -162,22 +155,7 @@ public class Movement : MonoBehaviour
            // m_rigidbody2d.velocity = new Vector2(m_rigidbody2d.velocity.x, m_MovementInput.InputVertical * m_player.PlayerData.ClimbSpeed);
         }
     }
-    private void CheckClimbing()
-    {
-        if(m_climbCheckCollisionScript.Climbing)
-        {
-            m_animator.SetBool(animator_climb, true);
-        }
-    }
     #endregion
-
-    private void SetStateFalse()
-    {
-        m_animator.SetBool(animator_ground, false);
-        m_animator.SetBool(animator_jump, false);
-        m_animator.SetBool(animator_climb, false);
-        m_animator.SetBool(animator_push, false);
-    }
 }
 
 [System.Serializable]

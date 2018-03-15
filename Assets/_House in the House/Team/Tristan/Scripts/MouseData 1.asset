@@ -11,11 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba9452134b6a264b8330c22a4dd1f28, type: 3}
   m_Name: MouseData 1
   m_EditorClassIdentifier: 
-  m_MaxSpeed: 10
+  m_MaxHorizontalSpeed: 10
+  m_SpeedMultiplier: 1
   m_canJump: 1
   m_AirControl: 1
-  m_JumpForce: 2500
-  m_WhatIsGround:
-    serializedVersion: 2
-    m_Bits: 1
+  m_JumpForce: 2000
   m_ClimbingSpeedMultiplier: 0.025
+  m_canPush: 1
