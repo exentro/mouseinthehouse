@@ -37,6 +37,12 @@ public class MousePlayerData : ScriptableObject
     }
 
     [Header("Climb")]
+    [SerializeField]
+    private bool m_canClimb = true;
+    public bool CanClimb
+    {
+        get { return m_canClimb; }
+    }
     [SerializeField] [Range(0.01f, 0.1f)] private float m_ClimbingSpeedMultiplier;
     public float ClimbSpeed
     {

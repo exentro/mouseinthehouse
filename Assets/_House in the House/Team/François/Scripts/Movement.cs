@@ -54,24 +54,12 @@ public class Movement : MonoBehaviour
 
         bool push = m_PushCheckCollisionScript.Pushing;
         if (m_animator.GetBool(animator_push) != push) m_animator.SetBool(animator_push, push);
-
-        // HopingMovement();
     }
     #endregion
 
-    private void HopingMovement()
-    {
-        if(!m_animator.GetBool(animator_climb))
-        {
-            Vector3 newPosition = m_transform.position;
-            newPosition.y += m_MovementInput.InputVertical * .2f;
-            m_transform.position = newPosition;
-        }
-    }
-
     #region Run
     private bool m_FacingRight = true;
-    const string animator_VelocityX = "Speed";
+    const string animator_VelocityX = "HorizontalSpeed";
 
     public void Run()
     {
