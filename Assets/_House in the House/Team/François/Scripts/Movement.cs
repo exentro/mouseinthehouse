@@ -45,16 +45,25 @@ public class Movement : MonoBehaviour
     {
         bool ground = m_groundCheckCollisionScript.Grounded;
         if(m_animator.GetBool(animator_ground) != ground) m_animator.SetBool(animator_ground, ground);
-
+        
         bool jump = !m_animator.GetBool(animator_ground) && !m_animator.GetBool(animator_climb);
-        if(m_animator.GetBool(animator_jump) != jump) m_animator.SetBool(animator_jump, jump);
+        if (m_animator.GetBool(animator_jump) != jump) m_animator.SetBool(animator_jump, jump);
+        
+        if (m_player.PlayerData.CanClimb)
+        {
+            bool climb = m_climbCheckCollisionScript.Climbing;
+            if (m_animator.GetBool(animator_climb) != climb) m_animator.SetBool(animator_climb, climb);
+        }
 
-        bool climb = m_climbCheckCollisionScript.Climbing;
-        if (m_animator.GetBool(animator_climb) != climb) m_animator.SetBool(animator_climb, climb);
+        if (m_player.PlayerData.CanPush)
+        {
+            bool push = m_PushCheckCollisionScript.Pushing;
+            if (m_animator.GetBool(animator_push) != push) m_animator.SetBool(animator_push, push);
+        }
 
-        bool push = m_PushCheckCollisionScript.Pushing;
-        if (m_animator.GetBool(animator_push) != push) m_animator.SetBool(animator_push, push);
+        m_animator.SetFloat(animator_VelocityY, m_rigidbody2d.velocity.y);
     }
+    const string animator_VelocityY = "VerticalSpeed";
     #endregion
 
     #region Run
