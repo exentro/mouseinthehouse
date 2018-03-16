@@ -9,6 +9,7 @@ public class TrailDisplay : MonoBehaviour
     public bool m_trail;
     public float m_trailDuration;
     public Color m_trailColor = Color.red;
+    public BoxCollider2D m_feetCollider;
 
 	#endregion
 
@@ -25,17 +26,21 @@ public class TrailDisplay : MonoBehaviour
 
 	private void Start() 
 	{
-        m_feetCollider = GetComponent<CircleCollider2D>();
+        //m_feetCollider = GetComponent<BoxCollider2D>();
+        //m_feetCollider = GetComponent<CircleCollider2D>();
         m_prevPos = transform.position;
-        m_prevPos.y = m_prevPos.y + m_feetCollider.offset.y - m_feetCollider.radius;
+        //m_prevPos.y = m_prevPos.y + m_feetCollider.offset.y - m_feetCollider.radius;
     }
 
     private void Update()
     {
         if (m_trail)
         {
+            //Vector3 pos = transform.position;
+            //pos.y = pos.y + m_feetCollider.offset.y - m_feetCollider.radius;
+            //Debug.DrawLine(m_prevPos, pos, m_trailColor, m_trailDuration);
+            //m_prevPos = pos;
             Vector3 pos = transform.position;
-            pos.y = pos.y + m_feetCollider.offset.y - m_feetCollider.radius;
             Debug.DrawLine(m_prevPos, pos, m_trailColor, m_trailDuration);
             m_prevPos = pos;
         }
@@ -55,7 +60,8 @@ public class TrailDisplay : MonoBehaviour
     #region Private an Protected Members
 
     private Vector3 m_prevPos;
-    private CircleCollider2D m_feetCollider;
+    //private CircleCollider2D m_feetCollider;
+    // private BoxCollider2D m_feetCollider;
 
-	#endregion
+    #endregion
 }
