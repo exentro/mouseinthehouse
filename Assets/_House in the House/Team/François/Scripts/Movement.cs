@@ -139,8 +139,6 @@ public class Movement : MonoBehaviour
 
                 objectPosition.x += pushMovement;
 
-                Debug.Log(pushMovement);
-
                 m_PushCheckCollisionScript.PushableObject.position = objectPosition;
             }
         }
