@@ -96,9 +96,9 @@ public class Movement : MonoBehaviour
     private void Flip()
     {
         m_FacingRight = !m_FacingRight;
-        Vector3 theScale = transform.localScale;
+        Vector3 theScale = m_transform.localScale;
         theScale.x *= -1;
-        transform.localScale = theScale;
+        m_transform.localScale = theScale;
     }
     #endregion
 
@@ -106,7 +106,6 @@ public class Movement : MonoBehaviour
     [SerializeField] GroundCheckCollision m_groundCheckCollisionScript;
     const string animator_ground = "Ground";
     const string animator_jump = "Jump";
-    const float k_GroundedRadius = .15f;
 
     public void Jump()
     {
@@ -131,7 +130,19 @@ public class Movement : MonoBehaviour
     {
         if (m_player.PlayerData.CanPush)
         {
+            if (m_PushCheckCollisionScript.PushableObject != null)
+            {
+                Vector3 objectPosition = m_PushCheckCollisionScript.PushableObject.position;
 
+                float pushMovement = (m_MovementInput.InputHorizontal * m_player.PlayerData.PushSpeed * Time.deltaTime);
+                //float pushMovement = m_player.PlayerData.PushSpeed;
+
+                objectPosition.x += pushMovement;
+
+                Debug.Log(pushMovement);
+
+                m_PushCheckCollisionScript.PushableObject.position = objectPosition;
+            }
         }
     }
     #endregion
