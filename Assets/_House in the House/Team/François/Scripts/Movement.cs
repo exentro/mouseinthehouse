@@ -135,7 +135,6 @@ public class Movement : MonoBehaviour
                 Vector3 objectPosition = m_PushCheckCollisionScript.PushableObject.position;
 
                 float pushMovement = (m_MovementInput.InputHorizontal * m_player.PlayerData.PushSpeed * Time.deltaTime);
-                //float pushMovement = m_player.PlayerData.PushSpeed;
 
                 objectPosition.x += pushMovement;
 
