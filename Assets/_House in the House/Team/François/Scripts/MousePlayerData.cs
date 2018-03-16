@@ -55,4 +55,9 @@ public class MousePlayerData : ScriptableObject
     {
         get { return m_canPush; }
     }
+    [SerializeField] private float m_PushingSpeedMultiplier;
+    public float PushSpeed
+    {
+        get { return m_PushingSpeedMultiplier; }
+    }
 }
