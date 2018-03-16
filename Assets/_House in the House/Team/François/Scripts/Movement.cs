@@ -152,8 +152,7 @@ public class Movement : MonoBehaviour
     public void Climb()
     {
         if (m_animator.GetBool(animator_climb))
-        {
-            
+        {            
             Vector3 newPosition = m_transform.position;
             newPosition.y += m_MovementInput.InputVertical * m_player.PlayerData.ClimbSpeed;
             m_transform.position = newPosition;
