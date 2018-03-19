@@ -59,7 +59,7 @@ public class Movement : MonoBehaviour
 
     public void Run()
     {
-        m_animator.SetFloat(animator_VelocityX, m_MovementInput.InputHorizontal);
+        //m_animator.SetFloat(animator_VelocityX, m_MovementInput.InputHorizontal);
 
         float maxSpeed = m_player.PlayerData.MaxHorizontalSpeed;
         float speed = m_MovementInput.InputHorizontal * m_player.PlayerData.SpeedMultiplier;
