@@ -112,10 +112,11 @@ public class Movement : MonoBehaviour
     #region Push
     private void CheckPush()
     {
-        if (m_player.PlayerData.CanPush)
-        {
-            m_animator.SetBool(animator_push, m_PushCheckCollisionScript.Pushing);
-        }
+        bool IsPushing = m_player.PlayerData.CanPush 
+            && m_PushCheckCollisionScript.Pushing 
+            && (m_animator.GetFloat(animator_velocityX) > 0.1f || m_animator.GetFloat(animator_velocityX) < -0.1f);
+        
+        m_animator.SetBool(animator_push, IsPushing);
     }
 
     public void Push()
