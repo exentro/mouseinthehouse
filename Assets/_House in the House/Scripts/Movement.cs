@@ -68,19 +68,18 @@ public class Movement : MonoBehaviour
 
     public void Run()
     {
-        float speed = m_MovementInput.InputHorizontal;
-        if (m_animator.GetBool(animator_crouch))
-            speed *= m_player.PlayerData.CrawlingSpeed;
-        else
-            speed *= m_player.PlayerData.SpeedMultiplier;
-
+        MoveX(m_MovementInput.InputHorizontal * m_player.PlayerData.SpeedMultiplier);
+    }
+    private void MoveX(float speed)
+    {
         float maxSpeed = m_player.PlayerData.MaxHorizontalSpeed;
 
         m_rigidbody2d.velocity = new Vector2(Mathf.Clamp(speed, -maxSpeed, maxSpeed), m_rigidbody2d.velocity.y);
 
-        if (m_MovementInput.InputHorizontal > 0 && !m_FacingRight) Flip();            
+        if (m_MovementInput.InputHorizontal > 0 && !m_FacingRight) Flip();
         else if (m_MovementInput.InputHorizontal < 0 && m_FacingRight) Flip();
     }
+
     private void Flip()
     {
         m_FacingRight = !m_FacingRight;
@@ -127,6 +126,7 @@ public class Movement : MonoBehaviour
             objectPosition.x += (m_MovementInput.InputHorizontal * m_player.PlayerData.PushSpeed * Time.deltaTime);
             m_PushCheckCollisionScript.PushableObject.position = objectPosition;
         }
+        MoveX(m_MovementInput.InputHorizontal * m_player.PlayerData.PushSpeed * 1.5f);
     }
     #endregion
 
@@ -157,6 +157,10 @@ public class Movement : MonoBehaviour
             && !m_animator.GetBool(animator_push);
 
         m_animator.SetBool(animator_crouch, crouched);
+    }
+    public void Crawl()
+    {
+        MoveX(m_MovementInput.InputHorizontal * m_player.PlayerData.CrawlingSpeed);
     }
     #endregion
 }

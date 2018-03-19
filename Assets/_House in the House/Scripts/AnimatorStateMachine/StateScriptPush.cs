@@ -16,7 +16,6 @@ public class StateScriptPush: StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         m_mousePlayer.Movement.Push();
-        m_mousePlayer.Movement.Run();
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
