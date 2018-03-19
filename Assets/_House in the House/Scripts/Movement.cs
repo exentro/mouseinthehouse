@@ -46,6 +46,7 @@ public class Movement : MonoBehaviour
         CheckJump();
         CheckClimb();
         CheckPush();
+        CheckCrouch();
 
         m_animator.SetFloat(animator_VelocityX, m_rigidbody2d.velocity.x);
         m_animator.SetFloat(animator_VelocityY, m_rigidbody2d.velocity.y);
@@ -59,10 +60,13 @@ public class Movement : MonoBehaviour
 
     public void Run()
     {
-        //m_animator.SetFloat(animator_VelocityX, m_MovementInput.InputHorizontal);
+        float speed = m_MovementInput.InputHorizontal;
+        if (m_animator.GetBool(animator_crouch))
+            speed *= m_player.PlayerData.CrawlingSpeed;
+        else
+            speed *= m_player.PlayerData.SpeedMultiplier;
 
         float maxSpeed = m_player.PlayerData.MaxHorizontalSpeed;
-        float speed = m_MovementInput.InputHorizontal * m_player.PlayerData.SpeedMultiplier;
 
         m_rigidbody2d.velocity = new Vector2(Mathf.Clamp(speed, -maxSpeed, maxSpeed), m_rigidbody2d.velocity.y);
 
@@ -143,6 +147,25 @@ public class Movement : MonoBehaviour
         m_transform.position = newPosition;
     }
     #endregion
+
+    #region Crouch
+    const string animator_crouch = "Crouch";
+
+    private void CheckCrouch()
+    {
+        bool crouched = m_player.PlayerData.CanCrouch
+            && m_MovementInput.Crouch
+            && !m_animator.GetBool(animator_climb)
+            && !m_animator.GetBool(animator_jump)
+            && !m_animator.GetBool(animator_push);
+
+        m_animator.SetBool(animator_crouch, crouched);
+    }
+    private void Crouch()
+    {
+
+    }
+    #endregion
 }
 
 [System.Serializable]
@@ -176,4 +199,10 @@ public class PlayerMovementInput
         set { m_jump = value; }
     }
 
+    [SerializeField] private bool m_crouch;
+    public bool Crouch
+    {
+        get { return m_crouch; }
+        set { m_crouch = value; }
+    }
 }

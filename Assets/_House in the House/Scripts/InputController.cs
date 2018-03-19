@@ -55,11 +55,7 @@ public class InputController : MonoBehaviour
 
     private void GetInput()
     {
-        //m_playerMovementInputs.Reset();
-
-        //if (!m_playerMovementInputs.Jump)
-            m_playerMovementInputs.Jump = m_player.GetButtonDown("Jump");
-        
-        //m_crouch = m_player.GetButtonDown("Crouch");
+        m_playerMovementInputs.Jump = m_player.GetButtonDown("Jump");
+        m_playerMovementInputs.Crouch = m_player.GetButton("Crouch");
     }
 }
