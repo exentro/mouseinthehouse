@@ -15,9 +15,7 @@ public class StateScriptJump : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (animator.GetBool("Ground")) m_mousePlayer.Movement.Jump();
-        m_mousePlayer.Movement.Run(); //active if airControl
-        m_mousePlayer.Movement.Climb();
+        if (m_mousePlayer.PlayerData.AirControl) m_mousePlayer.Movement.Run();
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

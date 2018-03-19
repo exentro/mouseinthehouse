@@ -17,7 +17,6 @@ public class StateScriptIdle : StateMachineBehaviour
     {
         m_mousePlayer.Movement.Run();
         m_mousePlayer.Movement.Jump();
-        m_mousePlayer.Movement.Climb();
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
