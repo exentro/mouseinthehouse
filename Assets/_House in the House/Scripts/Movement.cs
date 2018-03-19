@@ -10,6 +10,13 @@ public class Movement : MonoBehaviour
     private Transform m_transform;
     private Rigidbody2D m_rigidbody2d;
     private Animator m_animator;
+    const string animator_velocityX = "HorizontalSpeed";
+    const string animator_velocityY = "VerticalSpeed";
+    const string animator_ground = "Ground";
+    const string animator_jump = "Jump";
+    const string animator_push = "Push";
+    const string animator_climb = "Climb";
+    const string animator_crouch = "Crouch";
 
     [SerializeField][ReadOnly]
     private PlayerMovementInput m_MovementInput;
@@ -20,6 +27,9 @@ public class Movement : MonoBehaviour
 
     [Header("Dependencies")]
     [SerializeField] private MousePlayer m_player;
+    [SerializeField] GroundCheckCollision m_groundCheckCollisionScript;
+    [SerializeField] PushCheckCollision m_PushCheckCollisionScript;
+    [SerializeField] ClimbCheckCollision m_climbCheckCollisionScript;
 
     #region System
     private void Awake()
@@ -48,15 +58,13 @@ public class Movement : MonoBehaviour
         CheckPush();
         CheckCrouch();
 
-        m_animator.SetFloat(animator_VelocityX, m_rigidbody2d.velocity.x);
-        m_animator.SetFloat(animator_VelocityY, m_rigidbody2d.velocity.y);
+        m_animator.SetFloat(animator_velocityX, m_rigidbody2d.velocity.x);
+        m_animator.SetFloat(animator_velocityY, m_rigidbody2d.velocity.y);
     }
-    const string animator_VelocityY = "VerticalSpeed";
     #endregion
 
     #region Run
     private bool m_FacingRight = true;
-    const string animator_VelocityX = "HorizontalSpeed";
 
     public void Run()
     {
@@ -83,10 +91,6 @@ public class Movement : MonoBehaviour
     #endregion
 
     #region Jump
-    [SerializeField] GroundCheckCollision m_groundCheckCollisionScript;
-    const string animator_ground = "Ground";
-    const string animator_jump = "Jump";
-
     private void CheckJump()
     {
         m_animator.SetBool(animator_ground, m_groundCheckCollisionScript.Grounded);
@@ -106,9 +110,6 @@ public class Movement : MonoBehaviour
     #endregion
 
     #region Push
-    [SerializeField] PushCheckCollision m_PushCheckCollisionScript;
-    const string animator_push = "Push";
-
     private void CheckPush()
     {
         if (m_player.PlayerData.CanPush)
@@ -129,9 +130,6 @@ public class Movement : MonoBehaviour
     #endregion
 
     #region Climb
-    [SerializeField] ClimbCheckCollision m_climbCheckCollisionScript;
-    const string animator_climb = "Climb";
-
     private void CheckClimb()
     {
         if (m_player.PlayerData.CanClimb)
@@ -149,8 +147,6 @@ public class Movement : MonoBehaviour
     #endregion
 
     #region Crouch
-    const string animator_crouch = "Crouch";
-
     private void CheckCrouch()
     {
         bool crouched = m_player.PlayerData.CanCrouch
@@ -160,10 +156,6 @@ public class Movement : MonoBehaviour
             && !m_animator.GetBool(animator_push);
 
         m_animator.SetBool(animator_crouch, crouched);
-    }
-    private void Crouch()
-    {
-
     }
     #endregion
 }
