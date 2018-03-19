@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateScriptIdle : StateMachineBehaviour
+public class StateScriptCrouch : StateMachineBehaviour
 {
-    [SerializeField] public MousePlayer m_mousePlayer;
+    private MousePlayer m_mousePlayer;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -16,8 +16,6 @@ public class StateScriptIdle : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         m_mousePlayer.Movement.Run();
-        m_mousePlayer.Movement.Jump();
-        m_mousePlayer.Movement.Climb();
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
