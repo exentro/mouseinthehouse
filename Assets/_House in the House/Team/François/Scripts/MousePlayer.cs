@@ -46,7 +46,7 @@ public class MousePlayer : MonoBehaviour
         get { return m_data; }
         set { m_data = value; }
     }
-    
+
     [SerializeField] private Animator m_Anim;
     public Animator Animator
     {
