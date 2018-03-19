@@ -11,7 +11,7 @@ public class Movement : MonoBehaviour
     private Rigidbody2D m_rigidbody2d;
     private Animator m_animator;
 
-    [SerializeField]
+    [SerializeField][ReadOnly]
     private PlayerMovementInput m_MovementInput;
     public PlayerMovementInput MovementInput
     {
@@ -43,24 +43,12 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        bool ground = m_groundCheckCollisionScript.Grounded;
-        if(m_animator.GetBool(animator_ground) != ground) m_animator.SetBool(animator_ground, ground);
-        
-        bool jump = !m_animator.GetBool(animator_ground) && !m_animator.GetBool(animator_climb);
-        if (m_animator.GetBool(animator_jump) != jump) m_animator.SetBool(animator_jump, jump);
-        
-        if (m_player.PlayerData.CanClimb)
-        {
-            bool climb = m_climbCheckCollisionScript.Climbing;
-            if (m_animator.GetBool(animator_climb) != climb) m_animator.SetBool(animator_climb, climb);
-        }
+        CheckJump();
+        CheckClimb();
+        CheckPush();
+        CheckCrouch();
 
-        if (m_player.PlayerData.CanPush)
-        {
-            bool push = m_PushCheckCollisionScript.Pushing;
-            if (m_animator.GetBool(animator_push) != push) m_animator.SetBool(animator_push, push);
-        }
-
+        m_animator.SetFloat(animator_VelocityX, m_rigidbody2d.velocity.x);
         m_animator.SetFloat(animator_VelocityY, m_rigidbody2d.velocity.y);
     }
     const string animator_VelocityY = "VerticalSpeed";
@@ -72,26 +60,18 @@ public class Movement : MonoBehaviour
 
     public void Run()
     {
-        if (m_animator.GetBool(animator_ground) 
-            || (m_animator.GetBool(animator_jump) && m_player.PlayerData.AirControl) 
-            || m_animator.GetBool(animator_climb))
-        {
-            m_animator.SetFloat(animator_VelocityX, m_MovementInput.InputHorizontal);
+        float speed = m_MovementInput.InputHorizontal;
+        if (m_animator.GetBool(animator_crouch))
+            speed *= m_player.PlayerData.CrawlingSpeed;
+        else
+            speed *= m_player.PlayerData.SpeedMultiplier;
 
-            float maxSpeed = m_player.PlayerData.MaxHorizontalSpeed;
-            float speed = m_MovementInput.InputHorizontal * m_player.PlayerData.SpeedMultiplier;
+        float maxSpeed = m_player.PlayerData.MaxHorizontalSpeed;
 
-            m_rigidbody2d.velocity = new Vector2(Mathf.Clamp(speed, -maxSpeed, maxSpeed), m_rigidbody2d.velocity.y);
+        m_rigidbody2d.velocity = new Vector2(Mathf.Clamp(speed, -maxSpeed, maxSpeed), m_rigidbody2d.velocity.y);
 
-            if (m_MovementInput.InputHorizontal > 0 && !m_FacingRight)
-            {
-                Flip();
-            }
-            else if (m_MovementInput.InputHorizontal < 0 && m_FacingRight)
-            {
-                Flip();
-            }
-        }
+        if (m_MovementInput.InputHorizontal > 0 && !m_FacingRight) Flip();            
+        else if (m_MovementInput.InputHorizontal < 0 && m_FacingRight) Flip();
     }
     private void Flip()
     {
@@ -107,16 +87,19 @@ public class Movement : MonoBehaviour
     const string animator_ground = "Ground";
     const string animator_jump = "Jump";
 
+    private void CheckJump()
+    {
+        m_animator.SetBool(animator_ground, m_groundCheckCollisionScript.Grounded);
+
+        bool jump = !m_animator.GetBool(animator_ground) && !m_animator.GetBool(animator_climb);
+        m_animator.SetBool(animator_jump, jump);
+    }
+
     public void Jump()
     {
-        if (m_MovementInput.Jump && m_player.PlayerData.CanJump)
+        if (m_MovementInput.Jump)
         {
-            if (m_animator.GetBool(animator_ground))
-            {
-                m_animator.SetBool(animator_ground, false);
-                m_animator.SetBool(animator_jump, true);
-                m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
-            }
+            m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
             m_MovementInput.Jump = false;
         }
     }
@@ -126,21 +109,21 @@ public class Movement : MonoBehaviour
     [SerializeField] PushCheckCollision m_PushCheckCollisionScript;
     const string animator_push = "Push";
 
-    public void Push()
+    private void CheckPush()
     {
         if (m_player.PlayerData.CanPush)
         {
-            if (m_PushCheckCollisionScript.PushableObject != null)
-            {
-                Vector3 objectPosition = m_PushCheckCollisionScript.PushableObject.position;
+            m_animator.SetBool(animator_push, m_PushCheckCollisionScript.Pushing);
+        }
+    }
 
-                float pushMovement = (m_MovementInput.InputHorizontal * m_player.PlayerData.PushSpeed * Time.deltaTime);
-                //float pushMovement = m_player.PlayerData.PushSpeed;
-
-                objectPosition.x += pushMovement;
-
-                m_PushCheckCollisionScript.PushableObject.position = objectPosition;
-            }
+    public void Push()
+    {
+        if (m_PushCheckCollisionScript.PushableObject != null)
+        {
+            Vector3 objectPosition = m_PushCheckCollisionScript.PushableObject.position;
+            objectPosition.x += (m_MovementInput.InputHorizontal * m_player.PlayerData.PushSpeed * Time.deltaTime);
+            m_PushCheckCollisionScript.PushableObject.position = objectPosition;
         }
     }
     #endregion
@@ -149,16 +132,38 @@ public class Movement : MonoBehaviour
     [SerializeField] ClimbCheckCollision m_climbCheckCollisionScript;
     const string animator_climb = "Climb";
 
+    private void CheckClimb()
+    {
+        if (m_player.PlayerData.CanClimb)
+        {
+            m_animator.SetBool(animator_climb, m_climbCheckCollisionScript.Climbing);
+        }
+    }
+
     public void Climb()
     {
-        if (m_animator.GetBool(animator_climb))
-        {            
-            Vector3 newPosition = m_transform.position;
-            newPosition.y += m_MovementInput.InputVertical * m_player.PlayerData.ClimbSpeed;
-            m_transform.position = newPosition;
-            
-           // m_rigidbody2d.velocity = new Vector2(m_rigidbody2d.velocity.x, m_MovementInput.InputVertical * m_player.PlayerData.ClimbSpeed);
-        }
+        Vector3 newPosition = m_transform.position;
+        newPosition.y += m_MovementInput.InputVertical * m_player.PlayerData.ClimbSpeed;
+        m_transform.position = newPosition;
+    }
+    #endregion
+
+    #region Crouch
+    const string animator_crouch = "Crouch";
+
+    private void CheckCrouch()
+    {
+        bool crouched = m_player.PlayerData.CanCrouch
+            && m_MovementInput.Crouch
+            && !m_animator.GetBool(animator_climb)
+            && !m_animator.GetBool(animator_jump)
+            && !m_animator.GetBool(animator_push);
+
+        m_animator.SetBool(animator_crouch, crouched);
+    }
+    private void Crouch()
+    {
+
     }
     #endregion
 }
@@ -194,4 +199,10 @@ public class PlayerMovementInput
         set { m_jump = value; }
     }
 
+    [SerializeField] private bool m_crouch;
+    public bool Crouch
+    {
+        get { return m_crouch; }
+        set { m_crouch = value; }
+    }
 }

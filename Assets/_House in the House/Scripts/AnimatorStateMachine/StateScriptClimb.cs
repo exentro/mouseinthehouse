@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateScriptClimb : StateMachineBehaviour
 {
-    [SerializeField] public MousePlayer m_mousePlayer;
+    private MousePlayer m_mousePlayer;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

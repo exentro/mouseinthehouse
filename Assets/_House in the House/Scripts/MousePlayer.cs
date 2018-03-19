@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class MousePlayer : MonoBehaviour
@@ -31,8 +30,8 @@ public class MousePlayer : MonoBehaviour
         if (m_movement == null) m_movement = GetComponent<Movement>();
         if (m_debug && m_movement == null) Debug.LogError("Can't find Component Movement");
     }
-
-    [SerializeField] private int m_playerId;
+    
+    [SerializeField] [ReadOnly] private int m_playerId;
     public int PlayerID
     {
         get { return m_playerId; }
@@ -46,7 +45,7 @@ public class MousePlayer : MonoBehaviour
         get { return m_data; }
         set { m_data = value; }
     }
-    
+
     [SerializeField] private Animator m_Anim;
     public Animator Animator
     {

@@ -60,4 +60,17 @@ public class MousePlayerData : ScriptableObject
     {
         get { return m_PushingSpeedMultiplier; }
     }
+
+    [Header("Crouch")]
+    [SerializeField]
+    private bool m_canCrouch = true;
+    public bool CanCrouch
+    {
+        get { return m_canCrouch; }
+    }
+    [SerializeField] private float m_CrawlingSpeedMultiplier;
+    public float CrawlingSpeed
+    {
+        get { return m_PushingSpeedMultiplier; }
+    }
 }
