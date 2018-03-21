@@ -9008,6 +9008,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -109.508
       objectReference: {fileID: 0}
+    - target: {fileID: 114298401143597292, guid: 0bde16655f278ba43a3dff79807561eb,
+        type: 2}
+      propertyPath: m_feetCollider
+      value: 
+      objectReference: {fileID: 2026874799}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0bde16655f278ba43a3dff79807561eb, type: 2}
   m_IsPrefabParent: 0
@@ -11220,6 +11225,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 39
   m_LocalEulerAnglesHint: {x: 0, y: 1.9, z: 0}
+--- !u!61 &2026874799 stripped
+BoxCollider2D:
+  m_PrefabParentObject: {fileID: 61480432639475840, guid: 0bde16655f278ba43a3dff79807561eb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1648322137}
 --- !u!1 &2108614807
 GameObject:
   m_ObjectHideFlags: 0
