@@ -2894,15 +2894,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_debug: 1
+  m_currentState: 0
   m_MovementInput:
     m_inputVertical: 0
     m_inputHorizontal: 0
     m_jump: 0
     m_crouch: 0
   m_player: {fileID: 114524874575402466}
-  m_groundCheckCollisionScript: {fileID: 114820076391803442}
-  m_PushCheckCollisionScript: {fileID: 114055546209471100}
-  m_climbCheckCollisionScript: {fileID: 114030853318772348}
+  m_transform: {fileID: 0}
+  m_rigidbody2d: {fileID: 0}
+  m_animator: {fileID: 0}
+  m_colliders: {fileID: 0}
+  m_animatorParameters: {fileID: 0}
 --- !u!114 &114582701453182040
 MonoBehaviour:
   m_ObjectHideFlags: 1
