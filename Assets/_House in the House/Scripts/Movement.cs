@@ -5,44 +5,48 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [Header("Debug")]
-    [SerializeField]
-    private bool m_debug = true;
-    private Transform m_transform;
-    private Rigidbody2D m_rigidbody2d;
-    private Animator m_animator;
-    const string animator_velocityX = "HorizontalSpeed";
-    const string animator_velocityY = "VerticalSpeed";
-    const string animator_ground = "Ground";
-    const string animator_jump = "Jump";
-    const string animator_push = "Push";
-    const string animator_climb = "Climb";
-    const string animator_crouch = "Crouch";
+    [SerializeField] private bool m_debug = true;
+    [SerializeField] [ReadOnly] private E_MouseState m_currentState;
+    public E_MouseState State
+    {
+        get { return m_currentState; }
+        set
+        {
+            m_colliders.EnableCollider(value);
+            m_currentState = value;
+        }
+    }
 
     [SerializeField][ReadOnly]
     private PlayerMovementInput m_MovementInput;
     public PlayerMovementInput MovementInput
     {
-        get { return m_MovementInput; }
+        get { return m_MovementInput;}
     }
 
     [Header("Dependencies")]
     [SerializeField] private MousePlayer m_player;
-    [SerializeField] GroundCheckCollision m_groundCheckCollisionScript;
-    [SerializeField] PushCheckCollision m_PushCheckCollisionScript;
-    [SerializeField] ClimbCheckCollision m_climbCheckCollisionScript;
+    [SerializeField] [ReadOnly] private Transform m_transform;
+    [SerializeField] [ReadOnly] private Rigidbody2D m_rigidbody2d;
+    [SerializeField] [ReadOnly] private Animator m_animator;
+    [SerializeField] private CollidersProvider m_colliders;
+    [SerializeField] private AnimatorParameterMapper m_animatorParameters;
 
     #region System
     private void Awake()
     {
-        if (m_climbCheckCollisionScript == null && m_debug) Debug.LogError("Reference to \"ClimbCheckCollision\" script is not setted");
-        if (m_groundCheckCollisionScript == null && m_debug) Debug.LogError("Reference to \"GroundCheckCollision\" script is not setted");
-
         m_MovementInput = new PlayerMovementInput();
     }
 
     private void Start()
     {
-        if (m_player == null) Debug.LogError("MousePlayer not set!");
+        if (m_colliders == null && m_debug) Debug.LogError("Reference to \"CollidersProvider\" script is not setted");
+        if (m_animatorParameters == null && m_debug) Debug.LogError("Reference to \"AnimatorParameterMapper\" script is not setted");
+
+        if (m_player == null)
+        {
+            if(m_debug) Debug.LogError("MousePlayer not set!");
+        }
         else
         {
             m_transform = m_player.Transform;
@@ -58,8 +62,8 @@ public class Movement : MonoBehaviour
         CheckPush();
         CheckCrouch();
 
-        m_animator.SetFloat(animator_velocityX, m_rigidbody2d.velocity.x);
-        m_animator.SetFloat(animator_velocityY, m_rigidbody2d.velocity.y);
+        m_animator.SetFloat(m_animatorParameters.HorizontalSpeed, m_rigidbody2d.velocity.x);
+        m_animator.SetFloat(m_animatorParameters.VerticalSpeed, m_rigidbody2d.velocity.y);
     }
     #endregion
 
@@ -92,10 +96,10 @@ public class Movement : MonoBehaviour
     #region Jump
     private void CheckJump()
     {
-        m_animator.SetBool(animator_ground, m_groundCheckCollisionScript.Grounded);
+        m_animator.SetBool(m_animatorParameters.Ground, m_colliders.CollidingGround());
 
-        bool jump = !m_animator.GetBool(animator_ground) && !m_animator.GetBool(animator_climb);
-        m_animator.SetBool(animator_jump, jump);
+        bool jump = !m_animator.GetBool(m_animatorParameters.Ground) && !m_animator.GetBool(m_animatorParameters.Climb);
+        m_animator.SetBool(m_animatorParameters.Jump, jump);
     }
 
     public void Jump()
@@ -112,19 +116,20 @@ public class Movement : MonoBehaviour
     private void CheckPush()
     {
         bool IsPushing = m_player.PlayerData.CanPush 
-            && m_PushCheckCollisionScript.Pushing 
-            && (m_animator.GetFloat(animator_velocityX) > 0.1f || m_animator.GetFloat(animator_velocityX) < -0.1f);
+            && m_colliders.CollidingPushable()
+            && (m_animator.GetFloat(m_animatorParameters.HorizontalSpeed) > 0.1f || m_animator.GetFloat(m_animatorParameters.HorizontalSpeed) < -0.1f);
         
-        m_animator.SetBool(animator_push, IsPushing);
+        m_animator.SetBool(m_animatorParameters.Push, IsPushing);
     }
 
     public void Push()
     {
-        if (m_PushCheckCollisionScript.PushableObject != null)
+        Transform obj = m_colliders.CollidingPushableObjectTransform();
+        if (obj != null)
         {
-            Vector3 objectPosition = m_PushCheckCollisionScript.PushableObject.position;
+            Vector3 objectPosition = obj.position;
             objectPosition.x += (m_MovementInput.InputHorizontal * m_player.PlayerData.PushSpeed * Time.deltaTime);
-            m_PushCheckCollisionScript.PushableObject.position = objectPosition;
+            obj.position = objectPosition;
         }
         MoveX(m_MovementInput.InputHorizontal * m_player.PlayerData.PushSpeed * 1.5f);
     }
@@ -135,7 +140,7 @@ public class Movement : MonoBehaviour
     {
         if (m_player.PlayerData.CanClimb)
         {
-            m_animator.SetBool(animator_climb, m_climbCheckCollisionScript.Climbing);
+            m_animator.SetBool(m_animatorParameters.Climb, m_colliders.CollidingClimbable());
         }
     }
 
@@ -152,11 +157,11 @@ public class Movement : MonoBehaviour
     {
         bool crouched = m_player.PlayerData.CanCrouch
             && m_MovementInput.Crouch
-            && !m_animator.GetBool(animator_climb)
-            && !m_animator.GetBool(animator_jump)
-            && !m_animator.GetBool(animator_push);
+            && !m_animator.GetBool(m_animatorParameters.Climb)
+            && !m_animator.GetBool(m_animatorParameters.Jump)
+            && !m_animator.GetBool(m_animatorParameters.Push);
 
-        m_animator.SetBool(animator_crouch, crouched);
+        m_animator.SetBool(m_animatorParameters.Crouch, crouched);
     }
     public void Crawl()
     {
