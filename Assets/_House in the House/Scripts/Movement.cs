@@ -12,7 +12,6 @@ public class Movement : MonoBehaviour
         get { return m_currentState; }
         set
         {
-            m_colliders.DisableCollider(m_currentState);
             m_colliders.EnableCollider(value);
             m_currentState = value;
         }
@@ -36,15 +35,18 @@ public class Movement : MonoBehaviour
     #region System
     private void Awake()
     {
-        if (m_animatorParameters == null && m_debug) Debug.LogError("Reference to \"CollidersProvider\" script is not setted");
-        if (m_colliders == null && m_debug) Debug.LogError("Reference to \"AnimatorParameterMapper\" script is not setted");
-
         m_MovementInput = new PlayerMovementInput();
     }
 
     private void Start()
     {
-        if (m_player == null) Debug.LogError("MousePlayer not set!");
+        if (m_colliders == null && m_debug) Debug.LogError("Reference to \"CollidersProvider\" script is not setted");
+        if (m_animatorParameters == null && m_debug) Debug.LogError("Reference to \"AnimatorParameterMapper\" script is not setted");
+
+        if (m_player == null)
+        {
+            if(m_debug) Debug.LogError("MousePlayer not set!");
+        }
         else
         {
             m_transform = m_player.Transform;

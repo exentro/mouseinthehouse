@@ -31,44 +31,44 @@ public class CollidersProvider : MonoBehaviour
         if (idle.Container == null) Debug.LogError("Missing Idle container");
         else
         {
-            idle.Ground = idle.Container.GetComponent<GroundCheckCollision>();
-            idle.Push = idle.Container.GetComponent<PushCheckCollision>();
-            idle.Climb = idle.Container.GetComponent<ClimbCheckCollision>();
+            idle.Ground = idle.Container.GetComponentInChildren<GroundCheckCollision>();
+            idle.Push = idle.Container.GetComponentInChildren<PushCheckCollision>();
+            idle.Climb = idle.Container.GetComponentInChildren<ClimbCheckCollision>();
         }
         if (run.Container == null) Debug.LogError("Missing Run container");
         else
         {
-            run.Ground = run.Container.GetComponent<GroundCheckCollision>();
-            run.Push = run.Container.GetComponent<PushCheckCollision>();
-            run.Climb = run.Container.GetComponent<ClimbCheckCollision>();
+            run.Ground = run.Container.GetComponentInChildren<GroundCheckCollision>();
+            run.Push = run.Container.GetComponentInChildren<PushCheckCollision>();
+            run.Climb = run.Container.GetComponentInChildren<ClimbCheckCollision>();
         }
         if (push.Container == null) Debug.LogError("Missing Push container");
         else
         {
-            push.Ground = push.Container.GetComponent<GroundCheckCollision>();
-            push.Push = push.Container.GetComponent<PushCheckCollision>();
-            push.Climb = push.Container.GetComponent<ClimbCheckCollision>();
+            push.Ground = push.Container.GetComponentInChildren<GroundCheckCollision>();
+            push.Push = push.Container.GetComponentInChildren<PushCheckCollision>();
+            push.Climb = push.Container.GetComponentInChildren<ClimbCheckCollision>();
         }
         if (climb.Container == null) Debug.LogError("Missing Climb container");
         else
         {
-            climb.Ground = climb.Container.GetComponent<GroundCheckCollision>();
-            climb.Push = climb.Container.GetComponent<PushCheckCollision>();
-            climb.Climb = climb.Container.GetComponent<ClimbCheckCollision>();
+            climb.Ground = climb.Container.GetComponentInChildren<GroundCheckCollision>();
+            climb.Push = climb.Container.GetComponentInChildren<PushCheckCollision>();
+            climb.Climb = climb.Container.GetComponentInChildren<ClimbCheckCollision>();
         }
         if (jump.Container == null) Debug.LogError("Missing Jump container");
         else
         {
-            jump.Ground = jump.Container.GetComponent<GroundCheckCollision>();
-            jump.Push = jump.Container.GetComponent<PushCheckCollision>();
-            jump.Climb = jump.Container.GetComponent<ClimbCheckCollision>();
+            jump.Ground = jump.Container.GetComponentInChildren<GroundCheckCollision>();
+            jump.Push = jump.Container.GetComponentInChildren<PushCheckCollision>();
+            jump.Climb = jump.Container.GetComponentInChildren<ClimbCheckCollision>();
         }
         if (crouch.Container == null) Debug.LogError("Missing Crouch container");
         else
         {
-            crouch.Ground = crouch.Container.GetComponent<GroundCheckCollision>();
-            crouch.Push = crouch.Container.GetComponent<PushCheckCollision>();
-            crouch.Climb = crouch.Container.GetComponent<ClimbCheckCollision>();
+            crouch.Ground = crouch.Container.GetComponentInChildren<GroundCheckCollision>();
+            crouch.Push = crouch.Container.GetComponentInChildren<PushCheckCollision>();
+            crouch.Climb = crouch.Container.GetComponentInChildren<ClimbCheckCollision>();
         }
     }
 
@@ -81,17 +81,17 @@ public class CollidersProvider : MonoBehaviour
         m_map.Add(E_MouseState.Climb, climb);
         m_map.Add(E_MouseState.Jump, jump);
         m_map.Add(E_MouseState.Crouch, crouch);
-    }
 
-    public void DisableCollider(E_MouseState key)
-    {
-        m_map[key].Container.SetActive(false);
-        m_activeColliders = null;
+        m_activeColliders = m_map[E_MouseState.Idle];
     }
     public void EnableCollider(E_MouseState key)
     {
-        m_map[key].Container.SetActive(true);
-        m_activeColliders = m_map[key];
+        if (m_activeColliders != m_map[key])
+        {
+            m_activeColliders.Container.SetActive(false);
+            m_activeColliders = m_map[key];
+            m_activeColliders.Container.SetActive(true);
+        }
     }
 
     public bool CollidingGround()

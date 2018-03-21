@@ -50,8 +50,7 @@ public class GroundCheckCollision : MonoBehaviour
     [SerializeField] private Collider2D bodyCollider;
     [SerializeField] private float m_BoxCastDistance = .05f;
     [SerializeField] private float m_BoxCastSizeY = .05f;
-
-    private Transform m_transform;
+    
     private RaycastHit2D m_Hit;
     private Vector2 m_boxCastSize;
 
@@ -64,16 +63,16 @@ public class GroundCheckCollision : MonoBehaviour
     private void Start()
     {
         m_grounded = false;
-        m_transform = transform;
             
         m_boxCastSize = new Vector2(bodyCollider.bounds.size.x, m_BoxCastSizeY);
+        
     }
 
     private void FixedUpdate()
     {
         m_grounded = false;
         
-        m_Hit = Physics2D.BoxCast(m_transform.position, m_boxCastSize, 0f, -transform.up, m_BoxCastDistance, m_WhatIsGround);
+        m_Hit = Physics2D.BoxCast(bodyCollider.bounds.center, m_boxCastSize, 0f, -transform.up, m_BoxCastDistance, m_WhatIsGround);
         if (m_Hit.collider != null)
         {
             m_grounded = true;
