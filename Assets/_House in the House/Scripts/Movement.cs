@@ -108,6 +108,8 @@ public class Movement : MonoBehaviour
         {
             m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
             m_MovementInput.Jump = false;
+            m_animator.SetBool(m_animatorParameters.Ground, false);
+            m_animator.SetBool(m_animatorParameters.Jump, true);
         }
     }
     #endregion
@@ -140,7 +142,8 @@ public class Movement : MonoBehaviour
     {
         if (m_player.PlayerData.CanClimb)
         {
-            m_animator.SetBool(m_animatorParameters.Climb, m_colliders.CollidingClimbable());
+            bool climbing = m_colliders.CollidingClimbable() && m_MovementInput.InputVertical > 0.1f;
+            m_animator.SetBool(m_animatorParameters.Climb, climbing);
         }
     }
 
