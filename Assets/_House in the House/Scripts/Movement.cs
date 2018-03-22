@@ -45,7 +45,7 @@ public class Movement : MonoBehaviour
 
         if (m_player == null)
         {
-            if(m_debug) Debug.LogError("MousePlayer not set!");
+            if (m_debug) Debug.LogError("MousePlayer not set!");
         }
         else
         {
@@ -55,6 +55,13 @@ public class Movement : MonoBehaviour
         }
 
         jumpdCooldownTimer = 0f;
+
+        if (m_player.PlayerData.OverridePhysics)
+        {
+            m_rigidbody2d.useAutoMass = false;
+            m_rigidbody2d.mass = m_player.PlayerData.Mass;
+            m_rigidbody2d.gravityScale = 1f;
+        }
     }
 
     private void FixedUpdate()
@@ -64,10 +71,31 @@ public class Movement : MonoBehaviour
         CheckPush();
         CheckCrouch();
 
+        AffectPhysics();
+
         m_animator.SetFloat(m_animatorParameters.HorizontalSpeed, m_rigidbody2d.velocity.x);
         m_animator.SetFloat(m_animatorParameters.VerticalSpeed, m_rigidbody2d.velocity.y);
     }
     #endregion
+
+    private void AffectPhysics()
+    {
+        if(m_player.PlayerData.OverridePhysics)
+        {
+            Vector2 velocity = m_rigidbody2d.velocity;
+
+            if (velocity.y < 0f)
+            {
+                velocity.y += velocity.y * m_player.PlayerData.DescendingDrag;
+                velocity.y = Mathf.Clamp(velocity.y, -m_player.PlayerData.MaxFallingSpeed, 0f);
+            }
+            else if (velocity.y > 0f)
+            {
+                velocity.y -= velocity.y * m_player.PlayerData.AscendingDrag;
+            }
+            m_rigidbody2d.velocity = velocity;
+        }
+    }
 
     #region Run
     private bool m_FacingRight = true;

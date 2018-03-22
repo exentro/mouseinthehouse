@@ -5,6 +5,41 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MouseData", menuName = "MouseInTheHouse/MouseData", order = 1)]
 public class MousePlayerData : ScriptableObject
 {
+    [Header("Physics")]
+    [SerializeField] private bool m_overridePhysics;
+    public bool OverridePhysics
+    {
+        get { return m_overridePhysics; }
+        set { m_overridePhysics = value; }
+    }
+
+    [SerializeField] private float m_mass = 2f;
+    public float Mass
+    {
+        get { return m_mass; }
+    }
+    [SerializeField] private float m_ascendingDrag = 0.05f;
+    public float AscendingDrag
+    {
+        get { return m_ascendingDrag; }
+    }
+    [SerializeField] private float m_descendingDrag = 0.15f;
+    public float DescendingDrag
+    {
+        get { return m_descendingDrag; }
+    }
+    [SerializeField] private float m_maxFallingSpeed = 30f;
+    public float MaxFallingSpeed
+    {
+        get { return m_maxFallingSpeed; }
+    }
+    /*
+    [SerializeField] private float m_factor = 0.1f;
+    public float Factor
+    {
+        get { return m_factor; }
+    }
+    */
     [Header("Left-Right Movement")]
     [SerializeField] private float m_MaxHorizontalSpeed = 10f;
     public float MaxHorizontalSpeed
