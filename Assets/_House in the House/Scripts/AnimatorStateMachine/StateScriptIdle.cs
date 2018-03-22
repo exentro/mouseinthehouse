@@ -10,6 +10,7 @@ public class StateScriptIdle : StateMachineBehaviour
     {
         if (m_mousePlayer == null)
             m_mousePlayer = MousePlayer.GetPlayer(animator.GetInteger("PlayerId"));
+        m_mousePlayer.Movement.State = E_MouseState.Idle;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

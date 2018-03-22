@@ -10,13 +10,13 @@ public class StateScriptPush: StateMachineBehaviour
     {
         if (m_mousePlayer == null)
             m_mousePlayer = MousePlayer.GetPlayer(animator.GetInteger("PlayerId"));
+        m_mousePlayer.Movement.State = E_MouseState.Push;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         m_mousePlayer.Movement.Push();
-        m_mousePlayer.Movement.Run();
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

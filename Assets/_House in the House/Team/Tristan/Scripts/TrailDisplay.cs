@@ -40,7 +40,7 @@ public class TrailDisplay : MonoBehaviour
             //pos.y = pos.y + m_feetCollider.offset.y - m_feetCollider.radius;
             //Debug.DrawLine(m_prevPos, pos, m_trailColor, m_trailDuration);
             //m_prevPos = pos;
-            Vector3 pos = transform.position;
+            Vector3 pos = m_feetCollider.transform.position;
             Debug.DrawLine(m_prevPos, pos, m_trailColor, m_trailDuration);
             m_prevPos = pos;
         }
