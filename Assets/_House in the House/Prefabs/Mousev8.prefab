@@ -443,9 +443,8 @@ GameObject:
   - component: {fileID: 114789061552152034}
   - component: {fileID: 114007921566374074}
   - component: {fileID: 50932475262854310}
-  - component: {fileID: 114273756725207234}
   m_Layer: 8
-  m_Name: Mousev7
+  m_Name: Mousev8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -531,7 +530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1336206395443866
 GameObject:
   m_ObjectHideFlags: 1
@@ -2654,11 +2653,11 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 2
+  m_UseAutoMass: 1
+  m_Mass: 2.0008
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 3.5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -2976,7 +2975,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.4, y: 1}
+  m_Offset: {x: 0.4, y: 0.85}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2987,7 +2986,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 2.2}
+  m_Size: {x: 0.2, y: 2.5}
   m_EdgeRadius: 0
 --- !u!61 &61568495137523050
 BoxCollider2D:
@@ -3623,21 +3622,6 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 4849065076485854}
   - {fileID: 4118896763132294}
---- !u!114 &114273756725207234
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1242904462406986}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c348cd98f2482ff468086e5a063f155c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_trail: 1
-  m_trailDuration: 5
-  m_trailColor: {r: 1, g: 0, b: 0, a: 1}
-  m_feetCollider: {fileID: 0}
 --- !u!114 &114279371970390550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3814,13 +3798,8 @@ MonoBehaviour:
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
-<<<<<<< HEAD:Assets/_House in the House/Prefabs/Mousev7.prefab
   m_GroundCollider: {fileID: 61271238275676228}
   m_BoxCastDistance: 0.07
-=======
-  m_GroundCollider: {fileID: 0}
-  m_BoxCastDistance: 0.1
->>>>>>> 8d80ce99b38e78c0a2c653a6367de8f0c7cb1894:Assets/_House in the House/Prefabs/Mousev6.prefab
 --- !u!114 &114328744249464222
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4033,11 +4012,7 @@ MonoBehaviour:
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
-<<<<<<< HEAD:Assets/_House in the House/Prefabs/Mousev7.prefab
   m_GroundCollider: {fileID: 61568495137523050}
-=======
-  m_GroundCollider: {fileID: 0}
->>>>>>> 8d80ce99b38e78c0a2c653a6367de8f0c7cb1894:Assets/_House in the House/Prefabs/Mousev6.prefab
   m_BoxCastDistance: 0.1
 --- !u!114 &114467180650854894
 MonoBehaviour:
@@ -4132,11 +4107,7 @@ MonoBehaviour:
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
-<<<<<<< HEAD:Assets/_House in the House/Prefabs/Mousev7.prefab
   m_GroundCollider: {fileID: 61746970398906162}
-=======
-  m_GroundCollider: {fileID: 0}
->>>>>>> 8d80ce99b38e78c0a2c653a6367de8f0c7cb1894:Assets/_House in the House/Prefabs/Mousev6.prefab
   m_BoxCastDistance: 0.1
 --- !u!114 &114517491362150848
 MonoBehaviour:
@@ -4224,11 +4195,7 @@ MonoBehaviour:
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
-<<<<<<< HEAD:Assets/_House in the House/Prefabs/Mousev7.prefab
   m_GroundCollider: {fileID: 61187781343693494}
-=======
-  m_GroundCollider: {fileID: 0}
->>>>>>> 8d80ce99b38e78c0a2c653a6367de8f0c7cb1894:Assets/_House in the House/Prefabs/Mousev6.prefab
   m_BoxCastDistance: 0.1
 --- !u!114 &114594739396559476
 MonoBehaviour:
@@ -4434,11 +4401,7 @@ MonoBehaviour:
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
-<<<<<<< HEAD:Assets/_House in the House/Prefabs/Mousev7.prefab
   m_GroundCollider: {fileID: 61411741742133918}
-=======
-  m_GroundCollider: {fileID: 0}
->>>>>>> 8d80ce99b38e78c0a2c653a6367de8f0c7cb1894:Assets/_House in the House/Prefabs/Mousev6.prefab
   m_BoxCastDistance: 0.1
 --- !u!114 &114781969808314436
 MonoBehaviour:
@@ -4754,11 +4717,7 @@ MonoBehaviour:
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
-<<<<<<< HEAD:Assets/_House in the House/Prefabs/Mousev7.prefab
   m_GroundCollider: {fileID: 61348678513023242}
-=======
-  m_GroundCollider: {fileID: 0}
->>>>>>> 8d80ce99b38e78c0a2c653a6367de8f0c7cb1894:Assets/_House in the House/Prefabs/Mousev6.prefab
   m_BoxCastDistance: 0.1
 --- !u!137 &137055380324272742
 SkinnedMeshRenderer:
