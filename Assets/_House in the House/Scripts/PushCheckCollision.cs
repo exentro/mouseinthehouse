@@ -32,7 +32,7 @@ public class PushCheckCollision : MonoBehaviour
         if(collision.gameObject != m_pushableObject)
         {
             Interactable coll = collision.gameObject.GetComponent<Interactable>();
-            if (coll != null)
+            if (coll != null && coll.Pushable)
             {
                 if (m_debug && m_pushableObject != null)
                 {
