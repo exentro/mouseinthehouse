@@ -36,6 +36,12 @@ public class MousePlayerData : ScriptableObject
         get { return m_JumpForce; }
     }
 
+    [SerializeField] private float m_JumpCooldown = .5f;
+    public float JumpCooldown
+    {
+        get { return m_JumpCooldown; }
+    }
+
     [Header("Climb")]
     [SerializeField]
     private bool m_canClimb = true;
