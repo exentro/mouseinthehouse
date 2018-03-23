@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4543581771190280}
   - component: {fileID: 212634270017004090}
   - component: {fileID: 61484289442237328}
+  - component: {fileID: 114266003076398766}
   m_Layer: 0
   m_Name: woodbox
   m_TagString: Untagged
@@ -35,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1656942691153030}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 122.15173, y: -125.26992, z: 0}
+  m_LocalPosition: {x: -35.64151, y: 2.6279335, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -66,6 +67,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 16.093925, y: 6.8839035}
   m_EdgeRadius: 0
+--- !u!114 &114266003076398766
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1656942691153030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca201eb4e31e6149b22cdb935ae6ac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Pushable: 0
+  Climbable: 1
 --- !u!212 &212634270017004090
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -45,13 +45,22 @@ public class Movement : MonoBehaviour
 
         if (m_player == null)
         {
-            if(m_debug) Debug.LogError("MousePlayer not set!");
+            if (m_debug) Debug.LogError("MousePlayer not set!");
         }
         else
         {
             m_transform = m_player.Transform;
             m_rigidbody2d = m_player.Rigidbody2D;
             m_animator = m_player.Animator;
+        }
+
+        jumpdCooldownTimer = 0f;
+
+        if (m_player.PlayerData.OverridePhysics)
+        {
+            m_rigidbody2d.useAutoMass = false;
+            m_rigidbody2d.mass = m_player.PlayerData.Mass;
+            m_rigidbody2d.gravityScale = 1f;
         }
     }
 
@@ -62,10 +71,31 @@ public class Movement : MonoBehaviour
         CheckPush();
         CheckCrouch();
 
+        AffectPhysics();
+
         m_animator.SetFloat(m_animatorParameters.HorizontalSpeed, m_rigidbody2d.velocity.x);
         m_animator.SetFloat(m_animatorParameters.VerticalSpeed, m_rigidbody2d.velocity.y);
     }
     #endregion
+
+    private void AffectPhysics()
+    {
+        if(m_player.PlayerData.OverridePhysics)
+        {
+            Vector2 velocity = m_rigidbody2d.velocity;
+
+            if (velocity.y < 0f)
+            {
+                velocity.y += velocity.y * m_player.PlayerData.DescendingDrag;
+                velocity.y = Mathf.Clamp(velocity.y, -m_player.PlayerData.MaxFallingSpeed, 0f);
+            }
+            else if (velocity.y > 0f)
+            {
+                velocity.y -= velocity.y * m_player.PlayerData.AscendingDrag;
+            }
+            m_rigidbody2d.velocity = velocity;
+        }
+    }
 
     #region Run
     private bool m_FacingRight = true;
@@ -94,8 +124,11 @@ public class Movement : MonoBehaviour
     #endregion
 
     #region Jump
+    private float jumpdCooldownTimer;
     private void CheckJump()
     {
+        jumpdCooldownTimer += Time.fixedDeltaTime;
+
         m_animator.SetBool(m_animatorParameters.Ground, m_colliders.CollidingGround());
 
         bool jump = !m_animator.GetBool(m_animatorParameters.Ground) && !m_animator.GetBool(m_animatorParameters.Climb);
@@ -106,10 +139,14 @@ public class Movement : MonoBehaviour
     {
         if (m_MovementInput.Jump)
         {
-            m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
+            if(jumpdCooldownTimer > m_player.PlayerData.JumpCooldown)
+            {
+                m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
+                m_animator.SetBool(m_animatorParameters.Ground, false);
+                m_animator.SetBool(m_animatorParameters.Jump, true);
+                jumpdCooldownTimer = 0f;
+            }
             m_MovementInput.Jump = false;
-            m_animator.SetBool(m_animatorParameters.Ground, false);
-            m_animator.SetBool(m_animatorParameters.Jump, true);
         }
     }
     #endregion
@@ -142,8 +179,7 @@ public class Movement : MonoBehaviour
     {
         if (m_player.PlayerData.CanClimb)
         {
-            bool climbing = m_colliders.CollidingClimbable() && m_MovementInput.InputVertical > 0.1f;
-            m_animator.SetBool(m_animatorParameters.Climb, climbing);
+            m_animator.SetBool(m_animatorParameters.Climb, m_colliders.CollidingClimbable());
         }
     }
 
