@@ -11,6 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba9452134b6a264b8330c22a4dd1f28, type: 3}
   m_Name: LegolasData
   m_EditorClassIdentifier: 
+  m_overridePhysics: 0
+  m_mass: 2
+  m_ascendingDrag: 0.05
+  m_descendingDrag: 0.15
+  m_maxFallingSpeed: 30
   m_MaxHorizontalSpeed: 30
   m_SpeedMultiplier: 10
   m_canJump: 1
@@ -20,6 +25,6 @@ MonoBehaviour:
   m_canClimb: 0
   m_ClimbingSpeedMultiplier: 0.05
   m_canPush: 0
-  m_PushingSpeedMultiplier: 100
+  m_PushingSpeedMultiplier: 3
   m_canCrouch: 1
-  m_CrawlingSpeedMultiplier: 0
+  m_CrawlingSpeedMultiplier: 0.2

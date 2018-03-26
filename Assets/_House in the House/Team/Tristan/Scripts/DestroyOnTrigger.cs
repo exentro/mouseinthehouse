@@ -4,7 +4,7 @@ public class DestroyOnTrigger : MonoBehaviour
 {
     #region Public Members
 
-    public GameObject m_door;
+    public GameObject m_breakable;
 
 	#endregion
 
@@ -12,7 +12,7 @@ public class DestroyOnTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(m_door);
+        Destroy(m_breakable);
     }
 
     #endregion
