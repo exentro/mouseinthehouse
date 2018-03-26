@@ -52,15 +52,15 @@ public class Movement : MonoBehaviour
             m_transform = m_player.Transform;
             m_rigidbody2d = m_player.Rigidbody2D;
             m_animator = m_player.Animator;
-        }
 
-        jumpdCooldownTimer = 0f;
+            jumpdCooldownTimer = 0f;
 
-        if (m_player.PlayerData.OverridePhysics)
-        {
-            m_rigidbody2d.useAutoMass = false;
-            m_rigidbody2d.mass = m_player.PlayerData.Mass;
-            m_rigidbody2d.gravityScale = 1f;
+            if (m_player.PlayerData.OverridePhysics)
+            {
+                m_rigidbody2d.useAutoMass = false;
+                m_rigidbody2d.mass = m_player.PlayerData.Mass;
+                m_rigidbody2d.gravityScale = 1f;
+            }
         }
     }
 
@@ -75,6 +75,11 @@ public class Movement : MonoBehaviour
 
         m_animator.SetFloat(m_animatorParameters.HorizontalSpeed, m_rigidbody2d.velocity.x);
         m_animator.SetFloat(m_animatorParameters.VerticalSpeed, m_rigidbody2d.velocity.y);
+    }
+
+    private void Update()
+    {
+        jumpdCooldownTimer += Time.deltaTime;
     }
     #endregion
 
@@ -127,9 +132,8 @@ public class Movement : MonoBehaviour
     private float jumpdCooldownTimer;
     private void CheckJump()
     {
-        jumpdCooldownTimer += Time.fixedDeltaTime;
-
-        m_animator.SetBool(m_animatorParameters.Ground, m_colliders.CollidingGround());
+        bool ground = m_colliders.CollidingGround();// && jumpdCooldownTimer < m_player.PlayerData.JumpCooldown;
+        m_animator.SetBool(m_animatorParameters.Ground, ground);
 
         bool jump = !m_animator.GetBool(m_animatorParameters.Ground) && !m_animator.GetBool(m_animatorParameters.Climb);
         m_animator.SetBool(m_animatorParameters.Jump, jump);
@@ -139,13 +143,14 @@ public class Movement : MonoBehaviour
     {
         if (m_MovementInput.Jump)
         {
-            if(jumpdCooldownTimer > m_player.PlayerData.JumpCooldown)
+            if (jumpdCooldownTimer > m_player.PlayerData.JumpCooldown)
             {
                 m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
                 m_animator.SetBool(m_animatorParameters.Ground, false);
                 m_animator.SetBool(m_animatorParameters.Jump, true);
                 jumpdCooldownTimer = 0f;
             }
+            else Debug.Log("Jump cooldown not ready.");
             m_MovementInput.Jump = false;
         }
     }
