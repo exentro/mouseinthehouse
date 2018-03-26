@@ -495,8 +495,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973e6ede5b9bf1c489ac140d97114dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_player1: {fileID: 0}
-  m_player2: {fileID: 0}
+  m_player1: {fileID: 995295850}
+  m_player2: {fileID: 915895676}
   m_damping: 0.2
   m_camera2: {fileID: 80769129}
   m_animCurve:
@@ -1371,6 +1371,10 @@ Prefab:
         type: 2}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1006112382351100, guid: 8e7cb812a4dfe4f4eaed2f033f6c3d10, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8e7cb812a4dfe4f4eaed2f033f6c3d10, type: 2}
