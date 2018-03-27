@@ -33,13 +33,7 @@ public class MousePlayerData : ScriptableObject
     {
         get { return m_maxFallingSpeed; }
     }
-    /*
-    [SerializeField] private float m_factor = 0.1f;
-    public float Factor
-    {
-        get { return m_factor; }
-    }
-    */
+
     [Header("Left-Right Movement")]
     [SerializeField] private float m_MaxHorizontalSpeed = 10f;
     public float MaxHorizontalSpeed
@@ -88,6 +82,12 @@ public class MousePlayerData : ScriptableObject
     public float ClimbSpeed
     {
         get { return m_ClimbingSpeedMultiplier; }
+    }
+    [SerializeField] private bool m_canClimbJump = true;
+    public bool CanClimbJump
+    {
+        get { return m_canClimbJump; }
+        set { m_canClimbJump = value; }
     }
 
     [Header("Push")]
