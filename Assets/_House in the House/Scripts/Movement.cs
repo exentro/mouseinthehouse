@@ -132,8 +132,7 @@ public class Movement : MonoBehaviour
     private float jumpdCooldownTimer;
     private void CheckJump()
     {
-        bool ground = m_colliders.CollidingGround();// && jumpdCooldownTimer < m_player.PlayerData.JumpCooldown;
-        m_animator.SetBool(m_animatorParameters.Ground, ground);
+        m_animator.SetBool(m_animatorParameters.Ground, m_colliders.CollidingGround());
 
         bool jump = !m_animator.GetBool(m_animatorParameters.Ground) && !m_animator.GetBool(m_animatorParameters.Climb);
         m_animator.SetBool(m_animatorParameters.Jump, jump);
@@ -143,15 +142,28 @@ public class Movement : MonoBehaviour
     {
         if (m_MovementInput.Jump)
         {
-            if (jumpdCooldownTimer > m_player.PlayerData.JumpCooldown)
+            if (m_animator.GetBool(m_animatorParameters.Climb))
             {
-                m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
-                m_animator.SetBool(m_animatorParameters.Ground, false);
-                m_animator.SetBool(m_animatorParameters.Jump, true);
-                jumpdCooldownTimer = 0f;
+                if (m_MovementInput.InputHorizontal < -0.5f && m_FacingRight
+                    || m_MovementInput.InputHorizontal > 0.5f && !m_FacingRight)
+                {
+                    m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
+                    m_animator.SetBool(m_animatorParameters.Ground, false);
+                    m_animator.SetBool(m_animatorParameters.Jump, true);
+                }
             }
-            else Debug.Log("Jump cooldown not ready.");
-            m_MovementInput.Jump = false;
+            else
+            {
+                if (jumpdCooldownTimer > m_player.PlayerData.JumpCooldown)
+                {
+                    m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
+                    m_animator.SetBool(m_animatorParameters.Ground, false);
+                    m_animator.SetBool(m_animatorParameters.Jump, true);
+                    jumpdCooldownTimer = 0f;
+                }
+                else Debug.Log("Jump cooldown not ready.");
+                m_MovementInput.Jump = false;
+            }
         }
     }
     #endregion
