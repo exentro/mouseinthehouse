@@ -1507,7 +1507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1946649243207740
 GameObject:
   m_ObjectHideFlags: 1
@@ -3373,12 +3373,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603195bfdc1c287469ba90ec060a89b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_movement: {fileID: 114512632069437222}
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
-  m_GroundColliderBox: {fileID: 0}
+  m_GroundColliderBox: {fileID: 61920717569179928}
   m_GroundColliderCircle: {fileID: 0}
-  m_BoxCastDistance: 0.4
+  m_CastDistance: 0.05
+  m_debug: 1
 --- !u!114 &114024280765293054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3802,12 +3804,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603195bfdc1c287469ba90ec060a89b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_movement: {fileID: 114512632069437222}
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
   m_GroundColliderBox: {fileID: 0}
-  m_GroundColliderCircle: {fileID: 0}
-  m_BoxCastDistance: 0.3
+  m_GroundColliderCircle: {fileID: 58630548282393726}
+  m_CastDistance: 0.05
+  m_debug: 1
 --- !u!114 &114224392163172708
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3928,12 +3932,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603195bfdc1c287469ba90ec060a89b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_movement: {fileID: 114512632069437222}
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
-  m_GroundColliderBox: {fileID: 0}
+  m_GroundColliderBox: {fileID: 61425813401350792}
   m_GroundColliderCircle: {fileID: 0}
-  m_BoxCastDistance: 0.4
+  m_CastDistance: 0.05
+  m_debug: 1
 --- !u!114 &114283954518727766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4688,12 +4694,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603195bfdc1c287469ba90ec060a89b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_movement: {fileID: 114512632069437222}
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
   m_GroundColliderBox: {fileID: 0}
-  m_GroundColliderCircle: {fileID: 0}
-  m_BoxCastDistance: 0.3
+  m_GroundColliderCircle: {fileID: 58751284331009496}
+  m_CastDistance: 0.05
+  m_debug: 1
 --- !u!114 &114696849200990690
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4935,12 +4943,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603195bfdc1c287469ba90ec060a89b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_movement: {fileID: 114512632069437222}
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
   m_GroundColliderBox: {fileID: 0}
-  m_GroundColliderCircle: {fileID: 0}
-  m_BoxCastDistance: 0.4
+  m_GroundColliderCircle: {fileID: 58730446252114280}
+  m_CastDistance: 0.05
+  m_debug: 1
 --- !u!114 &114880814404444896
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4952,12 +4962,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603195bfdc1c287469ba90ec060a89b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_movement: {fileID: 114512632069437222}
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
   m_GroundColliderBox: {fileID: 0}
-  m_GroundColliderCircle: {fileID: 0}
-  m_BoxCastDistance: 0.3
+  m_GroundColliderCircle: {fileID: 58284320386881656}
+  m_CastDistance: 0.05
+  m_debug: 1
 --- !u!114 &114886567796436092
 MonoBehaviour:
   m_ObjectHideFlags: 1
