@@ -18,6 +18,7 @@ public class StateScriptClimb : StateMachineBehaviour
     {
         m_mousePlayer.Movement.Climb();
         m_mousePlayer.Movement.Run();
+        if (m_mousePlayer.PlayerData.CanClimbJump) m_mousePlayer.Movement.Jump();
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

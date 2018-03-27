@@ -41,23 +41,26 @@ public class InputController : MonoBehaviour
     {
         if (!ReInput.isReady) return; // Exit if Rewired isn't ready. This would only happen during a script recompile in the editor.
         if (!m_initialized) Initialize(); // Reinitialize after a recompile in the editor
-    //    else GetInput();
+        else GetInput();
     }
 
     private void FixedUpdate()
     {
-        if (m_initialized)
-        {
-            m_playerMovementInputs.InputHorizontal = m_player.GetAxis("MoveHorizontal");
-            m_playerMovementInputs.InputVertical = m_player.GetAxis("MoveVertical");
+        //if (m_initialized)
+        //{
+        //    m_playerMovementInputs.InputHorizontal = m_player.GetAxis("MoveHorizontal");
+        //    m_playerMovementInputs.InputVertical = m_player.GetAxis("MoveVertical");
 
-            m_playerMovementInputs.Jump = m_player.GetButtonDown("Jump");
-            m_playerMovementInputs.Crouch = m_player.GetButton("Crouch");
-        }
+        //    m_playerMovementInputs.Jump = m_player.GetButtonDown("Jump");
+        //    m_playerMovementInputs.Crouch = m_player.GetButton("Crouch");
+        //}
     }
 
     private void GetInput()
     {
+        m_playerMovementInputs.InputHorizontal = m_player.GetAxis("MoveHorizontal");
+        m_playerMovementInputs.InputVertical = m_player.GetAxis("MoveVertical");
+
         m_playerMovementInputs.Jump = m_player.GetButtonDown("Jump");
         m_playerMovementInputs.Crouch = m_player.GetButton("Crouch");
     }
