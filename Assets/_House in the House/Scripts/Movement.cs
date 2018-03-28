@@ -152,32 +152,6 @@ public class Movement : MonoBehaviour
     {
         get { return m_animator.GetBool(m_animatorParameters.Jump); }
     }
-
-/*
- * 
-    public void Jump()
-    {
-        if (m_MovementInput.Jump)
-        {
-            if (jumpdCooldownTimer > m_player.PlayerData.JumpCooldown)
-            {
-                m_rigidbody2d.isKinematic = false;
-                m_animator.SetBool(m_animatorParameters.Jump, true);
-
-                if (m_animator.GetBool(m_animatorParameters.Climb))
-                    m_animator.SetBool(m_animatorParameters.Climb, false);
-                else
-                    m_animator.SetBool(m_animatorParameters.Ground, false);
-
-                m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
-                jumpdCooldownTimer = 0f;
-            }
-            else Debug.Log("Jump cooldown not ready.");
-            
-            m_MovementInput.Jump = false;
-        }
-    }
-    //*/
     public void Jump()
     {
         if (m_MovementInput.Jump)
@@ -228,7 +202,8 @@ public class Movement : MonoBehaviour
         Transform obj = m_colliders.CollidingPushableObjectTransform();
         if (obj != null)
         {
-            Vector3 objectPosition = obj.position;
+            //Vector3 objectPosition = obj.position;
+            Vector3 objectPosition = obj.parent.position;
             objectPosition.x += (m_MovementInput.InputHorizontal * m_player.PlayerData.PushSpeed * Time.deltaTime);
             obj.position = objectPosition;
         }
