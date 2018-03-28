@@ -371,7 +371,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 169550521}
-  - component: {fileID: 169550524}
   - component: {fileID: 169550523}
   - component: {fileID: 169550525}
   - component: {fileID: 169550522}
@@ -433,50 +432,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!212 &169550524
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 169550520}
-  m_Enabled: 0
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d28eb80717319ab47887841cb278ce11, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
 --- !u!50 &169550525
 Rigidbody2D:
   serializedVersion: 4
@@ -2011,6 +1966,119 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4403696001996684, guid: 397771900cbed3047a053c19915ec93a, type: 2}
       propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 137451478065938110, guid: 397771900cbed3047a053c19915ec93a,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 137406622273376490, guid: 397771900cbed3047a053c19915ec93a,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 137328539581842140, guid: 397771900cbed3047a053c19915ec93a,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 137468731128226220, guid: 397771900cbed3047a053c19915ec93a,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 137412131006769608, guid: 397771900cbed3047a053c19915ec93a,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 137229803220138934, guid: 397771900cbed3047a053c19915ec93a,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 137110734146113500, guid: 397771900cbed3047a053c19915ec93a,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 137970500564032336, guid: 397771900cbed3047a053c19915ec93a,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 137587818300919748, guid: 397771900cbed3047a053c19915ec93a,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 137539678894491198, guid: 397771900cbed3047a053c19915ec93a,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 137361139872519824, guid: 397771900cbed3047a053c19915ec93a,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932860990453740, guid: 397771900cbed3047a053c19915ec93a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535541628069218, guid: 397771900cbed3047a053c19915ec93a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1217868398640430, guid: 397771900cbed3047a053c19915ec93a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1946649243207740, guid: 397771900cbed3047a053c19915ec93a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1782651531758332, guid: 397771900cbed3047a053c19915ec93a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133174017799504, guid: 397771900cbed3047a053c19915ec93a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1604811209043904, guid: 397771900cbed3047a053c19915ec93a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114867017077416804, guid: 397771900cbed3047a053c19915ec93a,
+        type: 2}
+      propertyPath: m_debug
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114204720779977238, guid: 397771900cbed3047a053c19915ec93a,
+        type: 2}
+      propertyPath: m_debug
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114006361959639224, guid: 397771900cbed3047a053c19915ec93a,
+        type: 2}
+      propertyPath: m_debug
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114693750816982610, guid: 397771900cbed3047a053c19915ec93a,
+        type: 2}
+      propertyPath: m_debug
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114880814404444896, guid: 397771900cbed3047a053c19915ec93a,
+        type: 2}
+      propertyPath: m_debug
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114283701228975852, guid: 397771900cbed3047a053c19915ec93a,
+        type: 2}
+      propertyPath: m_debug
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
