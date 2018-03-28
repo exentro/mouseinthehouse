@@ -78,7 +78,7 @@ public class MousePlayerData : ScriptableObject
     {
         get { return m_canClimb; }
     }
-    [SerializeField] [Range(0.01f, 0.1f)] private float m_ClimbingSpeedMultiplier;
+    [SerializeField] private float m_ClimbingSpeedMultiplier;
     public float ClimbSpeed
     {
         get { return m_ClimbingSpeedMultiplier; }
