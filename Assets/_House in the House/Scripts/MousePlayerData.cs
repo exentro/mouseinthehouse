@@ -112,6 +112,6 @@ public class MousePlayerData : ScriptableObject
     [SerializeField] private float m_CrawlingSpeedMultiplier;
     public float CrawlingSpeed
     {
-        get { return m_PushingSpeedMultiplier; }
+        get { return m_CrawlingSpeedMultiplier; }
     }
 }
