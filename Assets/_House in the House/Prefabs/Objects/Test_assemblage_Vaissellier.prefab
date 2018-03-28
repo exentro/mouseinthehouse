@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212535659407147790}
   - component: {fileID: 61334010206929610}
   - component: {fileID: 61456063974780984}
+  - component: {fileID: 114144439564152930}
   m_Layer: 0
   m_Name: Test_assemblage_Vaissellier
   m_TagString: Untagged
@@ -36,8 +37,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1509145723488522}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 513.4016, y: 74.012825, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 584.94, y: 15.32, z: 0}
+  m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -92,6 +93,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 12.619507, y: 6.3116455}
   m_EdgeRadius: 0
+--- !u!114 &114144439564152930
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1509145723488522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca201eb4e31e6149b22cdb935ae6ac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Pushable: 0
+  Climbable: 1
 --- !u!212 &212535659407147790
 SpriteRenderer:
   m_ObjectHideFlags: 1
