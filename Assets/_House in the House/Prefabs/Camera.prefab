@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 863c30a9e88cb4848977a564830f476c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damping: 1.5
+  m_damping: 3
 --- !u!114 &114267073474726746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 863c30a9e88cb4848977a564830f476c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damping: 1.5
+  m_damping: 3
 --- !u!114 &114701022398375102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -288,15 +288,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_player1: {fileID: 0}
   m_player2: {fileID: 0}
-  m_damping: 1.5
+  m_damping: 3
   m_camera2: {fileID: 20742473159027536}
   m_camera3: {fileID: 20741369591283360}
-  m_animCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  m_maxHeight: 44
+  m_minHeight: -9
 --- !u!124 &124092163057551626
 Behaviour:
   m_ObjectHideFlags: 1
