@@ -11,10 +11,11 @@ public class GroundCheckCollision : MonoBehaviour
 
     private RaycastHit2D m_Hit;
 
-    private bool m_grounded;
+    private bool m_groundedPreviousFrame = false;
+    private bool m_groundedThisFrame;
     public bool Grounded
     {
-        get { return m_grounded; }
+        get { return m_groundedThisFrame && m_groundedPreviousFrame; }
     }
 
     private void Awake()
@@ -26,7 +27,7 @@ public class GroundCheckCollision : MonoBehaviour
 
     private void Start()
     {
-        m_grounded = false;
+        m_groundedThisFrame = false;
     }
 
     private void OnDrawGizmos()
@@ -40,10 +41,11 @@ public class GroundCheckCollision : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        m_grounded = false;
-
+        m_groundedPreviousFrame = m_groundedThisFrame;
+        m_groundedThisFrame = false;
+        
         if (m_GroundColliderCircle != null)
         {
             m_Hit = Physics2D.CircleCast(getPosition(), m_GroundColliderCircle.radius, -transform.up, m_CastDistance, m_WhatIsGround);
@@ -52,8 +54,12 @@ public class GroundCheckCollision : MonoBehaviour
         {
             m_Hit = Physics2D.BoxCast(getPosition(), m_GroundColliderBox.bounds.size, 0f, -transform.up, m_CastDistance, m_WhatIsGround);
         }
-        
-        if (m_Hit.collider != null) m_grounded = true;
+
+        if (m_Hit.collider != null)
+        {
+            m_groundedThisFrame = true;
+            //Time.timeScale = 0f;
+        }
     }
 
     private Vector2 getPosition()

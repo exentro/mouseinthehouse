@@ -78,6 +78,7 @@ public class Movement : MonoBehaviour
     }
     private void Update()
     {
+        m_animator.SetBool(m_animatorParameters.Ground, m_colliders.CollidingGround());
         jumpdCooldownTimer += Time.deltaTime;
     }
     #endregion
@@ -124,11 +125,8 @@ public class Movement : MonoBehaviour
     {
         float maxSpeed = m_player.PlayerData.MaxHorizontalSpeed;
 
-        m_rigidbody2d.isKinematic = false;
-
-        //Debug.Log("1-" + m_rigidbody2d.velocity);
+        m_rigidbody2d.isKinematic = false;        
         m_rigidbody2d.velocity = new Vector2(Mathf.Clamp(speed, -maxSpeed, maxSpeed), m_rigidbody2d.velocity.y);
-        //Debug.Log("2-" + m_rigidbody2d.velocity);
 
         if (m_MovementInput.InputHorizontal > 0 && !m_FacingRight) Flip();
         else if (m_MovementInput.InputHorizontal < 0 && m_FacingRight) Flip();        
@@ -146,8 +144,6 @@ public class Movement : MonoBehaviour
     private float jumpdCooldownTimer;
     private void CheckJump()
     {
-        m_animator.SetBool(m_animatorParameters.Ground, m_colliders.CollidingGround());
-
         bool jump = !m_animator.GetBool(m_animatorParameters.Ground) && !m_animator.GetBool(m_animatorParameters.Climb);
         m_animator.SetBool(m_animatorParameters.Jump, jump);
     }    
@@ -252,7 +248,6 @@ public class Movement : MonoBehaviour
     }
     public void Crawl()
     {
-        Debug.Log(m_player.PlayerData.CrawlingSpeed);
         MoveX(m_MovementInput.InputHorizontal * m_player.PlayerData.CrawlingSpeed);
     }
     #endregion
