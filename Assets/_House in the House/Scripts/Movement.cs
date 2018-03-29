@@ -37,7 +37,6 @@ public class Movement : MonoBehaviour
     {
         m_MovementInput = new PlayerMovementInput();
     }
-
     private void Start()
     {
         if (m_colliders == null && m_debug) Debug.LogError("Reference to \"CollidersProvider\" script is not setted");
@@ -63,7 +62,6 @@ public class Movement : MonoBehaviour
             }
         }
     }
-
     private void FixedUpdate()
     {
         CheckJump();
@@ -71,18 +69,25 @@ public class Movement : MonoBehaviour
         CheckPush();
         CheckCrouch();
 
+        CheckKinematic();
+
         AffectPhysics();
-
-        m_animator.SetFloat(m_animatorParameters.HorizontalSpeed, m_rigidbody2d.velocity.x);
-        m_animator.SetFloat(m_animatorParameters.VerticalSpeed, m_rigidbody2d.velocity.y);
+        
+        m_animator.SetFloat(m_animatorParameters.HorizontalSpeed, m_rigidbody2d.isKinematic ? 0f : m_rigidbody2d.velocity.x);
+        m_animator.SetFloat(m_animatorParameters.VerticalSpeed, m_rigidbody2d.isKinematic ? 0f : m_rigidbody2d.velocity.y);
     }
-
     private void Update()
     {
+        m_animator.SetBool(m_animatorParameters.Ground, m_colliders.CollidingGround());
         jumpdCooldownTimer += Time.deltaTime;
     }
     #endregion
 
+    private void CheckKinematic()
+    {
+        m_rigidbody2d.isKinematic = m_animator.GetBool(m_animatorParameters.Climb) && !m_animator.GetBool(m_animatorParameters.Jump) && !m_animator.GetBool(m_animatorParameters.Ground);
+        if (m_rigidbody2d.isKinematic) m_rigidbody2d.velocity = Vector2.zero;
+    }
     private void AffectPhysics()
     {
         if(m_player.PlayerData.OverridePhysics)
@@ -104,7 +109,14 @@ public class Movement : MonoBehaviour
 
     #region Run
     private bool m_FacingRight = true;
-
+    public bool FacingRight
+    {
+        get { return m_FacingRight; }
+    }
+    public bool IsGrounded
+    {
+        get { return m_animator.GetBool(m_animatorParameters.Ground); }
+    }
     public void Run()
     {
         MoveX(m_MovementInput.InputHorizontal * m_player.PlayerData.SpeedMultiplier);
@@ -113,12 +125,14 @@ public class Movement : MonoBehaviour
     {
         float maxSpeed = m_player.PlayerData.MaxHorizontalSpeed;
 
-        m_rigidbody2d.velocity = new Vector2(Mathf.Clamp(speed, -maxSpeed, maxSpeed), m_rigidbody2d.velocity.y);
-
+        if ((m_colliders.CollidingPushable() && m_player.PlayerData.CanPush) || !m_colliders.CollidingPushable())
+        {
+            m_rigidbody2d.isKinematic = false;
+            m_rigidbody2d.velocity = new Vector2(Mathf.Clamp(speed, -maxSpeed, maxSpeed), m_rigidbody2d.velocity.y);
+        }
         if (m_MovementInput.InputHorizontal > 0 && !m_FacingRight) Flip();
-        else if (m_MovementInput.InputHorizontal < 0 && m_FacingRight) Flip();
+        else if (m_MovementInput.InputHorizontal < 0 && m_FacingRight) Flip();        
     }
-
     private void Flip()
     {
         m_FacingRight = !m_FacingRight;
@@ -132,38 +146,41 @@ public class Movement : MonoBehaviour
     private float jumpdCooldownTimer;
     private void CheckJump()
     {
-        m_animator.SetBool(m_animatorParameters.Ground, m_colliders.CollidingGround());
-
         bool jump = !m_animator.GetBool(m_animatorParameters.Ground) && !m_animator.GetBool(m_animatorParameters.Climb);
         m_animator.SetBool(m_animatorParameters.Jump, jump);
+    }    
+    public bool IsJumping
+    {
+        get { return m_animator.GetBool(m_animatorParameters.Jump); }
     }
-
     public void Jump()
     {
         if (m_MovementInput.Jump)
         {
-            if (m_animator.GetBool(m_animatorParameters.Climb))
+            if (jumpdCooldownTimer > m_player.PlayerData.JumpCooldown)
             {
-                if (m_MovementInput.InputHorizontal < -0.5f && m_FacingRight
-                    || m_MovementInput.InputHorizontal > 0.5f && !m_FacingRight)
+                if (m_animator.GetBool(m_animatorParameters.Climb))
                 {
-                    m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
-                    m_animator.SetBool(m_animatorParameters.Ground, false);
-                    m_animator.SetBool(m_animatorParameters.Jump, true);
+                    if (m_MovementInput.InputHorizontal > 0.3f || m_MovementInput.InputHorizontal < -0.3f) 
+                    {
+                        m_animator.SetBool(m_animatorParameters.Climb, false);
+                        m_rigidbody2d.isKinematic = false;
+                        m_animator.SetBool(m_animatorParameters.Jump, true);
+                        m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
+                    }
                 }
-            }
-            else
-            {
-                if (jumpdCooldownTimer > m_player.PlayerData.JumpCooldown)
+                else
                 {
-                    m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
                     m_animator.SetBool(m_animatorParameters.Ground, false);
+                    m_rigidbody2d.isKinematic = false;
                     m_animator.SetBool(m_animatorParameters.Jump, true);
-                    jumpdCooldownTimer = 0f;
+                    m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
                 }
-                else Debug.Log("Jump cooldown not ready.");
-                m_MovementInput.Jump = false;
+                jumpdCooldownTimer = 0f;
             }
+            else Debug.Log("Jump cooldown not ready.");
+            
+            m_MovementInput.Jump = false;
         }
     }
     #endregion
@@ -171,19 +188,20 @@ public class Movement : MonoBehaviour
     #region Push
     private void CheckPush()
     {
-        bool IsPushing = m_player.PlayerData.CanPush 
-            && m_colliders.CollidingPushable()
-            && (m_animator.GetFloat(m_animatorParameters.HorizontalSpeed) > 0.1f || m_animator.GetFloat(m_animatorParameters.HorizontalSpeed) < -0.1f);
-        
+        bool IsPushing = m_player.PlayerData.CanPush && m_colliders.CollidingPushable();
         m_animator.SetBool(m_animatorParameters.Push, IsPushing);
     }
-
+    public bool IsPushing
+    {
+        get { return m_animator.GetBool(m_animatorParameters.Push); }
+    }
     public void Push()
     {
         Transform obj = m_colliders.CollidingPushableObjectTransform();
         if (obj != null)
         {
-            Vector3 objectPosition = obj.position;
+            //Vector3 objectPosition = obj.position;
+            Vector3 objectPosition = obj.parent.position;
             objectPosition.x += (m_MovementInput.InputHorizontal * m_player.PlayerData.PushSpeed * Time.deltaTime);
             obj.position = objectPosition;
         }
@@ -196,14 +214,18 @@ public class Movement : MonoBehaviour
     {
         if (m_player.PlayerData.CanClimb)
         {
-            m_animator.SetBool(m_animatorParameters.Climb, m_colliders.CollidingClimbable());
+            bool isClimbing = m_colliders.CollidingClimbable();
+            m_animator.SetBool(m_animatorParameters.Climb, isClimbing);
         }
     }
-
+    public bool IsClimbing
+    {
+        get { return m_animator.GetBool(m_animatorParameters.Climb); }
+    }
     public void Climb()
     {
         Vector3 newPosition = m_transform.position;
-        newPosition.y += m_MovementInput.InputVertical * m_player.PlayerData.ClimbSpeed;
+        newPosition.y += m_MovementInput.InputVertical * m_player.PlayerData.ClimbSpeed * Time.deltaTime;
         m_transform.position = newPosition;
     }
     #endregion
@@ -218,6 +240,10 @@ public class Movement : MonoBehaviour
             && !m_animator.GetBool(m_animatorParameters.Push);
 
         m_animator.SetBool(m_animatorParameters.Crouch, crouched);
+    }
+    public bool IsCrawling
+    {
+        get { return m_animator.GetBool(m_animatorParameters.Crouch); }
     }
     public void Crawl()
     {
