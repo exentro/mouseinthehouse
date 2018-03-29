@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class CheckPointManager : MonoBehaviour
 {
-	#region Public Members
+    #region Public Members
+
+    public BoxCollider2D[] m_checkpoints;
 
 	#endregion
 
@@ -34,13 +36,25 @@ public class CheckPointManager : MonoBehaviour
 		
 	}
 
-	#endregion
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        print("trig");
+        foreach(BoxCollider2D checkPoint in m_checkpoints)
+        {
+            if(collision.gameObject == checkPoint.gameObject)
+            {
+                print("Check point triggered");
+            }
+        }
+    }
 
-	#region Tools Debug And Utility
+    #endregion
 
-	#endregion
+    #region Tools Debug And Utility
 
-	#region Private an Protected Members
+    #endregion
 
-	#endregion
+    #region Private an Protected Members
+
+    #endregion
 }
