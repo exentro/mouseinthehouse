@@ -1263,7 +1263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1820767554835230
 GameObject:
   m_ObjectHideFlags: 1
@@ -2451,7 +2451,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1800708074810038}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -34.91, y: 13.97, z: 0}
+  m_LocalPosition: {x: -14.94, y: 2.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4741251840412028}
@@ -3354,7 +3354,7 @@ Animator:
   m_GameObject: {fileID: 1900088911276286}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 315a599ada72f2c499ef2b209f8db170, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0e07c3cfa7bcadc4faecab4b11da8f9e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4026,8 +4026,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285eec18e29414b458f985384e281a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_horizontal: HorizontalSpeed
-  m_vertical: VerticalSpeed
+  m_horizontalSpeed: HorizontalSpeed
+  m_verticalSpeed: VerticalSpeed
+  m_horizontalInput: HorizontalInput
+  m_verticalInput: VerticalInput
   m_ground: Ground
   m_jump: Jump
   m_push: Push
