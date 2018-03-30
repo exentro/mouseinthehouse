@@ -35,11 +35,13 @@ public class MousePlayerData : ScriptableObject
     }
 
     [Header("Left-Right Movement")]
+    /*
     [SerializeField] private float m_MaxHorizontalSpeed = 10f;
     public float MaxHorizontalSpeed
     {
         get { return m_MaxHorizontalSpeed; }
     }
+    */
     [SerializeField] private float m_SpeedMultiplier = 1f;
     public float SpeedMultiplier
     {
@@ -78,7 +80,7 @@ public class MousePlayerData : ScriptableObject
     {
         get { return m_canClimb; }
     }
-    [SerializeField] [Range(0.01f, 0.1f)] private float m_ClimbingSpeedMultiplier;
+    [SerializeField] private float m_ClimbingSpeedMultiplier;
     public float ClimbSpeed
     {
         get { return m_ClimbingSpeedMultiplier; }
@@ -112,6 +114,6 @@ public class MousePlayerData : ScriptableObject
     [SerializeField] private float m_CrawlingSpeedMultiplier;
     public float CrawlingSpeed
     {
-        get { return m_PushingSpeedMultiplier; }
+        get { return m_CrawlingSpeedMultiplier; }
     }
 }

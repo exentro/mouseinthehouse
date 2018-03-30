@@ -4,16 +4,28 @@ using UnityEngine;
 
 public class AnimatorParameterMapper : MonoBehaviour
 {
-    [SerializeField] private string m_horizontal = "HorizontalSpeed";
+    [SerializeField] private string m_horizontalSpeed = "HorizontalSpeed";
     public string HorizontalSpeed
     {
-        get { return m_horizontal; }
+        get { return m_horizontalSpeed; }
     }
 
-    [SerializeField] private string m_vertical = "VerticalSpeed";
+    [SerializeField] private string m_verticalSpeed = "VerticalSpeed";
     public string VerticalSpeed
     {
-        get { return m_vertical; }
+        get { return m_verticalSpeed; }
+    }
+
+    [SerializeField] private string m_horizontalInput = "HorizontalInput";
+    public string HorizontalInput
+    {
+        get { return m_horizontalInput; }
+    }
+
+    [SerializeField] private string m_verticalInput = "VerticalInput";
+    public string VerticalInput
+    {
+        get { return m_verticalInput; }
     }
 
     [SerializeField] private string m_ground = "Ground";
