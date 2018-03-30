@@ -26,9 +26,9 @@ public class Movement : MonoBehaviour
 
     [Header("Dependencies")]
     [SerializeField] private MousePlayer m_player;
-    [SerializeField] [ReadOnly] private Transform m_transform;
-    [SerializeField] [ReadOnly] private Rigidbody2D m_rigidbody2d;
-    [SerializeField] [ReadOnly] private Animator m_animator;
+    private Transform m_transform;
+    private Rigidbody2D m_rigidbody2d;
+    private Animator m_animator;
     [SerializeField] private CollidersProvider m_colliders;
     [SerializeField] private AnimatorParameterMapper m_animatorParameters;
 
@@ -205,8 +205,7 @@ public class Movement : MonoBehaviour
         Transform obj = m_colliders.CollidingPushableObjectTransform();
         if (obj != null)
         {
-            //Vector3 objectPosition = obj.position;
-            Vector3 objectPosition = obj.parent.position;
+            Vector3 objectPosition = obj.position;
             objectPosition.x += (m_MovementInput.InputHorizontal * m_player.PlayerData.PushSpeed * Time.deltaTime);
             obj.position = objectPosition;
         }
