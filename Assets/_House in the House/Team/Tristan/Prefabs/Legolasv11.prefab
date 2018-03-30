@@ -3786,8 +3786,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285eec18e29414b458f985384e281a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_horizontal: HorizontalSpeed
-  m_vertical: VerticalSpeed
+  m_horizontalSpeed: HorizontalSpeed
+  m_verticalSpeed: VerticalSpeed
+  m_horizontalInput: HorizontalInput
+  m_verticalInput: VerticalInput
   m_ground: Ground
   m_jump: Jump
   m_push: Push
@@ -4348,9 +4350,6 @@ MonoBehaviour:
     m_jump: 0
     m_crouch: 0
   m_player: {fileID: 114048120994161442}
-  m_transform: {fileID: 4403696001996684}
-  m_rigidbody2d: {fileID: 50591932783551782}
-  m_animator: {fileID: 0}
   m_colliders: {fileID: 114045274784354316}
   m_animatorParameters: {fileID: 114199314256017802}
 --- !u!114 &114530710042008836
