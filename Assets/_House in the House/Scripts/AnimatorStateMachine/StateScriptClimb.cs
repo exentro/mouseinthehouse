@@ -11,12 +11,13 @@ public class StateScriptClimb : StateMachineBehaviour
         if (m_mousePlayer == null)
             m_mousePlayer = MousePlayer.GetPlayer(animator.GetInteger("PlayerId"));
         m_mousePlayer.Movement.State = E_MouseState.Climb;
+        animator.speed = 1f;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        m_mousePlayer.Movement.Climb();
+        m_mousePlayer.Movement.Climb();        
         m_mousePlayer.Movement.Run();
         if (m_mousePlayer.PlayerData.CanClimbJump) m_mousePlayer.Movement.Jump();
     }

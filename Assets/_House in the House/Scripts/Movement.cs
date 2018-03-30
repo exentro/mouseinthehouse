@@ -26,9 +26,9 @@ public class Movement : MonoBehaviour
 
     [Header("Dependencies")]
     [SerializeField] private MousePlayer m_player;
-    [SerializeField] [ReadOnly] private Transform m_transform;
-    [SerializeField] [ReadOnly] private Rigidbody2D m_rigidbody2d;
-    [SerializeField] [ReadOnly] private Animator m_animator;
+    private Transform m_transform;
+    private Rigidbody2D m_rigidbody2d;
+    private Animator m_animator;
     [SerializeField] private CollidersProvider m_colliders;
     [SerializeField] private AnimatorParameterMapper m_animatorParameters;
 
@@ -72,9 +72,8 @@ public class Movement : MonoBehaviour
         CheckKinematic();
 
         AffectPhysics();
-        
-        m_animator.SetFloat(m_animatorParameters.HorizontalSpeed, m_rigidbody2d.isKinematic ? 0f : m_rigidbody2d.velocity.x);
-        m_animator.SetFloat(m_animatorParameters.VerticalSpeed, m_rigidbody2d.isKinematic ? 0f : m_rigidbody2d.velocity.y);
+
+        SetAnimatorFloatParameters();
     }
     private void Update()
     {
@@ -106,7 +105,14 @@ public class Movement : MonoBehaviour
             m_rigidbody2d.velocity = velocity;
         }
     }
+    private void SetAnimatorFloatParameters()
+    {
+        m_animator.SetFloat(m_animatorParameters.HorizontalInput, m_MovementInput.InputHorizontal);
+        m_animator.SetFloat(m_animatorParameters.VerticalInput, m_MovementInput.InputVertical);
 
+        m_animator.SetFloat(m_animatorParameters.HorizontalSpeed, Mathf.Clamp(Mathf.Abs(m_rigidbody2d.velocity.x), 0.05f, 1f));
+        m_animator.SetFloat(m_animatorParameters.VerticalSpeed, Mathf.Clamp(Mathf.Abs(m_rigidbody2d.velocity.y), 0f, 1f));
+    }
     #region Run
     private bool m_FacingRight = true;
     public bool FacingRight
@@ -123,13 +129,12 @@ public class Movement : MonoBehaviour
     }
     private void MoveX(float speed)
     {
-        float maxSpeed = m_player.PlayerData.MaxHorizontalSpeed;
-
         if ((m_colliders.CollidingPushable() && m_player.PlayerData.CanPush) || !m_colliders.CollidingPushable())
         {
             m_rigidbody2d.isKinematic = false;
-            m_rigidbody2d.velocity = new Vector2(Mathf.Clamp(speed, -maxSpeed, maxSpeed), m_rigidbody2d.velocity.y);
+            m_rigidbody2d.velocity = new Vector2(speed, m_rigidbody2d.velocity.y);
         }
+
         if (m_MovementInput.InputHorizontal > 0 && !m_FacingRight) Flip();
         else if (m_MovementInput.InputHorizontal < 0 && m_FacingRight) Flip();        
     }
@@ -200,8 +205,7 @@ public class Movement : MonoBehaviour
         Transform obj = m_colliders.CollidingPushableObjectTransform();
         if (obj != null)
         {
-            //Vector3 objectPosition = obj.position;
-            Vector3 objectPosition = obj.parent.position;
+            Vector3 objectPosition = obj.position;
             objectPosition.x += (m_MovementInput.InputHorizontal * m_player.PlayerData.PushSpeed * Time.deltaTime);
             obj.position = objectPosition;
         }
