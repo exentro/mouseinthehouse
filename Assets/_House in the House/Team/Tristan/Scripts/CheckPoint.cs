@@ -41,7 +41,7 @@ public class CheckPoint: MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         int id = collision.gameObject.GetComponentInParent<MousePlayer>().PlayerID;
-        print(gameObject.name + " triggered by player " + id);
+        // print(gameObject.name + " triggered by player " + id);
         if (id == 0)
             m_player0Triggered = true;
         else if (id == 1)
