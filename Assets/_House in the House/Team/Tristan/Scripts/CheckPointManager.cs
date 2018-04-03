@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CheckPointManager : MonoBehaviour
 {
@@ -25,8 +26,14 @@ public class CheckPointManager : MonoBehaviour
 
 	private void Start() 
 	{
-		
-	}
+        //CheckPointContainer.RespawnPoint = m_checkpoints[0].transform.position;
+        //Retry();
+        //print(m_selectedPoint.transform.position);
+        //CheckPointContainer.RespawnPoint = m_selectedPoint.transform.position;
+        print(CheckPointContainer.RespawnPoint);
+        m_player0.transform.position = CheckPointContainer.RespawnPoint;
+        m_player1.transform.position = CheckPointContainer.RespawnPoint;
+    }
 	
 	private void Update()
 	{
@@ -40,7 +47,7 @@ public class CheckPointManager : MonoBehaviour
 
     public void Retry()
     {
-        GameObject selectedPoint = m_checkpoints[0];
+        GameObject selectedPoint = null;
         int checkpointNumber = 0;
         foreach(GameObject point in m_checkpoints)
         {
@@ -54,9 +61,13 @@ public class CheckPointManager : MonoBehaviour
                 }
             }
         }
+        print(selectedPoint.transform.position);
         //TODO: Go to selectedPoint
         CheckPointContainer.RespawnPoint = selectedPoint.transform.position;
-        print("Retry on point " + checkpointNumber);
+        SceneManager.LoadScene(0);
+        //m_player0.transform.position = CheckPointContainer.RespawnPoint;
+        //m_player1.transform.position = CheckPointContainer.RespawnPoint;
+        //print("Retry on point " + checkpointNumber);
     }
 
     private void OnGUI()
