@@ -7,16 +7,18 @@ public class CheckPoint: MonoBehaviour
     #region Public Members
 
     public int m_checkpointNumber;
+    public bool m_player0Triggered;
+    public bool m_player1Triggered;
 
-	#endregion
+    #endregion
 
-	#region Public Function
+    #region Public Function
 
-	#endregion
+    #endregion
 
-	#region System
+    #region System
 
-	private void Awake() 
+    private void Awake() 
 	{
 		
 	}
@@ -54,10 +56,6 @@ public class CheckPoint: MonoBehaviour
     #endregion
 
     #region Private an Protected Members
-
-    private bool m_player0Triggered;
-    private bool m_player1Triggered;
-
 
     #endregion
 }
