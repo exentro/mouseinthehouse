@@ -903,6 +903,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1577070995640132
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4287219343492036}
+  - component: {fileID: 61891874574670378}
+  m_Layer: 12
+  m_Name: CheckPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1584388490888902
 GameObject:
   m_ObjectHideFlags: 1
@@ -1258,12 +1274,12 @@ GameObject:
   - component: {fileID: 114082644524140142}
   - component: {fileID: 50895469074471084}
   m_Layer: 8
-  m_Name: Legolas_FMA
+  m_Name: FMA_Legolas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1820767554835230
 GameObject:
   m_ObjectHideFlags: 1
@@ -2067,6 +2083,19 @@ Transform:
   m_Father: {fileID: 4364057632953930}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -29.043001}
+--- !u!4 &4287219343492036
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1577070995640132}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4575582194220456}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4293579393875720
 Transform:
   m_ObjectHideFlags: 1
@@ -2451,11 +2480,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1800708074810038}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.94, y: 2.8, z: 0}
+  m_LocalPosition: {x: 528.87, y: 15.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4741251840412028}
   - {fileID: 4257781645275816}
+  - {fileID: 4287219343492036}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3205,6 +3235,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 2}
   m_EdgeRadius: 0
+--- !u!61 &61891874574670378
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1577070995640132}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!61 &61985074373313920
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -3354,7 +3409,7 @@ Animator:
   m_GameObject: {fileID: 1900088911276286}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0e07c3cfa7bcadc4faecab4b11da8f9e, type: 2}
+  m_Controller: {fileID: 9100000, guid: c4001a69b0a48ae48bed952745783eaf, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3385,7 +3440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.048010383, g: 0.27205884, b: 0.07736848, a: 0.284}
-  m_Length: 1.7078323
+  m_Length: 1.707885
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4845109163187612}
   m_AttachedIK: {fileID: 0}
@@ -3401,7 +3456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.9558824, g: 0.42268226, b: 0.077314034, a: 0.381}
-  m_Length: 0.9498934
+  m_Length: 0.9498629
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4124248487464304}
   m_AttachedIK: {fileID: 0}
@@ -3490,9 +3545,6 @@ MonoBehaviour:
     m_jump: 0
     m_crouch: 0
   m_player: {fileID: 114344570691337202}
-  m_transform: {fileID: 4575582194220456}
-  m_rigidbody2d: {fileID: 50895469074471084}
-  m_animator: {fileID: 0}
   m_colliders: {fileID: 114827370571505584}
   m_animatorParameters: {fileID: 114319159299618402}
 --- !u!114 &114126492452354256
@@ -3574,7 +3626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.06325693, g: 0.3655814, b: 0.8602941, a: 0.308}
-  m_Length: 1.9443221
+  m_Length: 1.9443291
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4522815690834680}
   m_AttachedIK: {fileID: 0}
@@ -3590,7 +3642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.048010383, g: 0.27205884, b: 0.07736848, a: 0.284}
-  m_Length: 1.4396981
+  m_Length: 1.4397868
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4837864666540960}
   m_AttachedIK: {fileID: 0}
@@ -3684,7 +3736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.11245675, g: 0.58823526, b: 0.1748002, a: 0.284}
-  m_Length: 1.7078347
+  m_Length: 1.7077471
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4519987758924194}
   m_AttachedIK: {fileID: 0}
@@ -3721,7 +3773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.9558824, g: 0.93862605, b: 0.33034167, a: 0.362}
-  m_Length: 1.1365802
+  m_Length: 1.1366973
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4654575083439410}
   m_AttachedIK: {fileID: 0}
@@ -3771,7 +3823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8344396, g: 0.037305348, b: 0.8455882, a: 0.271}
-  m_Length: 1.0000101
+  m_Length: 1.000105
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4739650485229098}
   m_AttachedIK: {fileID: 0}
@@ -3979,7 +4031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8344396, g: 0.037305348, b: 0.8455882, a: 0.271}
-  m_Length: 1.0000017
+  m_Length: 1.0000398
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4160587046159390}
   m_AttachedIK: {fileID: 0}
@@ -3995,7 +4047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.11245675, g: 0.58823526, b: 0.1748002, a: 0.284}
-  m_Length: 3.0038316
+  m_Length: 3.003765
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4764341506997480}
   m_AttachedIK: {fileID: 0}
@@ -4011,7 +4063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8344396, g: 0.037305348, b: 0.8455882, a: 0.271}
-  m_Length: 1.0000125
+  m_Length: 0.9998979
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4122036952004182}
   m_AttachedIK: {fileID: 0}
@@ -4047,7 +4099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.99264705, g: 0.6028367, b: 0.350346, a: 0.381}
-  m_Length: 1.2048393
+  m_Length: 1.2048037
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4000272864094418}
   m_AttachedIK: {fileID: 0}
@@ -4125,7 +4177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.06325693, g: 0.3655814, b: 0.8602941, a: 0.308}
-  m_Length: 1.6653816
+  m_Length: 1.6654005
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4634292272428536}
   m_AttachedIK: {fileID: 0}
@@ -4164,7 +4216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.11245675, g: 0.58823526, b: 0.1748002, a: 0.284}
-  m_Length: 1.4397159
+  m_Length: 1.4396449
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4747157076835966}
   m_AttachedIK: {fileID: 0}
@@ -4180,7 +4232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8344396, g: 0.037305348, b: 0.8455882, a: 0.271}
-  m_Length: 1.3460206
+  m_Length: 1.3460398
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4107759062007796}
   m_AttachedIK: {fileID: 0}
@@ -4208,7 +4260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.9264706, g: 0.19074395, b: 0.19074395, a: 0.381}
-  m_Length: 1.6579778
+  m_Length: 1.6579672
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4785983491740694}
   m_AttachedIK: {fileID: 0}
@@ -4224,7 +4276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8344396, g: 0.037305348, b: 0.8455882, a: 0.271}
-  m_Length: 1.3999987
+  m_Length: 1.3998653
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4430183814869290}
   m_AttachedIK: {fileID: 0}
@@ -4303,7 +4355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8344396, g: 0.037305348, b: 0.8455882, a: 0.271}
-  m_Length: 1.023379
+  m_Length: 1.0234
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4143709816261676}
   m_AttachedIK: {fileID: 0}
@@ -4346,7 +4398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.018814871, g: 0.17344292, b: 0.42647058, a: 0.302}
-  m_Length: 1.7022107
+  m_Length: 1.7020797
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4275463948157820}
   m_AttachedIK: {fileID: 0}
@@ -4454,7 +4506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.018814871, g: 0.17344292, b: 0.42647058, a: 0.302}
-  m_Length: 0.4700005
+  m_Length: 0.47007573
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4476173112259030}
   m_AttachedIK: {fileID: 0}
@@ -4470,7 +4522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8344396, g: 0.037305348, b: 0.8455882, a: 0.271}
-  m_Length: 1.4919263
+  m_Length: 1.4919832
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4503213233940228}
   m_AttachedIK: {fileID: 0}
@@ -4582,7 +4634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.9558824, g: 0.42268226, b: 0.077314034, a: 0.381}
-  m_Length: 1.148205
+  m_Length: 1.1482259
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4083615915662308}
   m_AttachedIK: {fileID: 0}
@@ -4598,7 +4650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8344396, g: 0.037305348, b: 0.8455882, a: 0.271}
-  m_Length: 1.118706
+  m_Length: 1.1186497
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4179236771191818}
   m_AttachedIK: {fileID: 0}
@@ -4614,7 +4666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8344396, g: 0.037305348, b: 0.8455882, a: 0.271}
-  m_Length: 0.999997
+  m_Length: 0.99990076
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4156882432479310}
   m_AttachedIK: {fileID: 0}
@@ -4728,7 +4780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8344396, g: 0.037305348, b: 0.8455882, a: 0.271}
-  m_Length: 1.1229153
+  m_Length: 1.1228398
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4915515344523310}
   m_AttachedIK: {fileID: 0}
@@ -4899,7 +4951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8344396, g: 0.037305348, b: 0.8455882, a: 0.271}
-  m_Length: 1.3086193
+  m_Length: 1.3086958
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4190345197710868}
   m_AttachedIK: {fileID: 0}
@@ -4915,7 +4967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.9264706, g: 0.19074395, b: 0.19074395, a: 0.381}
-  m_Length: 0.7462399
+  m_Length: 0.7462316
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4269403998612114}
   m_AttachedIK: {fileID: 0}
@@ -4931,7 +4983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.06325693, g: 0.3655814, b: 0.8602941, a: 0.308}
-  m_Length: 0.46999866
+  m_Length: 0.4699412
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4523280338691966}
   m_AttachedIK: {fileID: 0}
@@ -4989,7 +5041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.018814871, g: 0.17344292, b: 0.42647058, a: 0.302}
-  m_Length: 1.9443231
+  m_Length: 1.9442502
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4364057632953930}
   m_AttachedIK: {fileID: 0}
@@ -5005,7 +5057,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.9264706, g: 0.19074395, b: 0.19074395, a: 0.381}
-  m_Length: 1.6332144
+  m_Length: 1.6332173
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4458476099138090}
   m_AttachedIK: {fileID: 0}
@@ -5044,7 +5096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.9264706, g: 0.19074395, b: 0.19074395, a: 0.381}
-  m_Length: 1.6837808
+  m_Length: 1.6837801
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4407828106578998}
   m_AttachedIK: {fileID: 0}
@@ -5091,7 +5143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.9558824, g: 0.93862605, b: 0.33034167, a: 0.362}
-  m_Length: 1.0232003
+  m_Length: 1.0231469
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4564305757174768}
   m_AttachedIK: {fileID: 0}

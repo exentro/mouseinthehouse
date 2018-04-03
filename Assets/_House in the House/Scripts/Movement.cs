@@ -110,7 +110,7 @@ public class Movement : MonoBehaviour
         m_animator.SetFloat(m_animatorParameters.HorizontalInput, m_MovementInput.InputHorizontal);
         m_animator.SetFloat(m_animatorParameters.VerticalInput, m_MovementInput.InputVertical);
 
-        m_animator.SetFloat(m_animatorParameters.HorizontalSpeed, Mathf.Clamp(Mathf.Abs(m_rigidbody2d.velocity.x), 0.05f, 1f));
+        m_animator.SetFloat(m_animatorParameters.HorizontalSpeed, Mathf.Clamp(Mathf.Abs(m_rigidbody2d.velocity.x), 0f, 1f));
         m_animator.SetFloat(m_animatorParameters.VerticalSpeed, Mathf.Clamp(Mathf.Abs(m_rigidbody2d.velocity.y), 0f, 1f));
     }
     #region Run
