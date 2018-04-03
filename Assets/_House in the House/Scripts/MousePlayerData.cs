@@ -35,13 +35,6 @@ public class MousePlayerData : ScriptableObject
     }
 
     [Header("Left-Right Movement")]
-    /*
-    [SerializeField] private float m_MaxHorizontalSpeed = 10f;
-    public float MaxHorizontalSpeed
-    {
-        get { return m_MaxHorizontalSpeed; }
-    }
-    */
     [SerializeField] private float m_SpeedMultiplier = 1f;
     public float SpeedMultiplier
     {

@@ -3476,31 +3476,37 @@ MonoBehaviour:
     Push: {fileID: 114679593655427566}
     Ground: {fileID: 114122312857788356}
     Climb: {fileID: 114161263203436816}
+    Nibble: {fileID: 0}
   run:
     Container: {fileID: 1919240281033908}
     Push: {fileID: 114627909129265210}
     Ground: {fileID: 114899009690701732}
     Climb: {fileID: 114051455683333716}
+    Nibble: {fileID: 0}
   push:
     Container: {fileID: 1915045036357416}
     Push: {fileID: 114585042172588246}
     Ground: {fileID: 114472375142780534}
     Climb: {fileID: 114491905531257154}
+    Nibble: {fileID: 0}
   climb:
     Container: {fileID: 1237860037583190}
     Push: {fileID: 114200995482202520}
     Ground: {fileID: 114811910216750928}
     Climb: {fileID: 114308108537623908}
+    Nibble: {fileID: 0}
   jump:
     Container: {fileID: 1254553297378772}
     Push: {fileID: 114347861135835104}
     Ground: {fileID: 114913980584389388}
     Climb: {fileID: 114243471021399496}
+    Nibble: {fileID: 0}
   crouch:
     Container: {fileID: 1441888828487576}
     Push: {fileID: 114052532306851618}
     Ground: {fileID: 114324618397130832}
     Climb: {fileID: 114910714732510884}
+    Nibble: {fileID: 0}
 --- !u!114 &114139141203512498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3579,6 +3585,7 @@ MonoBehaviour:
   m_Rigidbody2D: {fileID: 50574210840891938}
   m_transform: {fileID: 4828073914537046}
   m_movement: {fileID: 114094494209759096}
+  m_action: {fileID: 0}
 --- !u!114 &114161263203436816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3825,6 +3832,7 @@ MonoBehaviour:
   m_push: Push
   m_climb: Climb
   m_crouch: Crouch
+  m_nibble: Nibble
 --- !u!114 &114308108537623908
 MonoBehaviour:
   m_ObjectHideFlags: 1

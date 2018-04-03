@@ -8,9 +8,11 @@ public class MousePlayer : MonoBehaviour
     {
         return m_players[id];
     }
+
     private void Awake()
     {
         if (m_players == null) m_players = new List<MousePlayer>();
+        if (m_players.Count == 2) m_players.Clear();
         m_players.Add(this);
         m_playerId = m_players.IndexOf(this);
 
@@ -29,6 +31,9 @@ public class MousePlayer : MonoBehaviour
 
         if (m_movement == null) m_movement = GetComponent<Movement>();
         if (m_debug && m_movement == null) Debug.LogError("Can't find Component Movement");
+
+        if (m_action == null) m_action = GetComponent<PlayerAction>();
+        if (m_debug && m_action == null) Debug.LogError("Can't find Component PlayerAction");
     }
     
     [SerializeField] [ReadOnly] private int m_playerId;
@@ -68,5 +73,11 @@ public class MousePlayer : MonoBehaviour
     public Movement Movement
     {
         get { return m_movement; }
+    }
+
+    [SerializeField] private PlayerAction m_action;
+    public PlayerAction Action
+    {
+        get { return m_action; }
     }
 }
