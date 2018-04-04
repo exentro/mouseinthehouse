@@ -26,13 +26,9 @@ public class CheckPointManager : MonoBehaviour
 
 	private void Start() 
 	{
-        //CheckPointContainer.RespawnPoint = m_checkpoints[0].transform.position;
-        //Retry();
-        //print(m_selectedPoint.transform.position);
-        //CheckPointContainer.RespawnPoint = m_selectedPoint.transform.position;
         print(CheckPointContainer.RespawnPoint);
-        m_player0.transform.position = CheckPointContainer.RespawnPoint;
-        m_player1.transform.position = CheckPointContainer.RespawnPoint;
+        //m_player0.transform.position = CheckPointContainer.RespawnPoint;
+        //m_player1.transform.position = CheckPointContainer.RespawnPoint;
     }
 	
 	private void Update()
