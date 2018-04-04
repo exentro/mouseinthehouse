@@ -93,6 +93,7 @@ public class PlayerAction : MonoBehaviour
                 if (m_colliders.CollidingNibbleEdible())
                 {
                     Debug.Log("Nibble");
+                    Destroy(m_colliders.CollidingNibbleEdibleGameObject());
                 }
                 m_actionInput.Nibble = false;
             }

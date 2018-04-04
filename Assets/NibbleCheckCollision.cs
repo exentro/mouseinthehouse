@@ -18,6 +18,14 @@ public class NibbleCheckCollision : MonoBehaviour
     }
 
     private GameObject m_edibleObject;
+    public GameObject EdibleObject
+    {
+        get
+        {
+            if (m_edibleObject == null) return null;
+            return m_edibleObject;
+        }
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -26,10 +34,6 @@ public class NibbleCheckCollision : MonoBehaviour
             Interactable coll = collision.gameObject.GetComponent<Interactable>();
             if (coll != null && coll.NibbleEdible)
             {
-                if (m_debug && m_edibleObject != null)
-                {
-                    Debug.LogWarning(string.Format("New Edible object collision detected but another one still referenced. Replacing... Are they 2 edible objects close at the same time ? ({0} & {1})", m_edibleObject.name, collision.gameObject.name));
-                }
                 m_edible = coll.NibbleEdible;
                 if (coll.NibbleEdible) m_edibleObject = collision.gameObject;
             }

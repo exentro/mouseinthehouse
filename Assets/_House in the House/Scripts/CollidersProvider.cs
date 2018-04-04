@@ -13,6 +13,7 @@ public class CollidersProvider : MonoBehaviour
         [SerializeField] [ReadOnlyOnPlay] public ClimbCheckCollision Climb;
         [SerializeField] [ReadOnlyOnPlay] public NibbleCheckCollision Nibble;
     }
+
     [Header("Debug")]
     [SerializeField] bool m_debug = true;
 
@@ -145,5 +146,12 @@ public class CollidersProvider : MonoBehaviour
             if (m_debug) Debug.LogError("No active colliders.");
         }
         return false;
+    }
+    public GameObject CollidingNibbleEdibleGameObject()
+    {
+        if (m_activeColliders != null)
+            return m_activeColliders.Nibble.EdibleObject;
+        else if (m_debug) Debug.LogError("No active colliders.");
+        return null;
     }
 }
