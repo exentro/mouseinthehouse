@@ -11,9 +11,6 @@ public class MousePlayer : MonoBehaviour
     
     private void Awake()
     {
-        if(m_players == null) m_players = new MousePlayer[2];
-        m_players[m_data.ID] = this;
-
         if (m_Anim == null) m_Anim = GetComponent<Animator>();
         if (m_debug && m_Anim == null) Debug.LogError("Can't find Component Animator");
         if (m_Anim != null)
@@ -33,7 +30,17 @@ public class MousePlayer : MonoBehaviour
         if (m_action == null) m_action = GetComponent<PlayerAction>();
         if (m_debug && m_action == null) Debug.LogError("Can't find Component PlayerAction");
     }
-    
+
+    private void Start()
+    {
+        if (m_players == null) m_players = new MousePlayer[2];
+        m_players[m_data.ID] = this;
+        m_playerId = m_data.ID;
+        m_name = m_data.Name;
+    }
+
+    [Header("Debug")]
+    [SerializeField] [ReadOnly] private string m_name;
     [SerializeField] [ReadOnly] private int m_playerId;
     public int PlayerID
     {
