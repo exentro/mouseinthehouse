@@ -9,14 +9,14 @@ public class MousePlayerData : ScriptableObject
     {
         if (m_id == -1) Debug.LogError("Id not setted");
     }
-
+    
     [Header("Mouse")]
     [SerializeField] private string m_name;
     public string Name
     {
         get { return m_name; }
     }
-    [SerializeField][ReadOnly] private int m_id = -1;
+    [SerializeField] private int m_id = -1;
     public int ID
     {
         get { return m_id; }
