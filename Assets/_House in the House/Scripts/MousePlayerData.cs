@@ -109,4 +109,12 @@ public class MousePlayerData : ScriptableObject
     {
         get { return m_CrawlingSpeedMultiplier; }
     }
+
+    [Header("Nibble")]
+    [SerializeField]
+    private bool m_canNibble = true;
+    public bool CanNibble
+    {
+        get { return m_canNibble; }
+    }
 }

@@ -88,11 +88,14 @@ public class PlayerAction : MonoBehaviour
     {
         if (m_actionInput.Nibble)
         {
-            if (m_colliders.CollidingNibbleEdible())
+            if(m_player.PlayerData.CanNibble)
             {
-                Debug.Log("Nibble");
+                if (m_colliders.CollidingNibbleEdible())
+                {
+                    Debug.Log("Nibble");
+                }
+                m_actionInput.Nibble = false;
             }
-            m_actionInput.Nibble = false;
         }
     }
 
