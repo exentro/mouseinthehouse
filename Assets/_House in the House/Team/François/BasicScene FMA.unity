@@ -4758,6 +4758,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 697424884}
+  - component: {fileID: 697424885}
   m_Layer: 0
   m_Name: Players
   m_TagString: Untagged
@@ -4780,6 +4781,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &697424885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 697424883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 930aed0a47af55445a5daa513aa49abf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_timeScale: 0.1
 --- !u!1 &699248603
 GameObject:
   m_ObjectHideFlags: 0
@@ -5328,6 +5341,7 @@ MonoBehaviour:
   m_verticalSpeed: VerticalSpeed
   m_horizontalInput: HorizontalInput
   m_verticalInput: VerticalInput
+  m_verticalVelocity: VerticalVelocity
   m_ground: Ground
   m_jump: Jump
   m_isFalling: IsFalling
@@ -5889,6 +5903,7 @@ MonoBehaviour:
   m_verticalSpeed: VerticalSpeed
   m_horizontalInput: HorizontalInput
   m_verticalInput: VerticalInput
+  m_verticalVelocity: VerticalVelocity
   m_ground: Ground
   m_jump: Jump
   m_isFalling: IsFalling
@@ -6796,7 +6811,7 @@ MonoBehaviour:
   m_name: 
   m_playerId: 0
   m_debug: 1
-  m_data: {fileID: 11400000, guid: ae2ccf3aa3dcda449a57c15bd798f42e, type: 2}
+  m_data: {fileID: 11400000, guid: 720543905a77a4a48a5e5c76f1e80884, type: 2}
   m_Anim: {fileID: 767037843}
   m_Rigidbody2D: {fileID: 923419389}
   m_transform: {fileID: 1744327649}
@@ -8320,7 +8335,7 @@ MonoBehaviour:
     m_Bits: 1
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 1130910621}
-  m_CastDistance: 0.05
+  m_CastDistance: 0.25
   m_debug: 1
 --- !u!58 &1130910621
 CircleCollider2D:
@@ -10520,7 +10535,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4380655542698198, guid: 265b7836e8e997c48a75e6e2c942cbc5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -57
       objectReference: {fileID: 0}
     - target: {fileID: 4380655542698198, guid: 265b7836e8e997c48a75e6e2c942cbc5, type: 2}
       propertyPath: m_LocalPosition.y
@@ -10599,7 +10614,7 @@ MonoBehaviour:
     m_Bits: 1
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 1636595567}
-  m_CastDistance: 0.2
+  m_CastDistance: 0.25
   m_debug: 1
 --- !u!58 &1636595567
 CircleCollider2D:
@@ -11226,7 +11241,7 @@ MonoBehaviour:
     m_Bits: 1
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 1684338068}
-  m_CastDistance: 0.05
+  m_CastDistance: 0.25
   m_debug: 1
 --- !u!58 &1684338068
 CircleCollider2D:
