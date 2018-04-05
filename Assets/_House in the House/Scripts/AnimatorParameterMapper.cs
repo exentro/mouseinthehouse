@@ -40,6 +40,12 @@ public class AnimatorParameterMapper : MonoBehaviour
         get { return m_jump; }
     }
 
+    [SerializeField] private string m_isFalling = "IsFalling";
+    public string IsFalling
+    {
+        get { return m_isFalling; }
+    }
+
     [SerializeField] private string m_push = "Push";
     public string Push
     {
