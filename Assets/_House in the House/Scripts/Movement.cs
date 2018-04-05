@@ -110,9 +110,12 @@ public class Movement : MonoBehaviour
         m_animator.SetFloat(m_animatorParameters.HorizontalInput, m_MovementInput.InputHorizontal);
         m_animator.SetFloat(m_animatorParameters.VerticalInput, m_MovementInput.InputVertical);
 
-        m_animator.SetFloat(m_animatorParameters.HorizontalSpeed, Mathf.Clamp(Mathf.Abs(m_rigidbody2d.velocity.x), 0.05f, 1f));
+        m_animator.SetFloat(m_animatorParameters.HorizontalSpeed, Mathf.Clamp(Mathf.Abs(m_rigidbody2d.velocity.x), 0f, 1f));
         m_animator.SetFloat(m_animatorParameters.VerticalSpeed, Mathf.Clamp(Mathf.Abs(m_rigidbody2d.velocity.y), 0f, 1f));
+
+        m_animator.SetBool(m_animatorParameters.IsFalling, (m_rigidbody2d.velocity.y < 0 ? true : false));
     }
+    
     #region Run
     private bool m_FacingRight = true;
     public bool FacingRight
@@ -259,13 +262,6 @@ public class Movement : MonoBehaviour
 [System.Serializable]
 public class PlayerMovementInput
 {
-    public void Reset()
-    {
-        InputVertical = 0f;
-        InputHorizontal = 0f;
-        Jump = false;
-    }
-
     [SerializeField] private float m_inputVertical;
     public float InputVertical
     {

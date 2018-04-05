@@ -5,6 +5,23 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MouseData", menuName = "MouseInTheHouse/MouseData", order = 1)]
 public class MousePlayerData : ScriptableObject
 {
+    private void OnEnable()
+    {
+        if (m_id == -1) Debug.LogError("Id not setted");
+    }
+    
+    [Header("Mouse")]
+    [SerializeField] private string m_name;
+    public string Name
+    {
+        get { return m_name; }
+    }
+    [SerializeField] private int m_id = -1;
+    public int ID
+    {
+        get { return m_id; }
+    }
+
     [Header("Physics")]
     [SerializeField] private bool m_overridePhysics;
     public bool OverridePhysics
@@ -35,13 +52,6 @@ public class MousePlayerData : ScriptableObject
     }
 
     [Header("Left-Right Movement")]
-    /*
-    [SerializeField] private float m_MaxHorizontalSpeed = 10f;
-    public float MaxHorizontalSpeed
-    {
-        get { return m_MaxHorizontalSpeed; }
-    }
-    */
     [SerializeField] private float m_SpeedMultiplier = 1f;
     public float SpeedMultiplier
     {
@@ -115,5 +125,13 @@ public class MousePlayerData : ScriptableObject
     public float CrawlingSpeed
     {
         get { return m_CrawlingSpeedMultiplier; }
+    }
+
+    [Header("Nibble")]
+    [SerializeField]
+    private bool m_canNibble = true;
+    public bool CanNibble
+    {
+        get { return m_canNibble; }
     }
 }

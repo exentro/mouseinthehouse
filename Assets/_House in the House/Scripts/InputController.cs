@@ -6,15 +6,11 @@ public class InputController : MonoBehaviour
 {
     private Player m_player;
     private PlayerMovementInput m_playerMovementInputs;
+    private PlayerActionInput m_playerActiontInputs;
 
     [SerializeField] private MousePlayer m_mousePlayer;
 
     private bool m_initialized;
-    /*
-    private float m_moveX;
-    private float m_moveY;
-    private bool m_jump;
-    */
     private bool m_crouch;
 
     private void Awake()
@@ -28,11 +24,11 @@ public class InputController : MonoBehaviour
     private void Start()
     {
         m_playerMovementInputs = m_mousePlayer.Movement.MovementInput;
+        m_playerActiontInputs = m_mousePlayer.Action.ActionInput;
     }
 
     private void Initialize()
     {
-        // Get the Rewired Player object for this player.
         m_player = ReInput.players.GetPlayer(m_mousePlayer.PlayerID);
         m_initialized = true;
     }
@@ -44,18 +40,6 @@ public class InputController : MonoBehaviour
         else GetInput();
     }
 
-    private void FixedUpdate()
-    {
-        //if (m_initialized)
-        //{
-        //    m_playerMovementInputs.InputHorizontal = m_player.GetAxis("MoveHorizontal");
-        //    m_playerMovementInputs.InputVertical = m_player.GetAxis("MoveVertical");
-
-        //    m_playerMovementInputs.Jump = m_player.GetButtonDown("Jump");
-        //    m_playerMovementInputs.Crouch = m_player.GetButton("Crouch");
-        //}
-    }
-
     private void GetInput()
     {
         m_playerMovementInputs.InputHorizontal = m_player.GetAxis("MoveHorizontal");
@@ -63,5 +47,14 @@ public class InputController : MonoBehaviour
 
         m_playerMovementInputs.Jump = m_player.GetButtonDown("Jump");
         m_playerMovementInputs.Crouch = m_player.GetButton("Crouch");
+        
+        m_playerActiontInputs.Nibble = m_player.GetButtonDown("Nibble");
+        m_playerActiontInputs.Retry = m_player.GetButtonDown("Retry");
+        
+        m_playerActiontInputs.CameraHorizontal = m_player.GetAxis("CameraHorizontal");
+        m_playerActiontInputs.CameraVertical = m_player.GetAxis("CameraVertical");
+
+        m_playerActiontInputs.Zoom = m_player.GetAxis("Zoom");
+        m_playerActiontInputs.Unzoom = m_player.GetAxis("Unzoom");
     }
 }

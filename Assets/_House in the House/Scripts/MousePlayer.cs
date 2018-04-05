@@ -3,22 +3,19 @@ using UnityEngine;
 
 public class MousePlayer : MonoBehaviour
 {
-    private static List<MousePlayer> m_players;
+    private static MousePlayer[] m_players;
     public static MousePlayer GetPlayer(int id)
     {
         return m_players[id];
     }
+    
     private void Awake()
     {
-        if (m_players == null) m_players = new List<MousePlayer>();
-        m_players.Add(this);
-        m_playerId = m_players.IndexOf(this);
-
         if (m_Anim == null) m_Anim = GetComponent<Animator>();
         if (m_debug && m_Anim == null) Debug.LogError("Can't find Component Animator");
         if (m_Anim != null)
         {
-            m_Anim.SetInteger("PlayerId", m_playerId);
+            m_Anim.SetInteger("PlayerId", m_data.ID);
         }
 
         if (m_Rigidbody2D == null) m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -29,12 +26,25 @@ public class MousePlayer : MonoBehaviour
 
         if (m_movement == null) m_movement = GetComponent<Movement>();
         if (m_debug && m_movement == null) Debug.LogError("Can't find Component Movement");
+
+        if (m_action == null) m_action = GetComponent<PlayerAction>();
+        if (m_debug && m_action == null) Debug.LogError("Can't find Component PlayerAction");
     }
-    
+
+    private void Start()
+    {
+        if (m_players == null) m_players = new MousePlayer[2];
+        m_players[m_data.ID] = this;
+        m_playerId = m_data.ID;
+        m_name = m_data.Name;
+    }
+
+    [Header("Debug")]
+    [SerializeField] [ReadOnly] private string m_name;
     [SerializeField] [ReadOnly] private int m_playerId;
     public int PlayerID
     {
-        get { return m_playerId; }
+        get { return m_data.ID; }
     }
     [SerializeField] private bool m_debug = true;
 
@@ -68,5 +78,11 @@ public class MousePlayer : MonoBehaviour
     public Movement Movement
     {
         get { return m_movement; }
+    }
+
+    [SerializeField] private PlayerAction m_action;
+    public PlayerAction Action
+    {
+        get { return m_action; }
     }
 }
