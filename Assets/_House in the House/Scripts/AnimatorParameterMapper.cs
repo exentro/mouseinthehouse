@@ -28,6 +28,12 @@ public class AnimatorParameterMapper : MonoBehaviour
         get { return m_verticalInput; }
     }
 
+    [SerializeField] private string m_verticalVelocity = "VerticalVelocity";
+    public string VerticalVelocity
+    {
+        get { return m_verticalVelocity; }
+    }
+
     [SerializeField] private string m_ground = "Ground";
     public string Ground
     {
