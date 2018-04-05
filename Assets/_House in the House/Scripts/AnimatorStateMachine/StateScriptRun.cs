@@ -18,6 +18,8 @@ public class StateScriptRun : StateMachineBehaviour
     {
         m_mousePlayer.Movement.Run();
         m_mousePlayer.Movement.Jump();
+
+        m_mousePlayer.Action.Nibble();
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
