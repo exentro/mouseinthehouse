@@ -18,26 +18,6 @@ public class CheckPoint: MonoBehaviour
 
     #region System
 
-    private void Awake() 
-	{
-		
-	}
-
-	private void Start() 
-	{
-		
-	}
-	
-	private void Update()
-	{
-		
-	}
-
-	private void FixedUpdate()
-	{
-		
-	}
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         int id = collision.gameObject.GetComponentInParent<MousePlayer>().PlayerID;

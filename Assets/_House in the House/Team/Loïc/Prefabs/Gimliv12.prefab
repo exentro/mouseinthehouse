@@ -3163,12 +3163,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603195bfdc1c287469ba90ec060a89b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_movement: {fileID: 0}
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 58886177602651648}
-  m_BoxCastDistance: 0.4
+  m_CastDistance: 0.05
+  m_debug: 1
 --- !u!114 &114003662412696440
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3223,12 +3225,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603195bfdc1c287469ba90ec060a89b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_movement: {fileID: 0}
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
   m_GroundColliderBox: {fileID: 61180492852969894}
   m_GroundColliderCircle: {fileID: 0}
-  m_BoxCastDistance: 0.4
+  m_CastDistance: 0.05
+  m_debug: 1
 --- !u!114 &114032414467440570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3321,12 +3325,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603195bfdc1c287469ba90ec060a89b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_movement: {fileID: 0}
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 58165248495406546}
-  m_BoxCastDistance: 0.3
+  m_CastDistance: 0.05
+  m_debug: 1
 --- !u!114 &114092888191327670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3359,12 +3365,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603195bfdc1c287469ba90ec060a89b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_movement: {fileID: 0}
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 0}
-  m_BoxCastDistance: 0.4
+  m_CastDistance: 0.05
+  m_debug: 1
 --- !u!114 &114132947263958846
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3398,31 +3406,37 @@ MonoBehaviour:
     Push: {fileID: 114862639915339302}
     Ground: {fileID: 114003281854913296}
     Climb: {fileID: 114683766124963394}
+    Nibble: {fileID: 0}
   run:
     Container: {fileID: 1071246904678932}
     Push: {fileID: 114843302574273132}
     Ground: {fileID: 114090929724552936}
     Climb: {fileID: 114215058286459832}
+    Nibble: {fileID: 0}
   push:
     Container: {fileID: 1191942279112724}
     Push: {fileID: 114348321390765986}
     Ground: {fileID: 114018612163712520}
     Climb: {fileID: 114975062041145314}
+    Nibble: {fileID: 0}
   climb:
     Container: {fileID: 1290427306170380}
     Push: {fileID: 114624874603758608}
     Ground: {fileID: 114331887910021744}
     Climb: {fileID: 114078172162644472}
+    Nibble: {fileID: 0}
   jump:
     Container: {fileID: 1957502029773034}
     Push: {fileID: 114765336694083666}
     Ground: {fileID: 114712240743534750}
     Climb: {fileID: 114003662412696440}
+    Nibble: {fileID: 0}
   crouch:
     Container: {fileID: 1067573341949192}
     Push: {fileID: 114853181795157432}
     Ground: {fileID: 114114140053816588}
     Climb: {fileID: 114318532894141832}
+    Nibble: {fileID: 0}
 --- !u!114 &114145596710952016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3554,6 +3568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72d835261119e4546b171144f4ef63fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_name: 
   m_playerId: 0
   m_debug: 1
   m_data: {fileID: 11400000, guid: 659e9a32287e4e14bb50e9562b29fcdd, type: 2}
@@ -3561,6 +3576,7 @@ MonoBehaviour:
   m_Rigidbody2D: {fileID: 50443912165046240}
   m_transform: {fileID: 4392781333295970}
   m_movement: {fileID: 114841448298765208}
+  m_action: {fileID: 0}
 --- !u!114 &114215058286459832
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3746,12 +3762,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603195bfdc1c287469ba90ec060a89b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_movement: {fileID: 0}
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 0}
-  m_BoxCastDistance: 0.3
+  m_CastDistance: 0.05
+  m_debug: 1
 --- !u!114 &114337833628730082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4230,13 +4248,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285eec18e29414b458f985384e281a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_horizontal: HorizontalSpeed
-  m_vertical: VerticalSpeed
+  m_horizontalSpeed: HorizontalSpeed
+  m_verticalSpeed: VerticalSpeed
+  m_horizontalInput: HorizontalInput
+  m_verticalInput: VerticalInput
   m_ground: Ground
   m_jump: Jump
+  m_isFalling: IsFalling
   m_push: Push
   m_climb: Climb
   m_crouch: Crouch
+  m_nibble: Nibble
 --- !u!114 &114624874603758608
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4303,12 +4325,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603195bfdc1c287469ba90ec060a89b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_movement: {fileID: 0}
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 0}
-  m_BoxCastDistance: 0.3
+  m_CastDistance: 0.05
+  m_debug: 1
 --- !u!114 &114720358280568596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4496,9 +4520,6 @@ MonoBehaviour:
     m_jump: 0
     m_crouch: 0
   m_player: {fileID: 114213155687730470}
-  m_transform: {fileID: 4392781333295970}
-  m_rigidbody2d: {fileID: 50443912165046240}
-  m_animator: {fileID: 0}
   m_colliders: {fileID: 114138920439578832}
   m_animatorParameters: {fileID: 114623118685491344}
 --- !u!114 &114843302574273132
