@@ -4792,6 +4792,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930aed0a47af55445a5daa513aa49abf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_pauseAtFirstFrame: 0
+  m_pauseAtSecondFrame: 0
+  m_pauseAtFirstFixedUpdate: 0
+  m_pauseAtSecondFixedUpdatee: 0
   m_timeScale: 0.1
 --- !u!1 &699248603
 GameObject:
@@ -5344,7 +5348,6 @@ MonoBehaviour:
   m_verticalVelocity: VerticalVelocity
   m_ground: Ground
   m_jump: Jump
-  m_isFalling: IsFalling
   m_push: Push
   m_climb: Climb
   m_crouch: Crouch
@@ -5906,7 +5909,6 @@ MonoBehaviour:
   m_verticalVelocity: VerticalVelocity
   m_ground: Ground
   m_jump: Jump
-  m_isFalling: IsFalling
   m_push: Push
   m_climb: Climb
   m_crouch: Crouch
