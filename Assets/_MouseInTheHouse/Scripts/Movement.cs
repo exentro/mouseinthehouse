@@ -164,7 +164,11 @@ public class Movement : MonoBehaviour
             {
                 if (m_animator.GetBool(m_animatorParameters.Climb))
                 {
-                    if (m_MovementInput.InputHorizontal > 0.3f || m_MovementInput.InputHorizontal < -0.3f) 
+                    if (m_MovementInput.InputHorizontal > 0.3f || m_MovementInput.InputHorizontal < -0.3f)
+                    /*
+                    (   (!FacingRight && m_MovementInput.InputHorizontal > 0.3f) || 
+                        (FacingRight && m_MovementInput.InputHorizontal < -0.3f)    ) 
+                    */
                     {
                         m_animator.SetBool(m_animatorParameters.Climb, false);
                         m_rigidbody2d.isKinematic = false;
@@ -172,7 +176,7 @@ public class Movement : MonoBehaviour
                         m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
                     }
                 }
-                else
+                else if (m_animator.GetBool(m_animatorParameters.Ground))
                 {
                     m_animator.SetBool(m_animatorParameters.Ground, false);
                     m_rigidbody2d.isKinematic = false;
