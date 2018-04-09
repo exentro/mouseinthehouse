@@ -19,6 +19,8 @@ public class PlayerAction : MonoBehaviour
     [SerializeField] private CollidersProvider m_colliders;
     [SerializeField] private AnimatorParameterMapper m_animatorParameters;
 
+    private IEnumerator m_nibbleCoroutine;
+
     #region System
     private void Awake()
     {
@@ -38,6 +40,8 @@ public class PlayerAction : MonoBehaviour
         {
             m_animator = m_player.Animator;
         }
+
+        m_nibbleCoroutine = DoNibbleCoroutine();
     }
 
     private void FixedUpdate()
@@ -90,14 +94,22 @@ public class PlayerAction : MonoBehaviour
         {
             if(m_player.PlayerData.CanNibble)
             {
+                m_animator.SetTrigger(m_animatorParameters.Nibble);
                 if (m_colliders.CollidingNibbleEdible())
                 {
-                    Debug.Log("Nibble");
-                    Destroy(m_colliders.CollidingNibbleEdibleGameObject());
+                    StartCoroutine(m_nibbleCoroutine);
+                    //Destroy(m_colliders.CollidingNibbleEdibleGameObject());
                 }
                 m_actionInput.Nibble = false;
             }
         }
+    }
+
+    private IEnumerator DoNibbleCoroutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(m_colliders.CollidingNibbleEdibleGameObject());
+        m_nibbleCoroutine = DoNibbleCoroutine();
     }
 
     public void Retry()
