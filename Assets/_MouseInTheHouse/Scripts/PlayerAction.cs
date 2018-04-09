@@ -18,6 +18,7 @@ public class PlayerAction : MonoBehaviour
     private Animator m_animator;
     [SerializeField] private CollidersProvider m_colliders;
     [SerializeField] private AnimatorParameterMapper m_animatorParameters;
+    [SerializeField] private CheckPointManager m_checkPointManager;
 
     #region System
     private void Awake()
@@ -103,6 +104,7 @@ public class PlayerAction : MonoBehaviour
     public void Retry()
     {
         Debug.Log("Retry");
+        m_checkPointManager.Retry();
     }
 
     public void Unzoom()
