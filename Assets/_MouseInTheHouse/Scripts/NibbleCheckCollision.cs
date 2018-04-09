@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class NibbleCheckCollision : MonoBehaviour
 {
-    [SerializeField] private bool m_debug = true;
-
     private void Start()
     {
         m_edible = false;
