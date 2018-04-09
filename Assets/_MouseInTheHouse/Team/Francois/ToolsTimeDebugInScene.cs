@@ -2,6 +2,7 @@
 
 public class ToolsTimeDebugInScene : MonoBehaviour
 {
+#if UNITY_EDITOR
     [SerializeField] bool m_pauseAtFirstFrame = false;
     [SerializeField] bool m_pauseAtSecondFrame = false;
     private bool m_firstFrameSpent = false;
@@ -58,4 +59,5 @@ public class ToolsTimeDebugInScene : MonoBehaviour
     {
         GUI.Button(new Rect(0, 0, 70, 30), "frame:" + frameCount.ToString());
     }
+#endif
 }

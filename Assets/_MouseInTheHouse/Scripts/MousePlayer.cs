@@ -37,6 +37,8 @@ public class MousePlayer : MonoBehaviour
         m_players[m_data.ID] = this;
         m_playerId = m_data.ID;
         m_name = m_data.Name;
+
+        if(m_debug) Debug.Log(string.Format("{0} (id:{1}) loaded.", m_name, m_playerId));
     }
 
     [Header("Debug")]
