@@ -4476,7 +4476,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c2d66b1d446ef4e9dcb345699d37f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_debug: 1
 --- !u!114 &114393751949662170
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4932,6 +4931,7 @@ MonoBehaviour:
   m_jump: Jump
   m_push: Push
   m_climb: Climb
+  m_climbEnd: ClimbEnd
   m_crouch: Crouch
   m_nibble: Nibble
 --- !u!114 &114658128459167428
@@ -5036,6 +5036,7 @@ MonoBehaviour:
   m_player: {fileID: 114879525341946862}
   m_colliders: {fileID: 114902177396642580}
   m_animatorParameters: {fileID: 114633513857627294}
+  m_checkPointManager: {fileID: 0}
 --- !u!114 &114720016109881338
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5091,7 +5092,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c2d66b1d446ef4e9dcb345699d37f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_debug: 1
 --- !u!114 &114763659321374378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5371,36 +5371,42 @@ MonoBehaviour:
     Ground: {fileID: 114068879091286796}
     Climb: {fileID: 114534063161313480}
     Nibble: {fileID: 114390871505623706}
+    EndClimb: {fileID: 0}
   run:
     Container: {fileID: 1809612129162584}
     Push: {fileID: 114404663642474770}
     Ground: {fileID: 114000040829574088}
     Climb: {fileID: 114058600643982784}
     Nibble: {fileID: 114961499548752780}
+    EndClimb: {fileID: 0}
   push:
     Container: {fileID: 1320952002841322}
     Push: {fileID: 114582357940348006}
     Ground: {fileID: 114359506433345150}
     Climb: {fileID: 114534809682444282}
     Nibble: {fileID: 0}
+    EndClimb: {fileID: 0}
   climb:
     Container: {fileID: 1146734598004204}
     Push: {fileID: 114816003330047038}
     Ground: {fileID: 114218459852816630}
     Climb: {fileID: 114835628888549056}
     Nibble: {fileID: 0}
+    EndClimb: {fileID: 0}
   jump:
     Container: {fileID: 1890892358612304}
     Push: {fileID: 114566516244485022}
     Ground: {fileID: 114282832787476260}
     Climb: {fileID: 114327021961358836}
     Nibble: {fileID: 0}
+    EndClimb: {fileID: 0}
   crouch:
     Container: {fileID: 1517759824715482}
     Push: {fileID: 114974767896500372}
     Ground: {fileID: 114887236725139894}
     Climb: {fileID: 114813761456630036}
     Nibble: {fileID: 114751146008575308}
+    EndClimb: {fileID: 0}
 --- !u!114 &114903990210693972
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5435,7 +5441,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c2d66b1d446ef4e9dcb345699d37f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_debug: 1
 --- !u!114 &114965406108969274
 MonoBehaviour:
   m_ObjectHideFlags: 1
