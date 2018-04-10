@@ -3721,8 +3721,6 @@ MonoBehaviour:
     m_jump: 0
     m_crouch: 0
   m_player: {fileID: 114686496585008458}
-  m_colliders: {fileID: 114741186306091040}
-  m_animatorParameters: {fileID: 114731793062436996}
 --- !u!114 &114221152443145792
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3871,7 +3869,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c2d66b1d446ef4e9dcb345699d37f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_debug: 1
 --- !u!114 &114307235174582236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4611,11 +4608,13 @@ MonoBehaviour:
   m_playerId: 0
   m_debug: 1
   m_data: {fileID: 11400000, guid: 659e9a32287e4e14bb50e9562b29fcdd, type: 2}
-  m_Anim: {fileID: 95270641848158860}
+  m_Animator: {fileID: 0}
+  m_animatorParameterMapper: {fileID: 0}
   m_Rigidbody2D: {fileID: 50449599878045600}
   m_transform: {fileID: 4902050018968166}
   m_movement: {fileID: 114216775035750188}
   m_action: {fileID: 114847252681184324}
+  m_collidersProvider: {fileID: 0}
 --- !u!114 &114701167137797124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4645,9 +4644,9 @@ MonoBehaviour:
   m_verticalVelocity: VerticalVelocity
   m_ground: Ground
   m_jump: Jump
-  m_isFalling: IsFalling
   m_push: Push
   m_climb: Climb
+  m_climbEnd: ClimbEnd
   m_crouch: Crouch
   m_nibble: Nibble
 --- !u!114 &114741186306091040
@@ -4668,36 +4667,42 @@ MonoBehaviour:
     Ground: {fileID: 114389205942321606}
     Climb: {fileID: 114056947586859850}
     Nibble: {fileID: 114290295718686074}
+    EndClimb: {fileID: 0}
   run:
     Container: {fileID: 1478463044754570}
     Push: {fileID: 114858960116606934}
     Ground: {fileID: 114028317394493590}
     Climb: {fileID: 114520447409992670}
     Nibble: {fileID: 114986106942358326}
+    EndClimb: {fileID: 0}
   push:
     Container: {fileID: 1181068663874526}
     Push: {fileID: 114364735431040968}
     Ground: {fileID: 114992432921498810}
     Climb: {fileID: 114701167137797124}
     Nibble: {fileID: 0}
+    EndClimb: {fileID: 0}
   climb:
     Container: {fileID: 1977487653862030}
     Push: {fileID: 114276565706429800}
     Ground: {fileID: 114386577099607342}
     Climb: {fileID: 114090330976833308}
     Nibble: {fileID: 0}
+    EndClimb: {fileID: 0}
   jump:
     Container: {fileID: 1587439372177910}
     Push: {fileID: 114420428280597240}
     Ground: {fileID: 114990276754457764}
     Climb: {fileID: 114268622300452358}
     Nibble: {fileID: 0}
+    EndClimb: {fileID: 0}
   crouch:
     Container: {fileID: 1494723745041366}
     Push: {fileID: 114947473259385772}
     Ground: {fileID: 114613771313022088}
     Climb: {fileID: 114661418040129570}
     Nibble: {fileID: 114923437538131964}
+    EndClimb: {fileID: 0}
 --- !u!114 &114749521141269132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4904,8 +4909,7 @@ MonoBehaviour:
     m_cameraHorizontal: 0
     m_cameraVertical: 0
   m_player: {fileID: 114686496585008458}
-  m_colliders: {fileID: 114741186306091040}
-  m_animatorParameters: {fileID: 114731793062436996}
+  m_checkPointManager: {fileID: 0}
 --- !u!114 &114858960116606934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4961,7 +4965,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c2d66b1d446ef4e9dcb345699d37f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_debug: 1
 --- !u!114 &114947473259385772
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5033,7 +5036,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c2d66b1d446ef4e9dcb345699d37f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_debug: 1
 --- !u!114 &114990276754457764
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -4279,8 +4279,6 @@ MonoBehaviour:
     m_jump: 0
     m_crouch: 0
   m_player: {fileID: 114879525341946862}
-  m_colliders: {fileID: 114902177396642580}
-  m_animatorParameters: {fileID: 114633513857627294}
 --- !u!114 &114306097260820886
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5034,8 +5032,6 @@ MonoBehaviour:
     m_cameraHorizontal: 0
     m_cameraVertical: 0
   m_player: {fileID: 114879525341946862}
-  m_colliders: {fileID: 114902177396642580}
-  m_animatorParameters: {fileID: 114633513857627294}
   m_checkPointManager: {fileID: 0}
 --- !u!114 &114720016109881338
 MonoBehaviour:
@@ -5301,11 +5297,13 @@ MonoBehaviour:
   m_playerId: 0
   m_debug: 1
   m_data: {fileID: 11400000, guid: ae2ccf3aa3dcda449a57c15bd798f42e, type: 2}
-  m_Anim: {fileID: 95069251171293828}
+  m_Animator: {fileID: 0}
+  m_animatorParameterMapper: {fileID: 0}
   m_Rigidbody2D: {fileID: 50006836786968194}
   m_transform: {fileID: 4149635398333474}
   m_movement: {fileID: 114298377538227738}
   m_action: {fileID: 114709521150570658}
+  m_collidersProvider: {fileID: 0}
 --- !u!114 &114887236725139894
 MonoBehaviour:
   m_ObjectHideFlags: 1
