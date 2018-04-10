@@ -3005,6 +3005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 920760e81ce995a4f9b9a3324dc1519d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_activateCheckpoint: 0
   m_checkpoints:
   - {fileID: 1065499973}
   - {fileID: 1753362325}
@@ -3012,8 +3013,10 @@ MonoBehaviour:
   - {fileID: 330203432}
   - {fileID: 474919955}
   - {fileID: 1423414660}
+  - {fileID: 287803893}
   m_player0: {fileID: 1420587500}
   m_player1: {fileID: 5787729}
+  m_camera: {fileID: 676800407}
 --- !u!1001 &218071001
 Prefab:
   m_ObjectHideFlags: 0
@@ -8755,6 +8758,11 @@ GameObject:
   m_PrefabParentObject: {fileID: 1094892674890126, guid: c3b264fc2b658e542be9f484d10582ca,
     type: 2}
   m_PrefabInternal: {fileID: 1992066749}
+--- !u!20 &676800407 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 20658562630457152, guid: c3b264fc2b658e542be9f484d10582ca,
+    type: 2}
+  m_PrefabInternal: {fileID: 1992066749}
 --- !u!114 &676800408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13136,6 +13144,11 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114709521150570658, guid: b6d77e4b403294346b445f912e730de0,
+        type: 2}
+      propertyPath: m_checkPointManager
+      value: 
+      objectReference: {fileID: 214926471}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b6d77e4b403294346b445f912e730de0, type: 2}
   m_IsPrefabParent: 0
@@ -17198,7 +17211,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4761960318510590, guid: 4a0443252f5133746bf74df5467613ff, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 283.99
+      value: 284.32
       objectReference: {fileID: 0}
     - target: {fileID: 4761960318510590, guid: 4a0443252f5133746bf74df5467613ff, type: 2}
       propertyPath: m_LocalPosition.y
@@ -22796,6 +22809,11 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114034314647092792, guid: 4bc6ec350869ccd408e89b7875b349de,
+        type: 2}
+      propertyPath: m_checkPointManager
+      value: 
+      objectReference: {fileID: 214926471}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4bc6ec350869ccd408e89b7875b349de, type: 2}
   m_IsPrefabParent: 0
@@ -25762,11 +25780,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4380655542698198, guid: c3b264fc2b658e542be9f484d10582ca, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 703.43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4380655542698198, guid: c3b264fc2b658e542be9f484d10582ca, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 25.452665
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4380655542698198, guid: c3b264fc2b658e542be9f484d10582ca, type: 2}
       propertyPath: m_LocalPosition.z
@@ -27048,91 +27066,6 @@ PolygonCollider2D:
       - {x: -5.59552, y: 2.2876987}
       - {x: -9.024445, y: 3.0517235}
       - {x: -8.9953, y: 3.851963}
---- !u!1 &2128998430 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1522068255561554, guid: c3b264fc2b658e542be9f484d10582ca,
-    type: 2}
-  m_PrefabInternal: {fileID: 1992066749}
---- !u!82 &2128998431
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2128998430}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!4 &2129734877 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4788143543056272, guid: d66af47274980f84e809a3ef45553e57,
