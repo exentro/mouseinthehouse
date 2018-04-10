@@ -103,7 +103,6 @@ public class PlayerAction : MonoBehaviour
                 if (m_colliders.CollidingNibbleEdible())
                 {
                     StartCoroutine(m_nibbleCoroutine);
-                    //Destroy(m_colliders.CollidingNibbleEdibleGameObject());
                 }
                 m_actionInput.Nibble = false;
             }

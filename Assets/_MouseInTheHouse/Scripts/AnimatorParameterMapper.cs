@@ -75,4 +75,10 @@ public class AnimatorParameterMapper : MonoBehaviour
     {
         get { return m_nibble; }
     }
+
+    [SerializeField] private string m_senseDanger = "Danger";
+    public string Danger
+    {
+        get { return m_senseDanger; }
+    }
 }
