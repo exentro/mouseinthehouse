@@ -7,9 +7,11 @@ public class CheckPointManager : MonoBehaviour
 {
     #region Public Members
 
+    public bool m_activateCheckpoint;
     public GameObject[] m_checkpoints;
     public GameObject m_player0;
     public GameObject m_player1;
+    public Camera m_camera;
 
     #endregion
 
@@ -26,9 +28,11 @@ public class CheckPointManager : MonoBehaviour
 
 	private void Start() 
 	{
-        print(CheckPointContainer.RespawnPoint);
-        //m_player0.transform.position = CheckPointContainer.RespawnPoint;
-        //m_player1.transform.position = CheckPointContainer.RespawnPoint;
+        if (m_activateCheckpoint)
+        {
+            m_player0.transform.position = CheckPointContainer.RespawnPoint;
+            m_player1.transform.position = CheckPointContainer.RespawnPoint;
+        }
     }
 	
 	private void Update()
@@ -43,7 +47,7 @@ public class CheckPointManager : MonoBehaviour
 
     public void Retry()
     {
-        GameObject selectedPoint = null;
+        GameObject selectedPoint = m_checkpoints[0];
         int checkpointNumber = 0;
         foreach(GameObject point in m_checkpoints)
         {
@@ -60,10 +64,15 @@ public class CheckPointManager : MonoBehaviour
         print(selectedPoint.transform.position);
         //TODO: Go to selectedPoint
         CheckPointContainer.RespawnPoint = selectedPoint.transform.position;
-        SceneManager.LoadScene(0);
-        //m_player0.transform.position = CheckPointContainer.RespawnPoint;
-        //m_player1.transform.position = CheckPointContainer.RespawnPoint;
-        //print("Retry on point " + checkpointNumber);
+        if (m_activateCheckpoint)
+        {
+            //Vector3 cameraPos = m_camera.transform.position;
+            SceneManager.LoadScene(0);
+            m_camera.transform.position = CheckPointContainer.RespawnPoint;
+            m_player0.transform.position = CheckPointContainer.RespawnPoint;
+            m_player1.transform.position = CheckPointContainer.RespawnPoint;
+            print("Retry on point " + checkpointNumber);
+        }
     }
 
     private void OnGUI()

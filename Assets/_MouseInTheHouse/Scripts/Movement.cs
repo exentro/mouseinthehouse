@@ -17,8 +17,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    [SerializeField][ReadOnly]
-    private PlayerMovementInput m_MovementInput;
+    [SerializeField][ReadOnly] private PlayerMovementInput m_MovementInput;
     public PlayerMovementInput MovementInput
     {
         get { return m_MovementInput;}
@@ -29,8 +28,8 @@ public class Movement : MonoBehaviour
     private Transform m_transform;
     private Rigidbody2D m_rigidbody2d;
     private Animator m_animator;
-    [SerializeField] private CollidersProvider m_colliders;
-    [SerializeField] private AnimatorParameterMapper m_animatorParameters;
+    private CollidersProvider m_colliders;
+    private AnimatorParameterMapper m_animatorParameters;
 
     #region System
     private void Awake()
@@ -39,9 +38,6 @@ public class Movement : MonoBehaviour
     }
     private void Start()
     {
-        if (m_colliders == null && m_debug) Debug.LogError("Reference to \"CollidersProvider\" script is not setted");
-        if (m_animatorParameters == null && m_debug) Debug.LogError("Reference to \"AnimatorParameterMapper\" script is not setted");
-
         if (m_player == null)
         {
             if (m_debug) Debug.LogError("MousePlayer not set!");
@@ -49,8 +45,19 @@ public class Movement : MonoBehaviour
         else
         {
             m_transform = m_player.Transform;
+            if (m_transform == null && m_debug) Debug.LogError("Reference to Component \"Transform\" is not setted");
+
             m_rigidbody2d = m_player.Rigidbody2D;
+            if (m_rigidbody2d == null && m_debug) Debug.LogError("Reference to Component \"Rigidbody2D\" is not setted");
+
             m_animator = m_player.Animator;
+            if (m_animator == null && m_debug) Debug.LogError("Reference to Component \"Animator\" is not setted");
+
+            m_animatorParameters = m_player.AnimatorParameterMapper;
+            if (m_animatorParameters == null && m_debug) Debug.LogError("Reference to \"AnimatorParameterMapper\" script is not setted");
+
+            m_colliders = m_player.CollidersProvider;
+            if (m_colliders == null && m_debug) Debug.LogError("Reference to \"CollidersProvider\" script is not setted");
 
             jumpdCooldownTimer = 0f;
 
@@ -113,8 +120,6 @@ public class Movement : MonoBehaviour
         m_animator.SetFloat(m_animatorParameters.HorizontalSpeed, Mathf.Clamp(Mathf.Abs(m_rigidbody2d.velocity.x), 0f, 1f));
         m_animator.SetFloat(m_animatorParameters.VerticalSpeed, Mathf.Clamp(Mathf.Abs(m_rigidbody2d.velocity.y), 0f, 1f)); 
         m_animator.SetFloat(m_animatorParameters.VerticalVelocity, m_rigidbody2d.velocity.y);
-
-        m_animator.SetBool(m_animatorParameters.IsFalling, (m_rigidbody2d.velocity.y < 0 ? true : false));
     }
     
     #region Run
@@ -166,7 +171,11 @@ public class Movement : MonoBehaviour
             {
                 if (m_animator.GetBool(m_animatorParameters.Climb))
                 {
-                    if (m_MovementInput.InputHorizontal > 0.3f || m_MovementInput.InputHorizontal < -0.3f) 
+                    if (m_MovementInput.InputHorizontal > 0.3f || m_MovementInput.InputHorizontal < -0.3f)
+                    /*
+                    (   (!FacingRight && m_MovementInput.InputHorizontal > 0.3f) || 
+                        (FacingRight && m_MovementInput.InputHorizontal < -0.3f)    ) 
+                    */
                     {
                         m_animator.SetBool(m_animatorParameters.Climb, false);
                         m_rigidbody2d.isKinematic = false;
@@ -174,7 +183,7 @@ public class Movement : MonoBehaviour
                         m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
                     }
                 }
-                else
+                else if (m_animator.GetBool(m_animatorParameters.Ground))
                 {
                     m_animator.SetBool(m_animatorParameters.Ground, false);
                     m_rigidbody2d.isKinematic = false;
@@ -219,7 +228,16 @@ public class Movement : MonoBehaviour
         if (m_player.PlayerData.CanClimb)
         {
             bool isClimbing = m_colliders.CollidingClimbable();
-            m_animator.SetBool(m_animatorParameters.Climb, isClimbing);
+
+            if (isClimbing && m_colliders.ClimbingEnd())
+            {
+                m_animator.SetTrigger(m_animatorParameters.ClimbEnd);
+            }
+            else
+            {
+                m_animator.SetBool(m_animatorParameters.Climb, isClimbing);
+                m_animator.ResetTrigger(m_animatorParameters.ClimbEnd);
+            }            
         }
     }
     public bool IsClimbing

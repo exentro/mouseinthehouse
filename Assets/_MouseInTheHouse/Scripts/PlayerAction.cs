@@ -16,8 +16,11 @@ public class PlayerAction : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private MousePlayer m_player;
     private Animator m_animator;
-    [SerializeField] private CollidersProvider m_colliders;
-    [SerializeField] private AnimatorParameterMapper m_animatorParameters;
+    private CollidersProvider m_colliders;
+    private AnimatorParameterMapper m_animatorParameters;
+    [SerializeField] private CheckPointManager m_checkPointManager;
+
+    private IEnumerator m_nibbleCoroutine;
 
     #region System
     private void Awake()
@@ -27,9 +30,6 @@ public class PlayerAction : MonoBehaviour
 
     private void Start()
     {
-        if (m_colliders == null && m_debug) Debug.LogError("Reference to \"CollidersProvider\" script is not setted");
-        if (m_animatorParameters == null && m_debug) Debug.LogError("Reference to \"AnimatorParameterMapper\" script is not setted");
-
         if (m_player == null)
         {
             if (m_debug) Debug.LogError("MousePlayer not set!");
@@ -37,7 +37,16 @@ public class PlayerAction : MonoBehaviour
         else
         {
             m_animator = m_player.Animator;
+            if (m_animator == null && m_debug) Debug.LogError("Reference to Component \"Animator\" is not setted");
+
+            m_animatorParameters = m_player.AnimatorParameterMapper;
+            if (m_animatorParameters == null && m_debug) Debug.LogError("Reference to \"AnimatorParameterMapper\" script is not setted");
+
+            m_colliders = m_player.CollidersProvider;
+            if (m_colliders == null && m_debug) Debug.LogError("Reference to \"CollidersProvider\" script is not setted");
         }
+
+        m_nibbleCoroutine = DoNibbleCoroutine();
     }
 
     private void FixedUpdate()
@@ -90,19 +99,28 @@ public class PlayerAction : MonoBehaviour
         {
             if(m_player.PlayerData.CanNibble)
             {
+                m_animator.SetTrigger(m_animatorParameters.Nibble);
                 if (m_colliders.CollidingNibbleEdible())
                 {
-                    Debug.Log("Nibble");
-                    Destroy(m_colliders.CollidingNibbleEdibleGameObject());
+                    StartCoroutine(m_nibbleCoroutine);
+                    //Destroy(m_colliders.CollidingNibbleEdibleGameObject());
                 }
                 m_actionInput.Nibble = false;
             }
         }
     }
 
+    private IEnumerator DoNibbleCoroutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(m_colliders.CollidingNibbleEdibleGameObject());
+        m_nibbleCoroutine = DoNibbleCoroutine();
+    }
+
     public void Retry()
     {
         Debug.Log("Retry");
+        m_checkPointManager.Retry();
     }
 
     public void Unzoom()
