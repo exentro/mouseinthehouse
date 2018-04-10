@@ -221,7 +221,16 @@ public class Movement : MonoBehaviour
         if (m_player.PlayerData.CanClimb)
         {
             bool isClimbing = m_colliders.CollidingClimbable();
-            m_animator.SetBool(m_animatorParameters.Climb, isClimbing);
+
+            if (isClimbing && m_colliders.ClimbingEnd())
+            {
+                m_animator.SetTrigger(m_animatorParameters.ClimbEnd);
+            }
+            else
+            {
+                m_animator.SetBool(m_animatorParameters.Climb, isClimbing);
+                m_animator.ResetTrigger(m_animatorParameters.ClimbEnd);
+            }            
         }
     }
     public bool IsClimbing

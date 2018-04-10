@@ -58,6 +58,12 @@ public class AnimatorParameterMapper : MonoBehaviour
         get { return m_climb; }
     }
 
+    [SerializeField] private string m_climbEnd = "ClimbEnd";
+    public string ClimbEnd
+    {
+        get { return m_climbEnd; }
+    }
+
     [SerializeField] private string m_crouch = "Crouch";
     public string Crouch
     {
