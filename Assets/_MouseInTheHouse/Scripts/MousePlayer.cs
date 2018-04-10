@@ -11,24 +11,16 @@ public class MousePlayer : MonoBehaviour
     
     private void Awake()
     {
-        if (m_Anim == null) m_Anim = GetComponent<Animator>();
-        if (m_debug && m_Anim == null) Debug.LogError("Can't find Component Animator");
-        if (m_Anim != null)
-        {
-            m_Anim.SetInteger("PlayerId", m_data.ID);
-        }
-
-        if (m_Rigidbody2D == null) m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        if (m_debug && m_Animator == null) Debug.LogError("Can't find Component Animator");
         if (m_debug && m_Rigidbody2D == null) Debug.LogError("Can't find Component Rigidbody2D");
-
-        if (m_transform == null) m_transform = GetComponent<Transform>();
         if (m_debug && m_transform == null) Debug.LogError("Can't find Component Transform");
-
-        if (m_movement == null) m_movement = GetComponent<Movement>();
         if (m_debug && m_movement == null) Debug.LogError("Can't find Component Movement");
-
-        if (m_action == null) m_action = GetComponent<PlayerAction>();
         if (m_debug && m_action == null) Debug.LogError("Can't find Component PlayerAction");
+
+        if (m_Animator != null)
+        {
+            m_Animator.SetInteger("PlayerId", m_data.ID);
+        }
     }
 
     private void Start()
@@ -58,12 +50,18 @@ public class MousePlayer : MonoBehaviour
         set { m_data = value; }
     }
 
-    [SerializeField] private Animator m_Anim;
+    [SerializeField] private Animator m_Animator;
     public Animator Animator
     {
-        get { return m_Anim; }
+        get { return m_Animator; }
     }
-    
+
+    [SerializeField] private AnimatorParameterMapper m_animatorParameterMapper;
+    public AnimatorParameterMapper AnimatorParameterMapper
+    {
+        get { return m_animatorParameterMapper; }
+    }
+
     [SerializeField] private Rigidbody2D m_Rigidbody2D;
     public Rigidbody2D Rigidbody2D
     {
@@ -86,5 +84,11 @@ public class MousePlayer : MonoBehaviour
     public PlayerAction Action
     {
         get { return m_action; }
+    }
+
+    [SerializeField] private CollidersProvider m_collidersProvider;
+    public CollidersProvider CollidersProvider
+    {
+        get { return m_collidersProvider; }
     }
 }

@@ -20,8 +20,13 @@ public class StateScriptClimbEnd : StateMachineBehaviour {
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        animator.SetBool(m_mousePlayer.AnimatorParameterMapper.Climb, false);
+
         Vector3 position = m_mousePlayer.Transform.position;
-        position.x += 1.2f;
+        if(m_mousePlayer.Movement.FacingRight)
+            position.x += 1.2f;
+        else
+            position.x -= 1.2f;
         position.y += 2.5f;
         m_mousePlayer.Transform.position = position;
     }
