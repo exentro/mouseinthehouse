@@ -134,14 +134,18 @@ public class Movement : MonoBehaviour
     }
     private void MoveX(float speed)
     {
+        if (m_MovementInput.InputHorizontal > 0 && !m_FacingRight) Flip();
+        else if (m_MovementInput.InputHorizontal < 0 && m_FacingRight) Flip();
+
         if ((m_colliders.CollidingPushable() && m_player.PlayerData.CanPush) || !m_colliders.CollidingPushable())
         {
             m_rigidbody2d.isKinematic = false;
             m_rigidbody2d.velocity = new Vector2(speed, m_rigidbody2d.velocity.y);
+        }     
+        else
+        {
+            m_rigidbody2d.velocity = new Vector2(0f, m_rigidbody2d.velocity.y);
         }
-
-        if (m_MovementInput.InputHorizontal > 0 && !m_FacingRight) Flip();
-        else if (m_MovementInput.InputHorizontal < 0 && m_FacingRight) Flip();        
     }
     private void Flip()
     {
