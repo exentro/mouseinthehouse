@@ -135,14 +135,7 @@ public class CollidersProvider : MonoBehaviour
     public bool ClimbingEnd()
     {
         if (m_activeColliders != null)
-            return 
-                m_activeColliders.
-                Climb.
-                Climbing 
-                && 
-                !m_activeColliders.
-                EndClimb.
-                EndOfClimb;
+            return m_activeColliders.Climb.Climbing && !m_activeColliders.EndClimb.EndOfClimb;
         else if (m_debug) Debug.LogError("No active colliders.");
         return false;
     }
