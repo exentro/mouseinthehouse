@@ -7,7 +7,7 @@ public class MouseBodyCollision : MonoBehaviour
     [SerializeField] private MousePlayer m_mouse;
     [SerializeField] private LayerMask m_WhatIsDanger;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (m_WhatIsDanger.Contains(collision.gameObject.layer))
         {
