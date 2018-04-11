@@ -18,7 +18,7 @@ public class StateScriptClimb : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         m_mousePlayer.Movement.Climb();        
-        m_mousePlayer.Movement.Run();
+        //m_mousePlayer.Movement.Run();
         if (m_mousePlayer.PlayerData.CanClimbJump) m_mousePlayer.Movement.Jump();
     }
 
