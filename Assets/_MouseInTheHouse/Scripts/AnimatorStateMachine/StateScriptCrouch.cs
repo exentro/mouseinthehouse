@@ -16,7 +16,7 @@ public class StateScriptCrouch : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        m_mousePlayer.Movement.Crawl();
+        if (!animator.GetBool(m_mousePlayer.AnimatorParameterMapper.Danger)) m_mousePlayer.Movement.Crawl();
 
         m_mousePlayer.Action.Nibble();
     }

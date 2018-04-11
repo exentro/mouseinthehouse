@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212425380744524862}
   - component: {fileID: 61742613180887472}
   - component: {fileID: 70542627467994964}
+  - component: {fileID: 70446492651809840}
   m_Layer: 0
   m_Name: plante1
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1328294441506928}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 57.37248, y: -103.04291, z: 0}
+  m_LocalPosition: {x: 292.36908, y: 24.474186, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -54,7 +55,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08702278, y: -3.4482002}
+  m_Offset: {x: 0.068603516, y: -3.51264}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -65,8 +66,23 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.892849, y: 1.8798294}
+  m_Size: {x: 5.819214, y: 1.7509499}
   m_EdgeRadius: 0
+--- !u!70 &70446492651809840
+CapsuleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1328294441506928}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.06697847, y: -4.933698}
+  m_Size: {x: 3.8421028, y: 2.306063}
+  m_Direction: 1
 --- !u!70 &70542627467994964
 CapsuleCollider2D:
   m_ObjectHideFlags: 1
@@ -79,8 +95,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08774755, y: -4.250049}
-  m_Size: {x: 5.880805, y: 3.4280248}
+  m_Offset: {x: 0.08313749, y: -4.250048}
+  m_Size: {x: 5.6138625, y: 3.207089}
   m_Direction: 1
 --- !u!212 &212425380744524862
 SpriteRenderer:
@@ -116,7 +132,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a71b48185a98211488e7e16655ea9900, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae1c1aca578c96d4eba960f3c52f0f4d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

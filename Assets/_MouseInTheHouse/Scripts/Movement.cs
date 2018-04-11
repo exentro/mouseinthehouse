@@ -134,14 +134,18 @@ public class Movement : MonoBehaviour
     }
     private void MoveX(float speed)
     {
+        if (m_MovementInput.InputHorizontal > 0 && !m_FacingRight) Flip();
+        else if (m_MovementInput.InputHorizontal < 0 && m_FacingRight) Flip();
+
         if ((m_colliders.CollidingPushable() && m_player.PlayerData.CanPush) || !m_colliders.CollidingPushable())
         {
             m_rigidbody2d.isKinematic = false;
             m_rigidbody2d.velocity = new Vector2(speed, m_rigidbody2d.velocity.y);
         }
-
-        if (m_MovementInput.InputHorizontal > 0 && !m_FacingRight) Flip();
-        else if (m_MovementInput.InputHorizontal < 0 && m_FacingRight) Flip();        
+        else
+        {
+            m_rigidbody2d.velocity = new Vector2(0f, m_rigidbody2d.velocity.y);
+        }
     }
     private void Flip()
     {
@@ -171,17 +175,15 @@ public class Movement : MonoBehaviour
             {
                 if (m_animator.GetBool(m_animatorParameters.Climb))
                 {
-                    if (m_MovementInput.InputHorizontal > 0.3f || m_MovementInput.InputHorizontal < -0.3f)
-                    /*
-                    (   (!FacingRight && m_MovementInput.InputHorizontal > 0.3f) || 
-                        (FacingRight && m_MovementInput.InputHorizontal < -0.3f)    ) 
-                    */
+                    if( (!FacingRight && m_MovementInput.InputHorizontal > 0.3f) || 
+                        (FacingRight && m_MovementInput.InputHorizontal < -0.3f)    )
                     {
                         m_animator.SetBool(m_animatorParameters.Climb, false);
                         m_rigidbody2d.isKinematic = false;
                         m_animator.SetBool(m_animatorParameters.Jump, true);
                         m_rigidbody2d.AddForce(new Vector2(0f, m_player.PlayerData.JumpForce));
                     }
+                    Run();
                 }
                 else if (m_animator.GetBool(m_animatorParameters.Ground))
                 {
@@ -270,6 +272,15 @@ public class Movement : MonoBehaviour
     public void Crawl()
     {
         MoveX(m_MovementInput.InputHorizontal * m_player.PlayerData.CrawlingSpeed);
+    }
+    #endregion
+
+    #region Danger
+    public void SenseDanger(Vector2 pushbackVelocity)
+    {
+        m_animator.SetBool(m_animatorParameters.Danger, true);
+        pushbackVelocity.x *= FacingRight ? -1 : 1;
+        m_rigidbody2d.velocity = pushbackVelocity;
     }
     #endregion
 }

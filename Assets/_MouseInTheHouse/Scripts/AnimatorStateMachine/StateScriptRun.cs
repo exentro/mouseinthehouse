@@ -10,13 +10,14 @@ public class StateScriptRun : StateMachineBehaviour
     {
         if (m_mousePlayer == null)
             m_mousePlayer = MousePlayer.GetPlayer(animator.GetInteger("PlayerId"));
+
         m_mousePlayer.Movement.State = E_MouseState.Run;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        m_mousePlayer.Movement.Run();
+        if(!animator.GetBool(m_mousePlayer.AnimatorParameterMapper.Danger)) m_mousePlayer.Movement.Run();
         m_mousePlayer.Movement.Jump();
 
         m_mousePlayer.Action.Nibble();
