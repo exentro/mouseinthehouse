@@ -58,7 +58,6 @@ public class GroundCheckCollision : MonoBehaviour
         if (m_Hit.collider != null)
         {
             m_groundedThisFrame = true;
-            //Time.timeScale = 0f;
         }
     }
 

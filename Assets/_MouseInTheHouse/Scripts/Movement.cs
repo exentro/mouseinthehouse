@@ -141,7 +141,7 @@ public class Movement : MonoBehaviour
         {
             m_rigidbody2d.isKinematic = false;
             m_rigidbody2d.velocity = new Vector2(speed, m_rigidbody2d.velocity.y);
-        }     
+        }
         else
         {
             m_rigidbody2d.velocity = new Vector2(0f, m_rigidbody2d.velocity.y);
@@ -274,6 +274,15 @@ public class Movement : MonoBehaviour
     public void Crawl()
     {
         MoveX(m_MovementInput.InputHorizontal * m_player.PlayerData.CrawlingSpeed);
+    }
+    #endregion
+
+    #region Danger
+    public void SenseDanger(Vector2 pushbackVelocity)
+    {
+        m_animator.SetBool(m_animatorParameters.Danger, true);
+        pushbackVelocity.x *= FacingRight ? -1 : 1;
+        m_rigidbody2d.velocity = pushbackVelocity;
     }
     #endregion
 }
