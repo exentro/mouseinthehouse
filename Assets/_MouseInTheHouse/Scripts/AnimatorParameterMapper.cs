@@ -81,4 +81,10 @@ public class AnimatorParameterMapper : MonoBehaviour
     {
         get { return m_senseDanger; }
     }
+
+    [SerializeField] private string m_canStandUpFromCrouch = "CanStandUpFromCrouch";
+    public string CanStandUpFromCrouch
+    {
+        get { return m_canStandUpFromCrouch; }
+    }
 }

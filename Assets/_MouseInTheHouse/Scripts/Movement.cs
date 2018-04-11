@@ -264,6 +264,8 @@ public class Movement : MonoBehaviour
             && !m_animator.GetBool(m_animatorParameters.Push);
 
         m_animator.SetBool(m_animatorParameters.Crouch, crouched);
+
+        m_animator.SetBool(m_animatorParameters.CanStandUpFromCrouch, m_colliders.CanStandUpFromCrouch());
     }
     public bool IsCrawling
     {
