@@ -13,6 +13,7 @@ public class CollidersProvider : MonoBehaviour
         [SerializeField] [ReadOnlyOnPlay] public ClimbCheckCollision Climb;
         [SerializeField] [ReadOnlyOnPlay] public NibbleCheckCollision Nibble;
         [SerializeField] [ReadOnlyOnPlay] public EndClimbDetector EndClimb;
+        [SerializeField] [ReadOnlyOnPlay] public CanStandCheckCollision CanStand;
     }
 
     [Header("Debug")]
@@ -39,6 +40,7 @@ public class CollidersProvider : MonoBehaviour
             idle.Climb = idle.Container.GetComponentInChildren<ClimbCheckCollision>();
             idle.Nibble = idle.Container.GetComponentInChildren<NibbleCheckCollision>();
             idle.EndClimb = idle.Container.GetComponentInChildren<EndClimbDetector>();
+            idle.CanStand = null;
         }
         if (run.Container == null) Debug.LogError("Missing Run container");
         else
@@ -48,6 +50,7 @@ public class CollidersProvider : MonoBehaviour
             run.Climb = run.Container.GetComponentInChildren<ClimbCheckCollision>();
             run.Nibble = run.Container.GetComponentInChildren<NibbleCheckCollision>();
             run.EndClimb = run.Container.GetComponentInChildren<EndClimbDetector>();
+            run.CanStand = null;
         }
         if (push.Container == null) Debug.LogError("Missing Push container");
         else
@@ -57,6 +60,7 @@ public class CollidersProvider : MonoBehaviour
             push.Climb = push.Container.GetComponentInChildren<ClimbCheckCollision>();
             push.Nibble = null;
             push.EndClimb = null;
+            push.CanStand = null;
         }
         if (climb.Container == null) Debug.LogError("Missing Climb container");
         else
@@ -66,6 +70,7 @@ public class CollidersProvider : MonoBehaviour
             climb.Climb = climb.Container.GetComponentInChildren<ClimbCheckCollision>();
             climb.Nibble = null;
             climb.EndClimb = climb.Container.GetComponentInChildren<EndClimbDetector>();
+            climb.CanStand = null;
         }
         if (jump.Container == null) Debug.LogError("Missing Jump container");
         else
@@ -75,6 +80,7 @@ public class CollidersProvider : MonoBehaviour
             jump.Climb = jump.Container.GetComponentInChildren<ClimbCheckCollision>();
             jump.Nibble = null;
             jump.EndClimb = jump.Container.GetComponentInChildren<EndClimbDetector>();
+            jump.CanStand = null;
         }
         if (crouch.Container == null) Debug.LogError("Missing Crouch container");
         else
@@ -84,6 +90,7 @@ public class CollidersProvider : MonoBehaviour
             crouch.Climb = crouch.Container.GetComponentInChildren<ClimbCheckCollision>();
             crouch.Nibble = crouch.Container.GetComponentInChildren<NibbleCheckCollision>();
             crouch.EndClimb = null;
+            crouch.CanStand = crouch.Container.GetComponentInChildren<CanStandCheckCollision>();
         }
     }
 
@@ -114,35 +121,49 @@ public class CollidersProvider : MonoBehaviour
     public bool CollidingGround()
     {
         if (m_activeColliders != null)
-            return m_activeColliders.Ground.Grounded;
+        {
+            if(m_activeColliders.Ground)
+                return m_activeColliders.Ground.Grounded;
+        }            
         else if (m_debug) Debug.LogError("No active colliders.");
         return false;
     }
     public bool CollidingPushable()
     {
         if (m_activeColliders != null)
-            return m_activeColliders.Push.Pushing;
+        {
+            if(m_activeColliders.Push)
+                return m_activeColliders.Push.Pushing;
+        }          
         else if (m_debug) Debug.LogError("No active colliders.");
         return false;
     }
     public bool CollidingClimbable()
     {
         if (m_activeColliders != null)
-            return m_activeColliders.Climb.Climbing;
+        {
+            if(m_activeColliders.Climb != null) return m_activeColliders.Climb.Climbing;
+        }            
         else if (m_debug) Debug.LogError("No active colliders.");
         return false;
     }
     public bool ClimbingEnd()
     {
         if (m_activeColliders != null)
-            return m_activeColliders.Climb.Climbing && !m_activeColliders.EndClimb.EndOfClimb;
+        {
+            if (m_activeColliders.Climb != null && m_activeColliders.EndClimb != null)
+                return m_activeColliders.Climb.Climbing && !m_activeColliders.EndClimb.EndOfClimb;
+        }
         else if (m_debug) Debug.LogError("No active colliders.");
         return false;
     }
     public Transform CollidingPushableObjectTransform()
     {
         if (m_activeColliders != null)
-            return m_activeColliders.Push.PushableObject;
+        {
+            if(m_activeColliders.Push != null)
+                return m_activeColliders.Push.PushableObject;
+        }
         else if (m_debug) Debug.LogError("No active colliders.");
         return null;
     }
@@ -164,8 +185,21 @@ public class CollidersProvider : MonoBehaviour
     public GameObject CollidingNibbleEdibleGameObject()
     {
         if (m_activeColliders != null)
-            return m_activeColliders.Nibble.EdibleObject;
+        {
+            if (m_activeColliders.Nibble != null)
+                return m_activeColliders.Nibble.EdibleObject;
+        }            
         else if (m_debug) Debug.LogError("No active colliders.");
         return null;
+    }
+    public bool CanStandUpFromCrouch()
+    {
+        if (m_activeColliders != null)
+        {
+            if(m_activeColliders.CanStand != null)
+                return m_activeColliders.CanStand.CanStandUp;
+        }            
+        else if (m_debug) Debug.LogError("No active colliders.");
+        return false;
     }
 }
