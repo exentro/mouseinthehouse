@@ -8,6 +8,13 @@ public class InputController : MonoBehaviour
     private PlayerMovementInput m_playerMovementInputs;
     private PlayerActionInput m_playerActiontInputs;
 
+    private bool m_allowInputs;
+    public bool AllowPlayerInput
+    {
+        get { return m_allowInputs; }
+        set { m_allowInputs = value; }
+    }
+
     [SerializeField] private MousePlayer m_mousePlayer;
 
     private bool m_initialized;
@@ -25,6 +32,7 @@ public class InputController : MonoBehaviour
     {
         m_playerMovementInputs = m_mousePlayer.Movement.MovementInput;
         m_playerActiontInputs = m_mousePlayer.Action.ActionInput;
+        m_allowInputs = true;
     }
 
     private void Initialize()
@@ -37,7 +45,7 @@ public class InputController : MonoBehaviour
     {
         if (!ReInput.isReady) return; // Exit if Rewired isn't ready. This would only happen during a script recompile in the editor.
         if (!m_initialized) Initialize(); // Reinitialize after a recompile in the editor
-        else GetInput();
+        else if(m_allowInputs) GetInput();
     }
 
     private void GetInput()
