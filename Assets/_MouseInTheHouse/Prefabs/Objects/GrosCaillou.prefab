@@ -9,47 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1084591808249150}
+  m_RootGameObject: {fileID: 1548010124945558}
   m_IsPrefabParent: 1
---- !u!1 &1084591808249150
+--- !u!1 &1548010124945558
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4314935563413910}
-  - component: {fileID: 212578418974099436}
-  - component: {fileID: 61974536853786746}
-  - component: {fileID: 114308643493827632}
-  - component: {fileID: 50611099558904904}
+  - component: {fileID: 4762566196483230}
+  - component: {fileID: 212459002582327218}
+  - component: {fileID: 61192755498619874}
+  - component: {fileID: 114527048549252954}
+  - component: {fileID: 50803236122139878}
   m_Layer: 0
-  m_Name: Poutre
+  m_Name: GrosCaillou
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4314935563413910
+--- !u!4 &4762566196483230
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1084591808249150}
+  m_GameObject: {fileID: 1548010124945558}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 380.25, y: -166.81, z: -1}
+  m_LocalPosition: {x: 372.64, y: -166.53, z: -1}
   m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50611099558904904
+--- !u!50 &50803236122139878
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1084591808249150}
+  m_GameObject: {fileID: 1548010124945558}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -63,12 +63,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &61974536853786746
+--- !u!61 &61192755498619874
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1084591808249150}
+  m_GameObject: {fileID: 1548010124945558}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -88,12 +88,12 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 18.180134, y: 5.940654}
   m_EdgeRadius: 0
---- !u!114 &114308643493827632
+--- !u!114 &114527048549252954
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1084591808249150}
+  m_GameObject: {fileID: 1548010124945558}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ca201eb4e31e6149b22cdb935ae6ac7, type: 3}
@@ -102,12 +102,12 @@ MonoBehaviour:
   Pushable: 1
   Climbable: 0
   NibbleEdible: 0
---- !u!212 &212578418974099436
+--- !u!212 &212459002582327218
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1084591808249150}
+  m_GameObject: {fileID: 1548010124945558}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
