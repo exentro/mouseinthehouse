@@ -87,4 +87,16 @@ public class AnimatorParameterMapper : MonoBehaviour
     {
         get { return m_canStandUpFromCrouch; }
     }
+
+    [SerializeField] private string m_sniffsniff = "SniffSniff";
+    public string SniffSniff
+    {
+        get { return m_sniffsniff; }
+    }
+
+    [SerializeField] private string m_victoryDance = "VictoryDance";
+    public string VictoryDance
+    {
+        get { return m_victoryDance; }
+    }
 }

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Rewired;
+using System.Collections;
 
 public class InputController : MonoBehaviour
 {
@@ -65,4 +66,23 @@ public class InputController : MonoBehaviour
         m_playerActiontInputs.Zoom = m_player.GetAxis("Zoom");
         m_playerActiontInputs.Unzoom = m_player.GetAxis("Unzoom");
     }
+    /*
+    public void ForbidPlayerInputs(float timeInSeconds)
+    {
+        if (m_routine != null)
+        {
+            m_routine = MyCoroutine(timeInSeconds);
+            StartCoroutine(m_routine);
+        }
+    }
+
+    private IEnumerator m_routine;
+    private IEnumerator MyCoroutine(float timeInSeconds)
+    {
+        m_allowInputs = false;
+        yield return new WaitForSeconds(timeInSeconds);
+        m_allowInputs = true;
+        m_routine = null;
+    }
+    */
 }

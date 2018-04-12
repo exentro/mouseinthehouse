@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CutSceneStart : MonoBehaviour
+public class StartSniffSniffAnimationScript : MonoBehaviour
 {
-    #region Members
     [SerializeField] private LayerMask m_PlayersLayer;
-    [SerializeField] [ReadOnly] List<int> m_alreadyTriggeredForTheseID;
-    #endregion
+    List<int> m_alreadyTriggeredForTheseID;
 
-    #region Public Methods
-    #endregion
+    private void Start()
+    {
+        if (m_alreadyTriggeredForTheseID == null) m_alreadyTriggeredForTheseID = new List<int>();
+    }
 
-    #region System
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (m_PlayersLayer.Contains(collision.gameObject.layer))
@@ -20,23 +19,13 @@ public class CutSceneStart : MonoBehaviour
             MousePlayer m_mouse = collision.gameObject.GetComponentInParent<MousePlayer>();
             if (m_mouse != null)
             {
-                Debug.Log("triggerStart - player");
                 if (!m_alreadyTriggeredForTheseID.Contains(m_mouse.PlayerID))
                 {
-                    Debug.Log("triggerStart - player first time");
                     m_alreadyTriggeredForTheseID.Add(m_mouse.PlayerID);
-                    m_mouse.AllowPlayerInput = false;
+                    m_mouse.Animator.SetTrigger(m_mouse.AnimatorParameterMapper.SniffSniff);
                 }
             }
         }
     }
-    #endregion
-
-    #region Class Methods
-    #endregion
-
-    #region Tools Debug And Utilities
-    #endregion
-
 
 }

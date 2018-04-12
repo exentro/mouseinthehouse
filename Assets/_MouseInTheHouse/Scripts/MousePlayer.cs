@@ -95,8 +95,15 @@ public class MousePlayer : MonoBehaviour
     }
 
     [SerializeField] private InputController m_inputController;
+
+    public void AllowPlayerInput(bool value)
+    {
+        m_inputController.AllowPlayerInput = value;
+        if (!value) m_Rigidbody2D.velocity = new Vector2(0f, 0f);
+    }
+
     private IEnumerator m_coroutine;
-    public bool AllowPlayerInput
+    public bool ForcePlayerTOMoveLeft
     {
         set
         {
@@ -116,9 +123,14 @@ public class MousePlayer : MonoBehaviour
         }
     }
     
-    IEnumerator MoveToLeftCoRoutine()
+    private IEnumerator MoveToLeftCoRoutine()
     {
         m_movement.MovementInput.InputHorizontal = 1f;
         yield return null;
     }
+    /*
+    public void ForbidPlayerInputs(float timeInSeconds)
+    {
+        m_inputController.ForbidPlayerInputs(timeInSeconds);
+    }*/
 }
