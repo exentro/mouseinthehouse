@@ -1,12 +1,20 @@
 using System;
 using UnityEngine;
 using Rewired;
+using System.Collections;
 
 public class InputController : MonoBehaviour
 {
     private Player m_player;
     private PlayerMovementInput m_playerMovementInputs;
     private PlayerActionInput m_playerActiontInputs;
+
+    private bool m_allowInputs;
+    public bool AllowPlayerInput
+    {
+        get { return m_allowInputs; }
+        set { m_allowInputs = value; }
+    }
 
     [SerializeField] private MousePlayer m_mousePlayer;
 
@@ -25,6 +33,7 @@ public class InputController : MonoBehaviour
     {
         m_playerMovementInputs = m_mousePlayer.Movement.MovementInput;
         m_playerActiontInputs = m_mousePlayer.Action.ActionInput;
+        m_allowInputs = true;
     }
 
     private void Initialize()
@@ -37,7 +46,7 @@ public class InputController : MonoBehaviour
     {
         if (!ReInput.isReady) return; // Exit if Rewired isn't ready. This would only happen during a script recompile in the editor.
         if (!m_initialized) Initialize(); // Reinitialize after a recompile in the editor
-        else GetInput();
+        else if(m_allowInputs) GetInput();
     }
 
     private void GetInput()
@@ -57,4 +66,23 @@ public class InputController : MonoBehaviour
         m_playerActiontInputs.Zoom = m_player.GetAxis("Zoom");
         m_playerActiontInputs.Unzoom = m_player.GetAxis("Unzoom");
     }
+    /*
+    public void ForbidPlayerInputs(float timeInSeconds)
+    {
+        if (m_routine != null)
+        {
+            m_routine = MyCoroutine(timeInSeconds);
+            StartCoroutine(m_routine);
+        }
+    }
+
+    private IEnumerator m_routine;
+    private IEnumerator MyCoroutine(float timeInSeconds)
+    {
+        m_allowInputs = false;
+        yield return new WaitForSeconds(timeInSeconds);
+        m_allowInputs = true;
+        m_routine = null;
+    }
+    */
 }

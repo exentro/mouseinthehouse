@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MousePlayer : MonoBehaviour
@@ -16,6 +17,7 @@ public class MousePlayer : MonoBehaviour
         if (m_debug && m_transform == null) Debug.LogError("Can't find Component Transform");
         if (m_debug && m_movement == null) Debug.LogError("Can't find Component Movement");
         if (m_debug && m_action == null) Debug.LogError("Can't find Component PlayerAction");
+        if (m_debug && m_inputController == null) Debug.LogError("Can't find script \"InputController\"");
 
         if (m_Animator != null)
         {
@@ -91,4 +93,44 @@ public class MousePlayer : MonoBehaviour
     {
         get { return m_collidersProvider; }
     }
+
+    [SerializeField] private InputController m_inputController;
+
+    public void AllowPlayerInput(bool value)
+    {
+        m_inputController.AllowPlayerInput = value;
+        if (!value) m_Rigidbody2D.velocity = new Vector2(0f, 0f);
+    }
+
+    private IEnumerator m_coroutine;
+    public bool ForcePlayerTOMoveLeft
+    {
+        set
+        {
+            if(value)
+            {
+                m_inputController.AllowPlayerInput = true;
+
+                StopCoroutine(m_coroutine);
+            }
+            else
+            {
+                m_inputController.AllowPlayerInput = false;
+
+                m_coroutine = MoveToLeftCoRoutine();
+                StartCoroutine(m_coroutine);
+            }
+        }
+    }
+    
+    private IEnumerator MoveToLeftCoRoutine()
+    {
+        m_movement.MovementInput.InputHorizontal = 1f;
+        yield return null;
+    }
+    /*
+    public void ForbidPlayerInputs(float timeInSeconds)
+    {
+        m_inputController.ForbidPlayerInputs(timeInSeconds);
+    }*/
 }
