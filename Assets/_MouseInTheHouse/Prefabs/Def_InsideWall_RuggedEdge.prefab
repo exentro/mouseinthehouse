@@ -20,7 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4143356091067972}
   - component: {fileID: 212846558166779780}
-  m_Layer: 0
+  - component: {fileID: 61862508719496238}
+  - component: {fileID: 114200830105670010}
+  m_Layer: 13
   m_Name: Def_InsideWall_RuggedEdge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,13 +35,54 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1815145922741510}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 1025.41, y: -144.45, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 997.46, y: -171, z: 0}
+  m_LocalScale: {x: -0.50000024, y: 0.8800005, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!61 &61862508719496238
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1815145922741510}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.23684502, y: -1.0669134}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 21.390001, y: 5.32}
+    newSize: {x: 21.390001, y: 5.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 19.337471, y: 1.6561887}
+  m_EdgeRadius: 0
+--- !u!114 &114200830105670010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1815145922741510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4272d79618feb2409262fbcee238e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_startAsDanger: 1
+  m_loop: 0
+  m_dangerTime: 5
+  m_safeTime: 5
+  m_pushForceVelocity: {x: 8, y: 6}
 --- !u!212 &212846558166779780
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -73,7 +116,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 30
   m_Sprite: {fileID: 21300000, guid: f10127095558dfa4d95e6fb6104de27f, type: 3}
   m_Color: {r: 0.78676474, g: 0.78676474, b: 0.78676474, a: 1}
   m_FlipX: 0
