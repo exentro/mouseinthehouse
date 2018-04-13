@@ -3875,6 +3875,7 @@ MonoBehaviour:
   m_movement: {fileID: 114173276542886544}
   m_action: {fileID: 114007968430539366}
   m_collidersProvider: {fileID: 114866693978417244}
+  m_inputController: {fileID: 0}
 --- !u!114 &114036759076637178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5196,6 +5197,9 @@ MonoBehaviour:
   m_crouch: Crouch
   m_nibble: Nibble
   m_senseDanger: Danger
+  m_canStandUpFromCrouch: CanStandUpFromCrouch
+  m_sniffsniff: SniffSniff
+  m_victoryDance: VictoryDance
 --- !u!114 &114755448628595988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5444,6 +5448,7 @@ MonoBehaviour:
     Climb: {fileID: 114093051125116290}
     Nibble: {fileID: 114654847354635356}
     EndClimb: {fileID: 114925565335076942}
+    CanStand: {fileID: 0}
   run:
     Container: {fileID: 1767233843034476}
     Push: {fileID: 114164230787908962}
@@ -5451,6 +5456,7 @@ MonoBehaviour:
     Climb: {fileID: 114846906751983214}
     Nibble: {fileID: 114758070554712496}
     EndClimb: {fileID: 114654432363109428}
+    CanStand: {fileID: 0}
   push:
     Container: {fileID: 1073944232320640}
     Push: {fileID: 114170104433220296}
@@ -5458,6 +5464,7 @@ MonoBehaviour:
     Climb: {fileID: 114231284324288540}
     Nibble: {fileID: 0}
     EndClimb: {fileID: 0}
+    CanStand: {fileID: 0}
   climb:
     Container: {fileID: 1707798255648050}
     Push: {fileID: 114660782065646722}
@@ -5465,6 +5472,7 @@ MonoBehaviour:
     Climb: {fileID: 114037762951141444}
     Nibble: {fileID: 0}
     EndClimb: {fileID: 114384467431609566}
+    CanStand: {fileID: 0}
   jump:
     Container: {fileID: 1325940467052806}
     Push: {fileID: 114907791808758064}
@@ -5472,6 +5480,7 @@ MonoBehaviour:
     Climb: {fileID: 114783357873303812}
     Nibble: {fileID: 0}
     EndClimb: {fileID: 114313880540584086}
+    CanStand: {fileID: 0}
   crouch:
     Container: {fileID: 1438471459851784}
     Push: {fileID: 114435954460502370}
@@ -5479,6 +5488,7 @@ MonoBehaviour:
     Climb: {fileID: 114520955711543990}
     Nibble: {fileID: 114517074627922710}
     EndClimb: {fileID: 0}
+    CanStand: {fileID: 0}
 --- !u!114 &114885928534307780
 MonoBehaviour:
   m_ObjectHideFlags: 1

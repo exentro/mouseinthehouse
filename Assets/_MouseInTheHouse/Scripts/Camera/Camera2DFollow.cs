@@ -41,10 +41,8 @@ public class Camera2DFollow : MonoBehaviour
             else
                 m_merging = false;
         }
-
-        // if (!m_splited) // 2 Players on same screen
+        
         SmoothLookPoint(m_camera1, GetMidPoint(m_focusPlayer1.position, m_focusPlayer2.position));
-        //else 
         if (!m_merging) // 2 players on differents screens
             SmoothLookEachPlayer();
     }
@@ -52,10 +50,7 @@ public class Camera2DFollow : MonoBehaviour
     private void SmoothLookPoint(Camera camera, Vector3 target)
     {
         Vector3 aheadTargetPos = target + Vector3.forward * m_offsetZ;
-        //Vector3 newPos = Vector3.SmoothDamp(camera.transform.position, aheadTargetPos, ref m_currentVelocity, m_damping);
         Vector3 newPos = Vector3.Lerp(camera.transform.position, aheadTargetPos, m_damping * Time.deltaTime);
-        //if(m_splited)
-        //    newPos.x = Mathf.Min(newPos.x, m_camera2.transform.position.x - m_screenLength * 0.5f);
         newPos.y = Mathf.Min(newPos.y, m_maxHeight - m_screenHeight * .5f);
         newPos.y = Mathf.Max(newPos.y, m_minHeight + m_screenHeight * .5f);
         camera.transform.position = newPos;
