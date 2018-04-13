@@ -4365,6 +4365,9 @@ MonoBehaviour:
   m_crouch: Crouch
   m_nibble: Nibble
   m_senseDanger: Danger
+  m_canStandUpFromCrouch: CanStandUpFromCrouch
+  m_sniffsniff: SniffSniff
+  m_victoryDance: VictoryDance
 --- !u!114 &114473560308442536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5012,6 +5015,7 @@ MonoBehaviour:
   m_movement: {fileID: 114357143393763632}
   m_action: {fileID: 114981459389446484}
   m_collidersProvider: {fileID: 114957593056632232}
+  m_inputController: {fileID: 0}
 --- !u!114 &114753831419027718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5380,6 +5384,7 @@ MonoBehaviour:
     Climb: {fileID: 114393775636803876}
     Nibble: {fileID: 114253047790543108}
     EndClimb: {fileID: 0}
+    CanStand: {fileID: 0}
   run:
     Container: {fileID: 1223010070144914}
     Push: {fileID: 114437632210791674}
@@ -5387,6 +5392,7 @@ MonoBehaviour:
     Climb: {fileID: 114695616214124344}
     Nibble: {fileID: 114712884935250356}
     EndClimb: {fileID: 0}
+    CanStand: {fileID: 0}
   push:
     Container: {fileID: 1104548948618172}
     Push: {fileID: 114753831419027718}
@@ -5394,6 +5400,7 @@ MonoBehaviour:
     Climb: {fileID: 114802686168134664}
     Nibble: {fileID: 0}
     EndClimb: {fileID: 0}
+    CanStand: {fileID: 0}
   climb:
     Container: {fileID: 1214323978032986}
     Push: {fileID: 114529437679924760}
@@ -5401,6 +5408,7 @@ MonoBehaviour:
     Climb: {fileID: 114818445500679988}
     Nibble: {fileID: 0}
     EndClimb: {fileID: 0}
+    CanStand: {fileID: 0}
   jump:
     Container: {fileID: 1151583085114538}
     Push: {fileID: 114627833492917026}
@@ -5408,6 +5416,7 @@ MonoBehaviour:
     Climb: {fileID: 114209001380920644}
     Nibble: {fileID: 0}
     EndClimb: {fileID: 0}
+    CanStand: {fileID: 0}
   crouch:
     Container: {fileID: 1095977391779956}
     Push: {fileID: 114394627274069576}
@@ -5415,6 +5424,7 @@ MonoBehaviour:
     Climb: {fileID: 114581823732401308}
     Nibble: {fileID: 114946243331989922}
     EndClimb: {fileID: 0}
+    CanStand: {fileID: 0}
 --- !u!114 &114967032403804534
 MonoBehaviour:
   m_ObjectHideFlags: 1
