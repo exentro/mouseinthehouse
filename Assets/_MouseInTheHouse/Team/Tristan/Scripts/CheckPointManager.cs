@@ -30,8 +30,10 @@ public class CheckPointManager : MonoBehaviour
 	{
         if (m_activateCheckpoint)
         {
+            
             m_player0.transform.position = CheckPointContainer.RespawnPoint;
             m_player1.transform.position = CheckPointContainer.RespawnPoint;
+            m_camera.transform.position = CheckPointContainer.RespawnPoint;
         }
     }
 	
@@ -68,17 +70,11 @@ public class CheckPointManager : MonoBehaviour
         {
             //Vector3 cameraPos = m_camera.transform.position;
             SceneManager.LoadScene(0);
-            m_camera.transform.position = CheckPointContainer.RespawnPoint;
             m_player0.transform.position = CheckPointContainer.RespawnPoint;
             m_player1.transform.position = CheckPointContainer.RespawnPoint;
+            m_camera.transform.position = CheckPointContainer.RespawnPoint;
             print("Retry on point " + checkpointNumber);
         }
-    }
-
-    private void OnGUI()
-    {
-        if (GUILayout.Button("Retry"))
-            Retry();
     }
 
     #endregion

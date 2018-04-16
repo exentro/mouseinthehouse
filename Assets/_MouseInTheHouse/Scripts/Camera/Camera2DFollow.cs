@@ -26,6 +26,11 @@ public class Camera2DFollow : MonoBehaviour
         m_camera3Follow = m_camera3.GetComponent<Camera2DAuxFollow>();
         m_camera2.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
         m_camera3.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
+        Vector3 camPos = GetMidPoint(m_focusPlayer1.position, m_focusPlayer2.position);
+        camPos.z = m_offsetZ;
+        transform.position = camPos;
+        print(camPos);
+        print(m_focusPlayer1.position + "-");
     }
     
     private void LateUpdate()
