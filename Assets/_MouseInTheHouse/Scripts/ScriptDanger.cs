@@ -7,7 +7,7 @@ public class ScriptDanger : MonoBehaviour
     #region Members
     private bool m_active = false;
     private float m_cooldown = 0f;
-    private SpriteRenderer m_spriteRender;
+   // private SpriteRenderer m_spriteRender;
     private Collider2D m_collider;
     
     [SerializeField] private bool m_startAsDanger = true;
@@ -43,12 +43,12 @@ public class ScriptDanger : MonoBehaviour
 
         if(m_active)
         {
-            m_spriteRender.color = Color.red;
+        //    m_spriteRender.color = Color.red;
             m_collider.enabled = true;
         }
         else
         {
-            m_spriteRender.color = Color.green;
+         //   m_spriteRender.color = Color.green;
             m_collider.enabled = false;
         }
     }
@@ -71,7 +71,7 @@ public class ScriptDanger : MonoBehaviour
     #region System
     void Awake()
     {
-        m_spriteRender = GetComponent<SpriteRenderer>();
+        //m_spriteRender = GetComponent<SpriteRenderer>();
         m_collider = GetComponent<Collider2D>();
     }
 
