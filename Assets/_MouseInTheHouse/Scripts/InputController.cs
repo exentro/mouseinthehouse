@@ -65,6 +65,13 @@ public class InputController : MonoBehaviour
 
         m_playerActiontInputs.Zoom = m_player.GetAxis("Zoom");
         m_playerActiontInputs.Unzoom = m_player.GetAxis("Unzoom");
+
+        if (m_player.GetButtonDown("Next"))
+            m_mousePlayer.Action.MenuNext();
+        if (m_player.GetButtonDown("Previous"))
+            m_mousePlayer.Action.MenuPrevious();
+        if (m_player.GetButtonDown("Submit"))
+            m_mousePlayer.Action.MenuSelect();
     }
     /*
     public void ForbidPlayerInputs(float timeInSeconds)

@@ -28,6 +28,17 @@ public class Camera2DFollow : MonoBehaviour
         m_camera2.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
         m_camera3.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
     }
+
+    public void MenuOn()
+    {
+
+    }
+
+    public void MenuOff()
+    {
+
+    }
+
     
     private void LateUpdate()
     {

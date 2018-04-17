@@ -145,28 +145,28 @@ public class PlayerAction : MonoBehaviour
     #endregion
 
     #region Menu
-    private void MenuEnter()
+    public void MenuEnter()
     {
         if(m_player.PlayerID == 0)
         {
             m_menuManager.MenuIsActive = true;
         }
     }
-    private void MenuSelect()
+    public void MenuSelect()
     {
         if (m_player.PlayerID == 0)
         {
             m_menuManager.Execute();
         }
     }
-    private void MenuNext()
+    public void MenuNext()
     {
         if (m_player.PlayerID == 0)
         {
             m_menuManager.Next();
         }
     }
-    private void MenuPrevious()
+    public void MenuPrevious()
     {
         if (m_player.PlayerID == 0)
         {
