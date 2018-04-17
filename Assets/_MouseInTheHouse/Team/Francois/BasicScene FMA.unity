@@ -418,7 +418,7 @@ MonoBehaviour:
   m_GroundColliderBox: {fileID: 29184446}
   m_GroundColliderCircle: {fileID: 0}
   m_CastDistance: 0.05
-  m_debug: 0
+  m_drawGizmo: 1
 --- !u!61 &29184446
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -550,7 +550,7 @@ MonoBehaviour:
   m_GroundColliderBox: {fileID: 47389327}
   m_GroundColliderCircle: {fileID: 0}
   m_CastDistance: 0.05
-  m_debug: 0
+  m_drawGizmo: 1
 --- !u!61 &47389327
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -714,8 +714,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 74821062}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -27.31, y: 6.5, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalPosition: {x: -27.31, y: 5, z: 0}
+  m_LocalScale: {x: 4, y: 2.0000012, z: 1}
   m_Children: []
   m_Father: {fileID: 1301868729}
   m_RootOrder: 7
@@ -1187,6 +1187,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4066b45605033074683c660eeecf229e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_mouse: {fileID: 0}
+  m_WhatIsBlocking:
+    serializedVersion: 2
+    m_Bits: 0
+  m_GroundColliderBox: {fileID: 0}
+  m_CastDistance: 0.05
+  m_drawGizmo: 1
+  m_boxCastEnabled: 0
 --- !u!61 &102922308
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1387,7 +1395,7 @@ MonoBehaviour:
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 140173787}
   m_CastDistance: 0.05
-  m_debug: 0
+  m_drawGizmo: 1
 --- !u!58 &140173787
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1560,6 +1568,7 @@ MonoBehaviour:
     Nibble: {fileID: 852882328}
     EndClimb: {fileID: 0}
     CanStand: {fileID: 0}
+    CeilingCheck: {fileID: 0}
   run:
     Container: {fileID: 1525660955}
     Push: {fileID: 2130288566}
@@ -1568,6 +1577,7 @@ MonoBehaviour:
     Nibble: {fileID: 694695767}
     EndClimb: {fileID: 0}
     CanStand: {fileID: 0}
+    CeilingCheck: {fileID: 0}
   push:
     Container: {fileID: 1220465012}
     Push: {fileID: 144436150}
@@ -1576,6 +1586,7 @@ MonoBehaviour:
     Nibble: {fileID: 0}
     EndClimb: {fileID: 0}
     CanStand: {fileID: 0}
+    CeilingCheck: {fileID: 0}
   climb:
     Container: {fileID: 1689301229}
     Push: {fileID: 408048146}
@@ -1584,6 +1595,7 @@ MonoBehaviour:
     Nibble: {fileID: 0}
     EndClimb: {fileID: 0}
     CanStand: {fileID: 0}
+    CeilingCheck: {fileID: 0}
   jump:
     Container: {fileID: 1174755417}
     Push: {fileID: 1007178795}
@@ -1592,6 +1604,7 @@ MonoBehaviour:
     Nibble: {fileID: 0}
     EndClimb: {fileID: 0}
     CanStand: {fileID: 0}
+    CeilingCheck: {fileID: 0}
   crouch:
     Container: {fileID: 1712539360}
     Push: {fileID: 356928778}
@@ -1600,6 +1613,7 @@ MonoBehaviour:
     Nibble: {fileID: 1605389624}
     EndClimb: {fileID: 0}
     CanStand: {fileID: 1286944832}
+    CeilingCheck: {fileID: 0}
 --- !u!1 &160074909
 GameObject:
   m_ObjectHideFlags: 0
@@ -3018,7 +3032,7 @@ MonoBehaviour:
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 316865600}
   m_CastDistance: 0.1
-  m_debug: 1
+  m_drawGizmo: 1
 --- !u!58 &316865600
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6420,7 +6434,7 @@ MonoBehaviour:
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 806412811}
   m_CastDistance: 0.2
-  m_debug: 1
+  m_drawGizmo: 1
 --- !u!58 &806412811
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7066,6 +7080,71 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.950614, y: 1.17}
   m_EdgeRadius: 0
+--- !u!1 &871878679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1544458746134218, guid: f08c0bf723eac8346a09159429ad40dd,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 871878682}
+  - component: {fileID: 871878681}
+  - component: {fileID: 871878680}
+  m_Layer: 8
+  m_Name: CeilingCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &871878680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 871878679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df93ee8358bf3f049af80fddf73565ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_mouse: {fileID: 912747361}
+  m_WhatIsBlocking:
+    serializedVersion: 2
+    m_Bits: 1
+  m_GroundColliderCircle: {fileID: 871878681}
+  m_CastDistance: 0.05
+  m_DraxwGizmo: 0
+--- !u!58 &871878681
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 871878679}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.11, y: 1.71}
+  serializedVersion: 2
+  m_Radius: 0.6
+--- !u!4 &871878682
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4977584437190154, guid: f08c0bf723eac8346a09159429ad40dd,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 871878679}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1244461602}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &876104169
 GameObject:
   m_ObjectHideFlags: 0
@@ -9075,7 +9154,7 @@ MonoBehaviour:
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 1130910621}
   m_CastDistance: 0.2
-  m_debug: 1
+  m_drawGizmo: 1
 --- !u!58 &1130910621
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9206,7 +9285,7 @@ MonoBehaviour:
   m_GroundColliderBox: {fileID: 1143535683}
   m_GroundColliderCircle: {fileID: 0}
   m_CastDistance: 0.05
-  m_debug: 0
+  m_drawGizmo: 1
 --- !u!61 &1143535683
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9692,6 +9771,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4066b45605033074683c660eeecf229e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_mouse: {fileID: 0}
+  m_WhatIsBlocking:
+    serializedVersion: 2
+    m_Bits: 0
+  m_GroundColliderBox: {fileID: 0}
+  m_CastDistance: 0.05
+  m_drawGizmo: 1
+  m_boxCastEnabled: 0
 --- !u!61 &1235751166
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9817,6 +9904,7 @@ Transform:
   - {fileID: 625103373}
   - {fileID: 1458392058}
   - {fileID: 1235751164}
+  - {fileID: 871878682}
   m_Father: {fileID: 1885647079}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10587,6 +10675,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4066b45605033074683c660eeecf229e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_mouse: {fileID: 912747361}
+  m_WhatIsBlocking:
+    serializedVersion: 2
+    m_Bits: 0
+  m_GroundColliderBox: {fileID: 1362031860}
+  m_CastDistance: 0.05
+  m_drawGizmo: 0
+  m_boxCastEnabled: 0
 --- !u!61 &1362031860
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10778,7 +10874,7 @@ MonoBehaviour:
   m_GroundColliderBox: {fileID: 1364327183}
   m_GroundColliderCircle: {fileID: 0}
   m_CastDistance: 0.05
-  m_debug: 0
+  m_drawGizmo: 1
 --- !u!61 &1364327183
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11230,6 +11326,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4066b45605033074683c660eeecf229e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_mouse: {fileID: 0}
+  m_WhatIsBlocking:
+    serializedVersion: 2
+    m_Bits: 0
+  m_GroundColliderBox: {fileID: 0}
+  m_CastDistance: 0.05
+  m_drawGizmo: 1
+  m_boxCastEnabled: 0
 --- !u!61 &1433155636
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11409,6 +11513,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4066b45605033074683c660eeecf229e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_mouse: {fileID: 912747361}
+  m_WhatIsBlocking:
+    serializedVersion: 2
+    m_Bits: 1
+  m_GroundColliderBox: {fileID: 1458392060}
+  m_CastDistance: 0.05
+  m_drawGizmo: 0
+  m_boxCastEnabled: 1
 --- !u!61 &1458392060
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11422,7 +11534,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.13, y: 2.4}
+  m_Offset: {x: 1.31, y: 3.4}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -11433,7 +11545,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.35, y: 0.5}
+  m_Size: {x: 1.7, y: 2.2}
   m_EdgeRadius: 0
 --- !u!1 &1509394382
 GameObject:
@@ -12610,7 +12722,7 @@ MonoBehaviour:
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 1636595567}
   m_CastDistance: 0.2
-  m_debug: 1
+  m_drawGizmo: 1
 --- !u!58 &1636595567
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13005,7 +13117,7 @@ MonoBehaviour:
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 1684338068}
   m_CastDistance: 0.2
-  m_debug: 1
+  m_drawGizmo: 1
 --- !u!58 &1684338068
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13545,7 +13657,7 @@ MonoBehaviour:
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 1720030289}
   m_CastDistance: 0.05
-  m_debug: 0
+  m_drawGizmo: 1
 --- !u!58 &1720030289
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -14644,6 +14756,7 @@ MonoBehaviour:
     Nibble: {fileID: 1061618687}
     EndClimb: {fileID: 1433155635}
     CanStand: {fileID: 0}
+    CeilingCheck: {fileID: 0}
   run:
     Container: {fileID: 2002271619}
     Push: {fileID: 2042192392}
@@ -14652,6 +14765,7 @@ MonoBehaviour:
     Nibble: {fileID: 195592162}
     EndClimb: {fileID: 102922307}
     CanStand: {fileID: 0}
+    CeilingCheck: {fileID: 0}
   push:
     Container: {fileID: 653812973}
     Push: {fileID: 920160115}
@@ -14660,6 +14774,7 @@ MonoBehaviour:
     Nibble: {fileID: 0}
     EndClimb: {fileID: 0}
     CanStand: {fileID: 0}
+    CeilingCheck: {fileID: 0}
   climb:
     Container: {fileID: 1244461601}
     Push: {fileID: 625103374}
@@ -14668,6 +14783,7 @@ MonoBehaviour:
     Nibble: {fileID: 0}
     EndClimb: {fileID: 1458392059}
     CanStand: {fileID: 0}
+    CeilingCheck: {fileID: 871878680}
   jump:
     Container: {fileID: 648762471}
     Push: {fileID: 1921339535}
@@ -14676,6 +14792,7 @@ MonoBehaviour:
     Nibble: {fileID: 0}
     EndClimb: {fileID: 1362031859}
     CanStand: {fileID: 0}
+    CeilingCheck: {fileID: 0}
   crouch:
     Container: {fileID: 1397461933}
     Push: {fileID: 646317411}
@@ -14684,6 +14801,7 @@ MonoBehaviour:
     Nibble: {fileID: 860758843}
     EndClimb: {fileID: 0}
     CanStand: {fileID: 0}
+    CeilingCheck: {fileID: 0}
 --- !u!1 &1887534030 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1094892674890126, guid: 265b7836e8e997c48a75e6e2c942cbc5,
@@ -16778,7 +16896,7 @@ MonoBehaviour:
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 2098941731}
   m_CastDistance: 0.05
-  m_debug: 0
+  m_drawGizmo: 0
 --- !u!58 &2098941731
 CircleCollider2D:
   m_ObjectHideFlags: 0

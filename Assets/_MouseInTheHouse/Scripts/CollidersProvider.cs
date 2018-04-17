@@ -14,6 +14,7 @@ public class CollidersProvider : MonoBehaviour
         [SerializeField] [ReadOnlyOnPlay] public NibbleCheckCollision Nibble;
         [SerializeField] [ReadOnlyOnPlay] public EndClimbDetector EndClimb;
         [SerializeField] [ReadOnlyOnPlay] public CanStandCheckCollision CanStand;
+        [SerializeField] [ReadOnlyOnPlay] public CeilingCheckCollision CeilingCheck;
     }
 
     [Header("Debug")]
@@ -41,6 +42,7 @@ public class CollidersProvider : MonoBehaviour
             idle.Nibble = idle.Container.GetComponentInChildren<NibbleCheckCollision>();
             idle.EndClimb = idle.Container.GetComponentInChildren<EndClimbDetector>();
             idle.CanStand = null;
+            idle.CeilingCheck = null;
         }
         if (run.Container == null) Debug.LogError("Missing Run container");
         else
@@ -51,6 +53,7 @@ public class CollidersProvider : MonoBehaviour
             run.Nibble = run.Container.GetComponentInChildren<NibbleCheckCollision>();
             run.EndClimb = run.Container.GetComponentInChildren<EndClimbDetector>();
             run.CanStand = null;
+            run.CeilingCheck = null;
         }
         if (push.Container == null) Debug.LogError("Missing Push container");
         else
@@ -61,6 +64,7 @@ public class CollidersProvider : MonoBehaviour
             push.Nibble = null;
             push.EndClimb = null;
             push.CanStand = null;
+            push.CeilingCheck = null;
         }
         if (climb.Container == null) Debug.LogError("Missing Climb container");
         else
@@ -71,6 +75,7 @@ public class CollidersProvider : MonoBehaviour
             climb.Nibble = null;
             climb.EndClimb = climb.Container.GetComponentInChildren<EndClimbDetector>();
             climb.CanStand = null;
+            climb.CeilingCheck = climb.Container.GetComponentInChildren<CeilingCheckCollision>(); ;
         }
         if (jump.Container == null) Debug.LogError("Missing Jump container");
         else
@@ -81,6 +86,7 @@ public class CollidersProvider : MonoBehaviour
             jump.Nibble = null;
             jump.EndClimb = jump.Container.GetComponentInChildren<EndClimbDetector>();
             jump.CanStand = null;
+            jump.CeilingCheck = null;
         }
         if (crouch.Container == null) Debug.LogError("Missing Crouch container");
         else
@@ -91,6 +97,7 @@ public class CollidersProvider : MonoBehaviour
             crouch.Nibble = crouch.Container.GetComponentInChildren<NibbleCheckCollision>();
             crouch.EndClimb = null;
             crouch.CanStand = crouch.Container.GetComponentInChildren<CanStandCheckCollision>();
+            crouch.CeilingCheck = null;
         }
     }
 
@@ -152,7 +159,7 @@ public class CollidersProvider : MonoBehaviour
         if (m_activeColliders != null)
         {
             if (m_activeColliders.Climb != null && m_activeColliders.EndClimb != null)
-                return m_activeColliders.Climb.Climbing && !m_activeColliders.EndClimb.EndOfClimb;
+                return m_activeColliders.Climb.Climbing && m_activeColliders.EndClimb.CanClimbTheTop;
         }
         else if (m_debug) Debug.LogError("No active colliders.");
         return false;
@@ -199,6 +206,16 @@ public class CollidersProvider : MonoBehaviour
             if(m_activeColliders.CanStand != null)
                 return m_activeColliders.CanStand.CanStandUp;
         }            
+        else if (m_debug) Debug.LogError("No active colliders.");
+        return false;
+    }
+    public bool CollidingWithCeiling()
+    {
+        if (m_activeColliders != null)
+        {
+            if (m_activeColliders.CeilingCheck != null)
+                return m_activeColliders.CeilingCheck.TouchingCeiling;
+        }
         else if (m_debug) Debug.LogError("No active colliders.");
         return false;
     }
