@@ -48,12 +48,10 @@ public class CheckPoint: MonoBehaviour
         if (m_player0Triggered == true ^ m_player1Triggered == true)
         {
             m_animator.SetBool("First Contact", true);
-            print("first contact");
         }
         else if (m_player0Triggered == true && m_player1Triggered == true)
         {
             m_animator.SetBool("Second Contact", true);
-            print("second contact");
         }
     }
 
