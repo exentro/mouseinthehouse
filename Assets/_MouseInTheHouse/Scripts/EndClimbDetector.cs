@@ -6,7 +6,7 @@ public class EndClimbDetector : MonoBehaviour
     [SerializeField] private LayerMask m_WhatIsBlocking;
     [SerializeField] private BoxCollider2D m_GroundColliderBox;
     [SerializeField] private float m_CastDistance = .05f;
-    [SerializeField] private bool m_drawGizmo = true;
+    [SerializeField] private bool m_drawGizmo = false;
     [SerializeField] private bool m_boxCastEnabled = false;
 
     private RaycastHit2D m_Hit;
@@ -24,7 +24,7 @@ public class EndClimbDetector : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (m_drawGizmo)
+        if (m_drawGizmo && m_boxCastEnabled)
         {
             Vector2 position = getPosition();
             position.y -= m_CastDistance;
