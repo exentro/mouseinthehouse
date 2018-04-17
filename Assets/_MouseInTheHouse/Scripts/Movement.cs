@@ -229,15 +229,13 @@ public class Movement : MonoBehaviour
     {
         if (m_player.PlayerData.CanClimb)
         {
-            bool isClimbing = m_colliders.CollidingClimbable();
-
-            if (isClimbing && m_colliders.ClimbingEnd())
+            if (m_colliders.ClimbingEnd())
             {
                 m_animator.SetTrigger(m_animatorParameters.ClimbEnd);
             }
             else
             {
-                m_animator.SetBool(m_animatorParameters.Climb, isClimbing);
+                m_animator.SetBool(m_animatorParameters.Climb, m_colliders.CollidingClimbable());
                 m_animator.ResetTrigger(m_animatorParameters.ClimbEnd);
             }            
         }
@@ -248,9 +246,12 @@ public class Movement : MonoBehaviour
     }
     public void Climb()
     {
-        Vector3 newPosition = m_transform.position;
-        newPosition.y += m_MovementInput.InputVertical * m_player.PlayerData.ClimbSpeed * Time.deltaTime;
-        m_transform.position = newPosition;
+        if(!m_colliders.CollidingWithCeiling() || m_MovementInput.InputVertical < 0f)
+        {
+            Vector3 newPosition = m_transform.position;
+            newPosition.y += m_MovementInput.InputVertical * m_player.PlayerData.ClimbSpeed * Time.deltaTime;
+            m_transform.position = newPosition;
+        }
     }
     #endregion
 
