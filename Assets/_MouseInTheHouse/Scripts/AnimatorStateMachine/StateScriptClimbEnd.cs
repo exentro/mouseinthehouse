@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StateScriptClimbEnd : StateMachineBehaviour {
 
+    [SerializeField] Vector2 TeleportationDelta;
+
     private MousePlayer m_mousePlayer;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -23,11 +25,8 @@ public class StateScriptClimbEnd : StateMachineBehaviour {
         animator.SetBool(m_mousePlayer.AnimatorParameterMapper.Climb, false);
 
         Vector3 position = m_mousePlayer.Transform.position;
-        if(m_mousePlayer.Movement.FacingRight)
-            position.x += 1.2f;
-        else
-            position.x -= 1.2f;
-        position.y += 2.5f;
+        position.x += m_mousePlayer.Movement.FacingRight ? TeleportationDelta.x : -TeleportationDelta.x;
+        position.y += TeleportationDelta.y;
         m_mousePlayer.Transform.position = position;
     }
 
