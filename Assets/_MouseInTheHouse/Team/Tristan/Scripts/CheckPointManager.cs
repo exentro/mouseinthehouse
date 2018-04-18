@@ -33,7 +33,7 @@ public class CheckPointManager : MonoBehaviour
             
             m_player0.transform.position = CheckPointContainer.RespawnPoint;
             m_player1.transform.position = CheckPointContainer.RespawnPoint;
-            m_camera.transform.position = CheckPointContainer.RespawnPoint;
+            //m_camera.transform.position = CheckPointContainer.RespawnPoint;
         }
     }
 	
@@ -72,7 +72,7 @@ public class CheckPointManager : MonoBehaviour
             SceneManager.LoadScene(0);
             m_player0.transform.position = CheckPointContainer.RespawnPoint;
             m_player1.transform.position = CheckPointContainer.RespawnPoint;
-            m_camera.transform.position = CheckPointContainer.RespawnPoint;
+            //m_camera.transform.position = CheckPointContainer.RespawnPoint;
             print("Retry on point " + checkpointNumber);
         }
     }
