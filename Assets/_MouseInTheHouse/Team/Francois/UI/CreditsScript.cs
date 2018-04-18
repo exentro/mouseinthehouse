@@ -6,6 +6,7 @@ public class CreditsScript : MonoBehaviour
 {
     #region Members
     [SerializeField] private UIScript m_ui;
+    [SerializeField] private Animator m_anim;
     #endregion
     
     #region Class Methods

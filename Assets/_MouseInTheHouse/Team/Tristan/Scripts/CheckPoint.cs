@@ -18,6 +18,11 @@ public class CheckPoint: MonoBehaviour
 
     #region System
 
+    private void Start()
+    {
+        m_animator = GetComponent<Animator>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         MousePlayer mousePlayer = collision.gameObject.GetComponentInParent<MousePlayer>();
@@ -25,10 +30,28 @@ public class CheckPoint: MonoBehaviour
         {
             int id = mousePlayer.PlayerID;
             // print(gameObject.name + " triggered by player " + id);
-            if (id == 0)
+            if (id == 0 && m_player0Triggered == false)
+            {
                 m_player0Triggered = true;
-            else if (id == 1)
+                Flip();
+            }
+            else if (id == 1 && m_player1Triggered == false)
+            {
                 m_player1Triggered = true;
+                Flip();
+            }
+        }
+    }
+
+    private void Flip()
+    {
+        if (m_player0Triggered == true ^ m_player1Triggered == true)
+        {
+            m_animator.SetBool("First Contact", true);
+        }
+        else if (m_player0Triggered == true && m_player1Triggered == true)
+        {
+            m_animator.SetBool("Second Contact", true);
         }
     }
 
@@ -40,6 +63,8 @@ public class CheckPoint: MonoBehaviour
     #endregion
 
     #region Private an Protected Members
+
+    private Animator m_animator;
 
     #endregion
 }

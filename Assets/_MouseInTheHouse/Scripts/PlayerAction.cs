@@ -19,6 +19,7 @@ public class PlayerAction : MonoBehaviour
     private CollidersProvider m_colliders;
     private AnimatorParameterMapper m_animatorParameters;
     [SerializeField] private CheckPointManager m_checkPointManager;
+    private MenuManager m_menuManager;
 
     private IEnumerator m_nibbleCoroutine;
 
@@ -44,6 +45,9 @@ public class PlayerAction : MonoBehaviour
 
             m_colliders = m_player.CollidersProvider;
             if (m_colliders == null && m_debug) Debug.LogError("Reference to \"CollidersProvider\" script is not setted");
+
+            m_menuManager = m_player.MenuManager;
+            if (m_menuManager == null && m_debug) Debug.LogError("Reference to \"Menu Manager\" script is not setted");
         }
 
         m_nibbleCoroutine = DoNibbleCoroutine();
@@ -92,7 +96,6 @@ public class PlayerAction : MonoBehaviour
     #endregion
 
     #region PlayerActions
-    
     public void Nibble()
     {
         if (m_actionInput.Nibble)
@@ -108,7 +111,6 @@ public class PlayerAction : MonoBehaviour
             }
         }
     }
-
     private IEnumerator DoNibbleCoroutine()
     {
         yield return new WaitForSeconds(0.5f);
@@ -118,15 +120,15 @@ public class PlayerAction : MonoBehaviour
 
     public void Retry()
     {
-        Debug.Log("Retry");
-        m_checkPointManager.Retry();
+        if(m_debug) Debug.Log("Retry");
+        if(m_checkPointManager != null) m_checkPointManager.Retry();
+        else if (m_debug) Debug.Log("m_checkPointManager is not setted");
     }
 
     public void Unzoom()
     {
         Debug.Log("Unzoom");
     }
-
     public void Zoom()
     {
         Debug.Log("Zoom");
@@ -136,10 +138,40 @@ public class PlayerAction : MonoBehaviour
     {
         Debug.Log("CameraHorizontal");
     }
-
     public void CameraVertical()
     {
         Debug.Log("CameraVertical");
+    }
+    #endregion
+
+    #region Menu
+    public void MenuEnter()
+    {
+        if(m_player.PlayerID == 0)
+        {
+            m_menuManager.MenuIsActive = true;
+        }
+    }
+    public void MenuSelect()
+    {
+        if (m_player.PlayerID == 0)
+        {
+            m_menuManager.Execute();
+        }
+    }
+    public void MenuNext()
+    {
+        if (m_player.PlayerID == 0)
+        {
+            m_menuManager.Next();
+        }
+    }
+    public void MenuPrevious()
+    {
+        if (m_player.PlayerID == 0)
+        {
+            m_menuManager.Previous();
+        }
     }
     #endregion
 }
