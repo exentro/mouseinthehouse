@@ -37,7 +37,7 @@ public class PlayerAction : MonoBehaviour
         }
         else
         {
-            m_animator = m_player.Animator;
+            m_animator = m_player.MouseAnimator;
             if (m_animator == null && m_debug) Debug.LogError("Reference to Component \"Animator\" is not setted");
 
             m_animatorParameters = m_player.AnimatorParameterMapper;

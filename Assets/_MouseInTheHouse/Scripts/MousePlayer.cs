@@ -12,7 +12,8 @@ public class MousePlayer : MonoBehaviour
     
     private void Awake()
     {
-        if (m_debug && m_Animator == null) Debug.LogError("Can't find Component Animator");
+        if (m_debug && m_MouseAnimator == null) Debug.LogError("Can't find Component Animator for the mouse");
+        if (m_debug && m_bubbleStartAnimator == null) Debug.LogError("Can't find Component Animator for the bubble");
         if (m_debug && m_Rigidbody2D == null) Debug.LogError("Can't find Component Rigidbody2D");
         if (m_debug && m_transform == null) Debug.LogError("Can't find Component Transform");
         if (m_debug && m_movement == null) Debug.LogError("Can't find Component Movement");
@@ -22,9 +23,9 @@ public class MousePlayer : MonoBehaviour
         if (m_menuManager == null) m_menuManager = FindObjectOfType<MenuManager>();
         if (m_debug && m_menuManager == null) Debug.LogError("Can't find \"MenuManager\"");
 
-        if (m_Animator != null)
+        if (m_MouseAnimator != null)
         {
-            m_Animator.SetInteger("PlayerId", m_data.ID);
+            m_MouseAnimator.SetInteger("PlayerId", m_data.ID);
         }
     }
 
@@ -55,10 +56,20 @@ public class MousePlayer : MonoBehaviour
         set { m_data = value; }
     }
 
-    [SerializeField] private Animator m_Animator;
-    public Animator Animator
+    [SerializeField] private Animator m_MouseAnimator;
+    public Animator MouseAnimator
     {
-        get { return m_Animator; }
+        get { return m_MouseAnimator; }
+    }
+    [SerializeField] private Animator m_bubbleStartAnimator;
+    public Animator BubbleStartAnimator
+    {
+        get { return m_bubbleStartAnimator; }
+    }
+    [SerializeField] private Animator m_bubbleEndAnimator;
+    public Animator BubbleEndAnimator
+    {
+        get { return m_bubbleEndAnimator; }
     }
 
     [SerializeField] private AnimatorParameterMapper m_animatorParameterMapper;

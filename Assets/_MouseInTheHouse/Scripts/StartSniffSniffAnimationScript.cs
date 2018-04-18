@@ -22,7 +22,8 @@ public class StartSniffSniffAnimationScript : MonoBehaviour
                 if (!m_alreadyTriggeredForTheseID.Contains(m_mouse.PlayerID))
                 {
                     m_alreadyTriggeredForTheseID.Add(m_mouse.PlayerID);
-                    m_mouse.Animator.SetTrigger(m_mouse.AnimatorParameterMapper.SniffSniff);
+                    m_mouse.MouseAnimator.SetTrigger(m_mouse.AnimatorParameterMapper.SniffSniff);
+                    m_mouse.BubbleStartAnimator.SetTrigger("appear");
                 }
             }
         }
