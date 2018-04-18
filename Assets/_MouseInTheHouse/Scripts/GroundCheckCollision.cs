@@ -7,7 +7,7 @@ public class GroundCheckCollision : MonoBehaviour
     [SerializeField] private BoxCollider2D m_GroundColliderBox;
     [SerializeField] private CircleCollider2D m_GroundColliderCircle;
     [SerializeField] private float m_CastDistance = .05f;
-    [SerializeField] private bool m_debug = true;
+    [SerializeField] private bool m_drawGizmo = true;
 
     private RaycastHit2D m_Hit;
 
@@ -32,7 +32,7 @@ public class GroundCheckCollision : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (m_debug)
+        if (m_drawGizmo)
         {
             Vector2 position = getPosition();
             position.y -= m_CastDistance;

@@ -13,12 +13,13 @@ public class Camera2DFollow : MonoBehaviour
     //public AnimationCurve m_animCurve;
     public float m_maxHeight;
     public float m_minHeight;
+    public float m_offsetZ = -10f;
 
     #endregion
 
     private void Start()
     {
-        m_offsetZ = transform.position.z;
+        //m_offsetZ = transform.position.z;
         m_screenLength = Vector2.Distance(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)), Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)));
         m_screenHeight = Vector2.Distance(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)), Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)));
         m_camera1 = GetComponent<Camera>();
@@ -26,12 +27,18 @@ public class Camera2DFollow : MonoBehaviour
         m_camera3Follow = m_camera3.GetComponent<Camera2DAuxFollow>();
         m_camera2.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
         m_camera3.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
-        Vector3 camPos = GetMidPoint(m_focusPlayer1.position, m_focusPlayer2.position);
-        camPos.z = m_offsetZ;
-        transform.position = camPos;
-        print(camPos);
-        print(m_focusPlayer1.position + "-");
     }
+
+    public void MenuOn()
+    {
+
+    }
+
+    public void MenuOff()
+    {
+
+    }
+
     
     private void LateUpdate()
     {
@@ -147,7 +154,7 @@ public class Camera2DFollow : MonoBehaviour
 
     #region Private an Protected Members
 
-    private float m_offsetZ;
+    //private float m_offsetZ;
     private Vector3 m_currentVelocity;
 
     private Camera m_camera1;

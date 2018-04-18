@@ -14,8 +14,7 @@ public class ClimbCheckCollision : MonoBehaviour
     {
         get { return m_climbing; }
     }
-
-    //private void OnCollisionStay2D(Collision2D collision)
+    
     private void OnTriggerStay2D(Collider2D collision)
     {
         Interactable coll = collision.gameObject.GetComponent<Interactable>();
@@ -24,7 +23,7 @@ public class ClimbCheckCollision : MonoBehaviour
             m_climbing = coll.Climbable;
         }
     }
-    //private void OnCollisionExit2D(Collision2D collision)
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         m_climbing = false;

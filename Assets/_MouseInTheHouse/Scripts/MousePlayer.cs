@@ -19,6 +19,9 @@ public class MousePlayer : MonoBehaviour
         if (m_debug && m_action == null) Debug.LogError("Can't find Component PlayerAction");
         if (m_debug && m_inputController == null) Debug.LogError("Can't find script \"InputController\"");
 
+        if (m_menuManager == null) m_menuManager = FindObjectOfType<MenuManager>();
+        if (m_debug && m_menuManager == null) Debug.LogError("Can't find \"MenuManager\"");
+
         if (m_Animator != null)
         {
             m_Animator.SetInteger("PlayerId", m_data.ID);
@@ -88,6 +91,12 @@ public class MousePlayer : MonoBehaviour
         get { return m_action; }
     }
 
+    [SerializeField] private MenuManager m_menuManager;
+    public MenuManager MenuManager
+    {
+        get { return m_menuManager; }
+    }
+
     [SerializeField] private CollidersProvider m_collidersProvider;
     public CollidersProvider CollidersProvider
     {
@@ -128,9 +137,4 @@ public class MousePlayer : MonoBehaviour
         m_movement.MovementInput.InputHorizontal = 1f;
         yield return null;
     }
-    /*
-    public void ForbidPlayerInputs(float timeInSeconds)
-    {
-        m_inputController.ForbidPlayerInputs(timeInSeconds);
-    }*/
 }
