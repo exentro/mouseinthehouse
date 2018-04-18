@@ -15,6 +15,7 @@ public class Camera2DFollow : MonoBehaviour
     public float m_minHeight;
     public float m_offsetZ = -10f;
     public Vector3 m_onMenuPos;
+    public Transform m_endGame;
 
     #endregion
 
@@ -39,7 +40,6 @@ public class Camera2DFollow : MonoBehaviour
         transform.position = m_onMenuPos;
         m_camera1.orthographicSize = 28;
         m_camera1.depth = 1;
-        Time.timeScale = 0f;
     }
 
     public void MenuOff()
@@ -53,7 +53,19 @@ public class Camera2DFollow : MonoBehaviour
         transform.position = m_camSavedPos;
         m_screenLength = Vector2.Distance(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)), Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)));
         m_screenHeight = Vector2.Distance(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)), Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)));
-        Time.timeScale = 1f;
+    }
+
+    public void EndGame()
+    {
+        m_onMenu = true;
+        Vector3 camPos = m_endGame.position;
+        camPos.z = m_offsetZ;
+        transform.position = camPos;
+    }
+
+    public void EndSound()
+    {
+
     }
 
     

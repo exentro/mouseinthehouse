@@ -21,5 +21,8 @@ public class ForceMovementToLeftStart : MonoBehaviour
                 }
             }
         }
+        Vector3 _temp = transform.localScale;
+        _temp.x = 150f;
+        transform.localScale = _temp;
     }
 }

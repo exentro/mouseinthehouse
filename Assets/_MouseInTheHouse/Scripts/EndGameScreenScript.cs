@@ -12,6 +12,7 @@ public class EndGameScreenScript : MonoBehaviour
     [SerializeField] private MenuManager m_menuManager;
     [SerializeField] private GameObject m_background;
     [SerializeField] private GameObject m_catEyes;
+    [SerializeField] private Camera2DFollow m_cameraFollow;
 
     public void StartEndGame()
     {
@@ -26,7 +27,7 @@ public class EndGameScreenScript : MonoBehaviour
     {
         m_catEyes.SetActive(false);
         m_background.SetActive(true);
-        //TODO: teleport camera
+        m_cameraFollow.EndGame();
         StartCoroutine(CatEyesCoroutine());
     }
     IEnumerator CatEyesCoroutine()
@@ -34,7 +35,7 @@ public class EndGameScreenScript : MonoBehaviour
         yield return new WaitForSeconds(m_timeBetweenTransitionAndCatEyes + m_transitionTime);
         m_catEyes.SetActive(true);
         m_background.SetActive(false);
-        //TODO: sound
+        m_cameraFollow.EndSound();
         yield return new WaitForSeconds(m_timeBetweenCatEyesAndCredits);
         m_menuManager.Credit();
     }
