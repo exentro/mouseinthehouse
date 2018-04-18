@@ -14,6 +14,7 @@ public class Camera2DFollow : MonoBehaviour
     public float m_maxHeight;
     public float m_minHeight;
     public float m_offsetZ = -10f;
+    public Vector3 m_onMenuPos;
 
     #endregion
 
@@ -27,36 +28,55 @@ public class Camera2DFollow : MonoBehaviour
         m_camera3Follow = m_camera3.GetComponent<Camera2DAuxFollow>();
         m_camera2.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
         m_camera3.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
+        transform.position = m_onMenuPos;
     }
 
     public void MenuOn()
     {
-
+        m_onMenu = true;
+        m_camSavedPos = transform.position;
+        transform.position = m_onMenuPos;
+        m_camera1.orthographicSize = 28;
+        m_camera1.depth = 1;
+        Time.timeScale = 0f;
     }
 
     public void MenuOff()
     {
-
+        m_onMenu = false;
+        m_camera1.orthographicSize = 13.8f;
+        if(m_splited)
+            m_camera1.depth = -1;
+        else
+            m_camera1.depth = 1;
+        transform.position = m_camSavedPos;
+        m_screenLength = Vector2.Distance(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)), Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)));
+        m_screenHeight = Vector2.Distance(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)), Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)));
+        Time.timeScale = 1f;
     }
 
     
     private void LateUpdate()
     {
-        float m_deltaX = Math.Abs(m_focusPlayer1.position.x - m_focusPlayer2.position.x);
-
-        if (!m_splited && m_deltaX > m_screenLength * .5)
-            SplitScreen();
-        else if (m_splited)
+        if (!m_onMenu)
         {
-            if (m_deltaX < m_screenLength * .5f)
-                MergeScreens();
-            else
-                m_merging = false;
+            float m_deltaX = Math.Abs(m_focusPlayer1.position.x - m_focusPlayer2.position.x);
+
+            if (!m_splited && m_deltaX > m_screenLength * .5)
+                SplitScreen();
+            else if (m_splited)
+            {
+                if (m_deltaX < m_screenLength * .5f)
+                    MergeScreens();
+                else
+                    m_merging = false;
+            }
+
+            SmoothLookPoint(m_camera1, GetMidPoint(m_focusPlayer1.position, m_focusPlayer2.position));
+            if (!m_merging) // 2 players on differents screens
+                SmoothLookEachPlayer();
         }
-        
-        SmoothLookPoint(m_camera1, GetMidPoint(m_focusPlayer1.position, m_focusPlayer2.position));
-        if (!m_merging) // 2 players on differents screens
-            SmoothLookEachPlayer();
+
     }
 
     private void SmoothLookPoint(Camera camera, Vector3 target)
@@ -164,6 +184,8 @@ public class Camera2DFollow : MonoBehaviour
     private float m_screenHeight;
     private bool m_splited = false;
     private bool m_merging = false;
+    private bool m_onMenu = true;
+    private Vector3 m_camSavedPos;
 
     #endregion
 

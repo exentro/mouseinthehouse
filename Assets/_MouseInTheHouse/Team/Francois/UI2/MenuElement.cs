@@ -5,12 +5,12 @@ using UnityEngine.Events;
 
 public class MenuElement : MonoBehaviour
 {
-    [SerializeField] private Component m_halo;
+    [SerializeField] private SpriteRenderer m_halo;
 
     public void Glow(bool value)
     {
         Debug.Log(string.Format("{0} : Glow {1}", gameObject.name, value));
-        ((Behaviour)m_halo).enabled = value;
+        m_halo.enabled = value;
     }
 
     [SerializeField] private UnityEvent m_MyEvent;

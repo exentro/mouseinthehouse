@@ -6,10 +6,11 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private MenuElement[] m_menuElements;
     [SerializeField] private FadeScreenTransitionScript m_fadeTransition;
+    [SerializeField] private Camera2DFollow m_CameraFollow;
 
     private int currentIndex = 0;
 
-    private bool m_menuIsActive;
+    private bool m_menuIsActive = true;
     public bool MenuIsActive
     {
         get { return m_menuIsActive; }
@@ -20,7 +21,8 @@ public class MenuManager : MonoBehaviour
             {
                 m_menuElements[currentIndex].Glow(value);
             }
-            if (value) { }//set Camera
+            if (value) { m_CameraFollow.MenuOn(); print("menuon"); }
+            else { m_CameraFollow.MenuOff(); }
         }
     }
 
@@ -67,6 +69,7 @@ public class MenuManager : MonoBehaviour
 
     public void NewGame()
     {
+        MenuIsActive = false;
         Debug.Log("NewGame");
     }
 
@@ -82,25 +85,25 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
     }
 
-    [SerializeField] private GameObject PanelCredit;
+    [SerializeField] public GameObject PanelCredit;
     private void CreditEnter()
     {
         PanelCredit.SetActive(true);
     }
-    private void CreditLeave()
+    public void CreditLeave()
     {
         PanelCredit.SetActive(false);
     }
 
-    private void Update()
-    {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Credit();
-        }
-        if (Input.GetButtonDown("Fire2"))
-        {
-            CreditLeave();
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetButtonDown("Fire1"))
+    //    {
+    //        Credit();
+    //    }
+    //    if (Input.GetButtonDown("Fire2"))
+    //    {
+    //        CreditLeave();
+    //    }
+    //}
 }

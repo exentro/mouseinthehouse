@@ -40,7 +40,7 @@ public class CeilingCheckCollision : MonoBehaviour
     private void Update()
     {
         m_touchingCeiling = false;
-        m_Hit = m_Hit = Physics2D.CircleCast(getPosition(), m_GroundColliderCircle.radius, -transform.up, m_CastDistance, m_WhatIsBlocking);
+        m_Hit = Physics2D.CircleCast(getPosition(), m_GroundColliderCircle.radius, -transform.up, m_CastDistance, m_WhatIsBlocking);
 
         if (m_Hit.collider != null)
         {
