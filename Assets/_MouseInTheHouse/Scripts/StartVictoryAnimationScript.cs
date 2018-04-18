@@ -5,6 +5,7 @@ using UnityEngine;
 public class StartVictoryAnimationScript : MonoBehaviour
 {
     [SerializeField] private LayerMask m_PlayersLayer;
+    [SerializeField] private EndGameScreenScript m_endGameScript;
     List<int> m_alreadyTriggeredForTheseID;
 
     private void Start()
@@ -23,9 +24,17 @@ public class StartVictoryAnimationScript : MonoBehaviour
                 {
                     m_alreadyTriggeredForTheseID.Add(m_mouse.PlayerID);
                     m_mouse.Animator.SetTrigger(m_mouse.AnimatorParameterMapper.VictoryDance);
+
+                    if (m_endGameScript == null) m_endGameScript = FindObjectOfType<EndGameScreenScript>();
+                    if (m_endGameScript == null)
+                    {
+                        Debug.LogError("\"EndGameScreenScript\" is not setted");
+                    }
+                    else if (m_alreadyTriggeredForTheseID.Count >= 2) m_endGameScript.StartEndGame();
                 }
             }
         }
     }
+
 
 }
