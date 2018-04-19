@@ -10,6 +10,11 @@ public class MenuManager : MonoBehaviour
 
     private int currentIndex = 0;
 
+    public void Start()
+    {
+        MenuIsActive = true;
+    }
+
     private bool m_menuIsActive = true;
     public bool MenuIsActive
     {
@@ -21,8 +26,14 @@ public class MenuManager : MonoBehaviour
             {
                 m_menuElements[currentIndex].Glow(value);
             }
-            if (value) { m_CameraFollow.MenuOn(); print("menuon"); }
-            else { m_CameraFollow.MenuOff(); }
+            if (value) {
+                m_CameraFollow.MenuOn();
+                Time.timeScale = 0f;
+            }
+            else {
+                m_CameraFollow.MenuOff();
+                Time.timeScale = 1f;
+            }
         }
     }
 
