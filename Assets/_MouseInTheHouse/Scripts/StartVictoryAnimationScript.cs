@@ -25,6 +25,8 @@ public class StartVictoryAnimationScript : MonoBehaviour
                     m_alreadyTriggeredForTheseID.Add(m_mouse.PlayerID);
                     m_mouse.MouseAnimator.SetTrigger(m_mouse.AnimatorParameterMapper.VictoryDance);
 
+                    StartCoroutine(MakeBubbleVisibleAndDisapear(m_mouse));
+
                     if (m_endGameScript == null) m_endGameScript = FindObjectOfType<EndGameScreenScript>();
                     if (m_endGameScript == null)
                     {
@@ -35,6 +37,12 @@ public class StartVictoryAnimationScript : MonoBehaviour
             }
         }
     }
-
-
+    IEnumerator MakeBubbleVisibleAndDisapear(MousePlayer mouse)
+    {
+        mouse.BubbleEndAnimator.gameObject.SetActive(true);
+        mouse.BubbleEndAnimator.SetBool("Visible", true);
+        yield return new WaitForSeconds(5f);
+        mouse.BubbleEndAnimator.SetBool("Visible", false);
+        mouse.BubbleEndAnimator.gameObject.SetActive(false);
+    }
 }
