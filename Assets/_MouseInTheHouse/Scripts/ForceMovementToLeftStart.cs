@@ -17,7 +17,7 @@ public class ForceMovementToLeftStart : MonoBehaviour
                 if (!m_alreadyTriggeredForTheseID.Contains(m_mouse.PlayerID))
                 {
                     m_alreadyTriggeredForTheseID.Add(m_mouse.PlayerID);
-                    m_mouse.ForcePlayerTOMoveLeft = false;
+                    m_mouse.ForcePlayerToMoveRight = true;
                 }
             }
         }
