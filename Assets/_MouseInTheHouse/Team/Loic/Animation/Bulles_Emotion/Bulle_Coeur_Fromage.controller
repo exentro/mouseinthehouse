@@ -27,6 +27,9 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+<<<<<<< HEAD
+--- !u!1102 &1102671298624512596
+=======
 --- !u!1101 &1101194187033834416
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -144,16 +147,24 @@ AnimatorState:
   m_CycleOffsetParameter: 
   m_TimeParameter: 
 --- !u!1102 &1102852097765823580
+>>>>>>> 742ec211b7a30ff0df6dfa7b3d57a17e626159ca
 AnimatorState:
   serializedVersion: 5
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
+<<<<<<< HEAD
+  m_Name: Bulle_Coeur_Fromage_Fixe
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+=======
   m_Name: Visible
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101277945392034402}
+>>>>>>> 742ec211b7a30ff0df6dfa7b3d57a17e626159ca
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -163,7 +174,11 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
+<<<<<<< HEAD
+  m_Motion: {fileID: 7400000, guid: 5fcf0801e389f804cabf7c632fc4b3d0, type: 2}
+=======
   m_Motion: {fileID: 0}
+>>>>>>> 742ec211b7a30ff0df6dfa7b3d57a17e626159ca
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -231,6 +246,12 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102892506018610094}
+<<<<<<< HEAD
+    m_Position: {x: 200, y: 0, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102671298624512596}
+    m_Position: {x: 235, y: 65, z: 0}
+=======
     m_Position: {x: 300, y: 48, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102431526288692182}
@@ -241,6 +262,7 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 1102852097765823580}
     m_Position: {x: 408, y: -36, z: 0}
+>>>>>>> 742ec211b7a30ff0df6dfa7b3d57a17e626159ca
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
