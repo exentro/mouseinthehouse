@@ -12,6 +12,7 @@ public class CheckPointManager : MonoBehaviour
     public GameObject m_player0;
     public GameObject m_player1;
     public Camera m_camera;
+    public bool m_onRetry = false;
 
     #endregion
 
@@ -23,16 +24,20 @@ public class CheckPointManager : MonoBehaviour
 
     private void Awake() 
 	{
-		
-	}
+        m_onRetry = CheckPointContainer.OnRetry;
+    }
 
 	private void Start() 
 	{
+        
         if (m_activateCheckpoint)
         {
-            
-            m_player0.transform.position = CheckPointContainer.RespawnPoint;
-            m_player1.transform.position = CheckPointContainer.RespawnPoint;
+            Vector3 player0Pos = CheckPointContainer.RespawnPoint;
+            Vector3 player1Pos = CheckPointContainer.RespawnPoint;
+            player0Pos.x += 1;
+            player1Pos.x -= 1;
+            m_player0.transform.position = player0Pos;
+            m_player1.transform.position = player1Pos;
             //m_camera.transform.position = CheckPointContainer.RespawnPoint;
         }
     }
@@ -66,13 +71,21 @@ public class CheckPointManager : MonoBehaviour
         print(selectedPoint.transform.position);
         //TODO: Go to selectedPoint
         CheckPointContainer.RespawnPoint = selectedPoint.transform.position;
+        CheckPointContainer.OnRetry = true;
         if (m_activateCheckpoint)
         {
             //Vector3 cameraPos = m_camera.transform.position;
-            SceneManager.LoadScene(0);
-            m_player0.transform.position = CheckPointContainer.RespawnPoint;
-            m_player1.transform.position = CheckPointContainer.RespawnPoint;
-            //m_camera.transform.position = CheckPointContainer.RespawnPoint;
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
+            Vector3 player0Pos = CheckPointContainer.RespawnPoint;
+            Vector3 player1Pos = CheckPointContainer.RespawnPoint;
+            Vector3 camPos = CheckPointContainer.RespawnPoint;
+            player0Pos.x += 1;
+            player1Pos.x -= 1;
+            camPos.z -= 10;
+            m_player0.transform.position = player0Pos;
+            m_player1.transform.position = player1Pos;
+            m_camera.transform.position = camPos;
             print("Retry on point " + checkpointNumber);
         }
     }
@@ -91,4 +104,5 @@ public class CheckPointManager : MonoBehaviour
 public static class CheckPointContainer
 {
     public static Vector3 RespawnPoint { get; set; }
+    public static bool OnRetry { get; set; }
 }

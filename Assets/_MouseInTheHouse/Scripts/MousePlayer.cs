@@ -13,7 +13,8 @@ public class MousePlayer : MonoBehaviour
     private void Awake()
     {
         if (m_debug && m_MouseAnimator == null) Debug.LogError("Can't find Component Animator for the mouse");
-        if (m_debug && m_bubbleStartAnimator == null) Debug.LogError("Can't find Component Animator for the bubble");
+        if (m_debug && m_bubbleStartAnimator == null) Debug.LogError("Can't find Component Animator for the bubble (start)");
+        if (m_debug && m_bubbleEndAnimator == null) Debug.LogError("Can't find Component Animator for the bubble (end)");
         if (m_debug && m_Rigidbody2D == null) Debug.LogError("Can't find Component Rigidbody2D");
         if (m_debug && m_transform == null) Debug.LogError("Can't find Component Transform");
         if (m_debug && m_movement == null) Debug.LogError("Can't find Component Movement");
@@ -116,29 +117,25 @@ public class MousePlayer : MonoBehaviour
 
     [SerializeField] private InputController m_inputController;
 
-    public void AllowPlayerInput(bool value)
-    {
-        m_inputController.AllowPlayerInput = value;
-        if (!value) m_Rigidbody2D.velocity = new Vector2(0f, 0f);
-    }
-
     private IEnumerator m_coroutine;
-    public bool ForcePlayerTOMoveLeft
+    public bool ForcePlayerToMoveRight
     {
         set
         {
             if(value)
             {
-                m_inputController.AllowPlayerInput = true;
-
-                StopCoroutine(m_coroutine);
-            }
-            else
-            {
                 m_inputController.AllowPlayerInput = false;
+                m_Rigidbody2D.velocity = new Vector2(0f, 0f);
 
                 m_coroutine = MoveToLeftCoRoutine();
                 StartCoroutine(m_coroutine);
+            }
+            else
+            {
+                m_inputController.AllowPlayerInput = true;
+
+                if(m_coroutine != null) StopCoroutine(m_coroutine);
+                m_movement.MovementInput.InputHorizontal = 0f;
             }
         }
     }

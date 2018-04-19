@@ -53,7 +53,6 @@ public class InputController : MonoBehaviour
 
     private void GetInput()
     {
-        print("Input");
         if (!m_menuManager.MenuIsActive)
         {
             m_playerMovementInputs.InputHorizontal = m_player.GetAxis("MoveHorizontal");
@@ -81,7 +80,6 @@ public class InputController : MonoBehaviour
         }
         else
         {
-            print("menu input");
             if (m_player.GetButtonDown("Next"))
                 m_mousePlayer.Action.MenuNext();
             if (m_player.GetButtonDown("Previous"))
@@ -90,23 +88,4 @@ public class InputController : MonoBehaviour
                 m_mousePlayer.Action.MenuSelect();
         }
     }
-    /*
-    public void ForbidPlayerInputs(float timeInSeconds)
-    {
-        if (m_routine != null)
-        {
-            m_routine = MyCoroutine(timeInSeconds);
-            StartCoroutine(m_routine);
-        }
-    }
-
-    private IEnumerator m_routine;
-    private IEnumerator MyCoroutine(float timeInSeconds)
-    {
-        m_allowInputs = false;
-        yield return new WaitForSeconds(timeInSeconds);
-        m_allowInputs = true;
-        m_routine = null;
-    }
-    */
 }

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class FadeScreenTransitionScript : MonoBehaviour
 {
     #region Members
-    [SerializeField] private UIScript m_ui;
     [SerializeField] private Color m_colorTransparent;
     [SerializeField] private Color m_colorOpaque;
     [SerializeField] private Image m_backgroundImage;
