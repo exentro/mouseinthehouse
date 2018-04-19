@@ -29,7 +29,8 @@ public class Camera2DFollow : MonoBehaviour
         m_camera3Follow = m_camera3.GetComponent<Camera2DAuxFollow>();
         m_camera2.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
         m_camera3.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
-        transform.position = m_onMenuPos;
+        if(m_onMenu)
+            transform.position = m_onMenuPos;
         m_camera1.orthographicSize = 28;
     }
 
