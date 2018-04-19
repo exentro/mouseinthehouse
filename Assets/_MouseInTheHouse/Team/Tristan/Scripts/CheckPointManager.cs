@@ -32,6 +32,7 @@ public class CheckPointManager : MonoBehaviour
         
         if (m_activateCheckpoint)
         {
+            //Vector3 player0Pos
             m_player0.transform.position = CheckPointContainer.RespawnPoint;
             m_player1.transform.position = CheckPointContainer.RespawnPoint;
             //m_camera.transform.position = CheckPointContainer.RespawnPoint;
