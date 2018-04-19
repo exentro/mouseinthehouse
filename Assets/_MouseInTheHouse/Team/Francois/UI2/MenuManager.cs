@@ -7,12 +7,14 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private MenuElement[] m_menuElements;
     [SerializeField] private FadeScreenTransitionScript m_fadeTransition;
     [SerializeField] private Camera2DFollow m_CameraFollow;
+    [SerializeField] private CheckPointManager m_checkPointManager;
 
     private int currentIndex = 0;
 
     public void Start()
     {
-        MenuIsActive = true;
+        //MenuIsActive = true;
+        MenuIsActive = !m_checkPointManager.m_onRetry;
     }
 
     private bool m_menuIsActive = true;
