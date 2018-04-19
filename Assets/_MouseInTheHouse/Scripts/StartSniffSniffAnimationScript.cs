@@ -22,10 +22,19 @@ public class StartSniffSniffAnimationScript : MonoBehaviour
                 if (!m_alreadyTriggeredForTheseID.Contains(m_mouse.PlayerID))
                 {
                     m_alreadyTriggeredForTheseID.Add(m_mouse.PlayerID);
-                    m_mouse.Animator.SetTrigger(m_mouse.AnimatorParameterMapper.SniffSniff);
+                    m_mouse.MouseAnimator.SetTrigger(m_mouse.AnimatorParameterMapper.SniffSniff);
+                    StartCoroutine(MakeBubbleVisibleAndDisapear(m_mouse));
                 }
             }
         }
     }
-
+    IEnumerator MakeBubbleVisibleAndDisapear(MousePlayer mouse)
+    {
+        mouse.BubbleStartAnimator.gameObject.SetActive(true);
+        mouse.BubbleStartAnimator.SetBool("Visible", true);
+        yield return new WaitForSeconds(3f);
+        mouse.BubbleStartAnimator.SetBool("Visible", false);
+        yield return new WaitForSeconds(1f);
+        mouse.BubbleStartAnimator.gameObject.SetActive(false);
+    }
 }

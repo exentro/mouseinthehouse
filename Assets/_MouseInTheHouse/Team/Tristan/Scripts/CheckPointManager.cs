@@ -12,6 +12,7 @@ public class CheckPointManager : MonoBehaviour
     public GameObject m_player0;
     public GameObject m_player1;
     public Camera m_camera;
+    public bool m_onRetry = false;
 
     #endregion
 
@@ -23,17 +24,18 @@ public class CheckPointManager : MonoBehaviour
 
     private void Awake() 
 	{
-		
-	}
+        m_onRetry = CheckPointContainer.OnRetry;
+    }
 
 	private void Start() 
 	{
+        
         if (m_activateCheckpoint)
         {
-            
+            //Vector3 player0Pos
             m_player0.transform.position = CheckPointContainer.RespawnPoint;
             m_player1.transform.position = CheckPointContainer.RespawnPoint;
-            m_camera.transform.position = CheckPointContainer.RespawnPoint;
+            //m_camera.transform.position = CheckPointContainer.RespawnPoint;
         }
     }
 	
@@ -66,13 +68,14 @@ public class CheckPointManager : MonoBehaviour
         print(selectedPoint.transform.position);
         //TODO: Go to selectedPoint
         CheckPointContainer.RespawnPoint = selectedPoint.transform.position;
+        CheckPointContainer.OnRetry = true;
         if (m_activateCheckpoint)
         {
             //Vector3 cameraPos = m_camera.transform.position;
             SceneManager.LoadScene(0);
             m_player0.transform.position = CheckPointContainer.RespawnPoint;
             m_player1.transform.position = CheckPointContainer.RespawnPoint;
-            m_camera.transform.position = CheckPointContainer.RespawnPoint;
+            //m_camera.transform.position = CheckPointContainer.RespawnPoint;
             print("Retry on point " + checkpointNumber);
         }
     }
@@ -91,4 +94,5 @@ public class CheckPointManager : MonoBehaviour
 public static class CheckPointContainer
 {
     public static Vector3 RespawnPoint { get; set; }
+    public static bool OnRetry { get; set; }
 }

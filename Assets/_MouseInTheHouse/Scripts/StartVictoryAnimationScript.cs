@@ -5,6 +5,7 @@ using UnityEngine;
 public class StartVictoryAnimationScript : MonoBehaviour
 {
     [SerializeField] private LayerMask m_PlayersLayer;
+    [SerializeField] private EndGameScreenScript m_endGameScript;
     List<int> m_alreadyTriggeredForTheseID;
 
     private void Start()
@@ -22,10 +23,26 @@ public class StartVictoryAnimationScript : MonoBehaviour
                 if (!m_alreadyTriggeredForTheseID.Contains(m_mouse.PlayerID))
                 {
                     m_alreadyTriggeredForTheseID.Add(m_mouse.PlayerID);
-                    m_mouse.Animator.SetTrigger(m_mouse.AnimatorParameterMapper.VictoryDance);
+                    m_mouse.MouseAnimator.SetTrigger(m_mouse.AnimatorParameterMapper.VictoryDance);
+
+                    StartCoroutine(MakeBubbleVisibleAndDisapear(m_mouse));
+
+                    if (m_endGameScript == null) m_endGameScript = FindObjectOfType<EndGameScreenScript>();
+                    if (m_endGameScript == null)
+                    {
+                        Debug.LogError("\"EndGameScreenScript\" is not setted");
+                    }
+                    else if (m_alreadyTriggeredForTheseID.Count >= 2) m_endGameScript.StartEndGame();
                 }
             }
         }
     }
-
+    IEnumerator MakeBubbleVisibleAndDisapear(MousePlayer mouse)
+    {
+        mouse.BubbleEndAnimator.gameObject.SetActive(true);
+        mouse.BubbleEndAnimator.SetBool("Visible", true);
+        yield return new WaitForSeconds(5f);
+        mouse.BubbleEndAnimator.SetBool("Visible", false);
+        mouse.BubbleEndAnimator.gameObject.SetActive(false);
+    }
 }

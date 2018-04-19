@@ -8,6 +8,7 @@ public class InputController : MonoBehaviour
     private Player m_player;
     private PlayerMovementInput m_playerMovementInputs;
     private PlayerActionInput m_playerActiontInputs;
+    private MenuManager m_menuManager;
 
     private bool m_allowInputs;
     public bool AllowPlayerInput
@@ -33,6 +34,7 @@ public class InputController : MonoBehaviour
     {
         m_playerMovementInputs = m_mousePlayer.Movement.MovementInput;
         m_playerActiontInputs = m_mousePlayer.Action.ActionInput;
+        m_menuManager = m_mousePlayer.MenuManager;
         m_allowInputs = true;
     }
 
@@ -51,27 +53,40 @@ public class InputController : MonoBehaviour
 
     private void GetInput()
     {
-        m_playerMovementInputs.InputHorizontal = m_player.GetAxis("MoveHorizontal");
-        m_playerMovementInputs.InputVertical = m_player.GetAxis("MoveVertical");
+        if (!m_menuManager.MenuIsActive)
+        {
+            m_playerMovementInputs.InputHorizontal = m_player.GetAxis("MoveHorizontal");
+            m_playerMovementInputs.InputVertical = m_player.GetAxis("MoveVertical");
 
-        m_playerMovementInputs.Jump = m_player.GetButtonDown("Jump");
-        m_playerMovementInputs.Crouch = m_player.GetButton("Crouch");
-        
-        m_playerActiontInputs.Nibble = m_player.GetButtonDown("Nibble");
-        m_playerActiontInputs.Retry = m_player.GetButtonDown("Retry");
-        
-        m_playerActiontInputs.CameraHorizontal = m_player.GetAxis("CameraHorizontal");
-        m_playerActiontInputs.CameraVertical = m_player.GetAxis("CameraVertical");
+            m_playerMovementInputs.Jump = m_player.GetButtonDown("Jump");
+            m_playerMovementInputs.Crouch = m_player.GetButton("Crouch");
 
-        m_playerActiontInputs.Zoom = m_player.GetAxis("Zoom");
-        m_playerActiontInputs.Unzoom = m_player.GetAxis("Unzoom");
+            m_playerActiontInputs.Nibble = m_player.GetButtonDown("Nibble");
+            m_playerActiontInputs.Retry = m_player.GetButtonDown("Retry");
 
-        if (m_player.GetButtonDown("Next"))
-            m_mousePlayer.Action.MenuNext();
-        if (m_player.GetButtonDown("Previous"))
-            m_mousePlayer.Action.MenuPrevious();
-        if (m_player.GetButtonDown("Submit"))
-            m_mousePlayer.Action.MenuSelect();
+            m_playerActiontInputs.CameraHorizontal = m_player.GetAxis("CameraHorizontal");
+            m_playerActiontInputs.CameraVertical = m_player.GetAxis("CameraVertical");
+
+            m_playerActiontInputs.Zoom = m_player.GetAxis("Zoom");
+            m_playerActiontInputs.Unzoom = m_player.GetAxis("Unzoom");
+
+            if (m_player.GetButtonDown("Submit"))
+                m_mousePlayer.Action.MenuEnter();
+        }
+        else if (m_menuManager.PanelCredit.activeSelf)
+        {
+            if (m_player.GetButtonDown("Submit"))
+                m_menuManager.CreditLeave();
+        }
+        else
+        {
+            if (m_player.GetButtonDown("Next"))
+                m_mousePlayer.Action.MenuNext();
+            if (m_player.GetButtonDown("Previous"))
+                m_mousePlayer.Action.MenuPrevious();
+            if (m_player.GetButtonDown("Submit"))
+                m_mousePlayer.Action.MenuSelect();
+        }
     }
     /*
     public void ForbidPlayerInputs(float timeInSeconds)
