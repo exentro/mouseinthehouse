@@ -10074,11 +10074,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4494289802296418, guid: e2accf3654ec4ee48b054cd1e3d5e15b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1190.97
+      value: 0.5599365
       objectReference: {fileID: 0}
     - target: {fileID: 4494289802296418, guid: e2accf3654ec4ee48b054cd1e3d5e15b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -69.96
+      value: 0.79999924
       objectReference: {fileID: 0}
     - target: {fileID: 4494289802296418, guid: e2accf3654ec4ee48b054cd1e3d5e15b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -14678,6 +14678,11 @@ Prefab:
       propertyPath: m_endGameScript
       value: 
       objectReference: {fileID: 968843890}
+    - target: {fileID: 114087931642518066, guid: 6ef1876dee9134e4e9765c392c1dd6d6,
+        type: 2}
+      propertyPath: m_camera2DFollow
+      value: 
+      objectReference: {fileID: 676800403}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6ef1876dee9134e4e9765c392c1dd6d6, type: 2}
   m_IsPrefabParent: 0
@@ -16482,6 +16487,9 @@ MonoBehaviour:
   m_offsetZ: -10
   m_onMenuPos: {x: -17, y: 16, z: -10}
   m_endGame: {fileID: 968843891}
+  m_gardenCamPos: {x: 0, y: 0, z: 0}
+  m_gardenCamSize: 0
+  m_sizeTransitionSpeed: 0
 --- !u!4 &676800404
 Transform:
   m_ObjectHideFlags: 0
@@ -51099,11 +51107,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4456341088905526, guid: e494ecf9afd1def40b52e15ac1f9e3ad, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1190.41
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4456341088905526, guid: e494ecf9afd1def40b52e15ac1f9e3ad, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -69.96
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4456341088905526, guid: e494ecf9afd1def40b52e15ac1f9e3ad, type: 2}
       propertyPath: m_LocalPosition.z
@@ -56485,7 +56493,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2122211922
 Transform:
   m_ObjectHideFlags: 0
