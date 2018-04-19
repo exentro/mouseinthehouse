@@ -9,7 +9,6 @@ public class MenuElement : MonoBehaviour
 
     public void Glow(bool value)
     {
-        Debug.Log(string.Format("{0} : Glow {1}", gameObject.name, value));
         m_halo.enabled = value;
     }
 
