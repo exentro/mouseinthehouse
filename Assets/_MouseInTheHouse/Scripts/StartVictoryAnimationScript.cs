@@ -6,6 +6,8 @@ public class StartVictoryAnimationScript : MonoBehaviour
 {
     [SerializeField] private LayerMask m_PlayersLayer;
     [SerializeField] private EndGameScreenScript m_endGameScript;
+    [SerializeField] private Camera2DFollow m_camera2DFollow;
+    
     List<int> m_alreadyTriggeredForTheseID;
 
     private void Start()
@@ -32,7 +34,11 @@ public class StartVictoryAnimationScript : MonoBehaviour
                     {
                         Debug.LogError("\"EndGameScreenScript\" is not setted");
                     }
-                    else if (m_alreadyTriggeredForTheseID.Count >= 2) m_endGameScript.StartEndGame();
+                    else if (m_alreadyTriggeredForTheseID.Count >= 2)
+                    {
+                        m_camera2DFollow.EndCinematic();
+                        m_endGameScript.StartEndGame();
+                    }
                 }
             }
         }

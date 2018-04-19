@@ -3760,6 +3760,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4066b45605033074683c660eeecf229e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_mouse: {fileID: 0}
+  m_WhatIsBlocking:
+    serializedVersion: 2
+    m_Bits: 0
+  m_GroundColliderBox: {fileID: 0}
+  m_CastDistance: 0.05
+  m_drawGizmo: 0
+  m_boxCastEnabled: 0
 --- !u!114 &114098821010865582
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3974,7 +3982,7 @@ MonoBehaviour:
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 58806605759837786}
   m_CastDistance: 0.1
-  m_debug: 1
+  m_drawGizmo: 1
 --- !u!114 &114172944001386796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4141,6 +4149,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4066b45605033074683c660eeecf229e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_mouse: {fileID: 0}
+  m_WhatIsBlocking:
+    serializedVersion: 2
+    m_Bits: 0
+  m_GroundColliderBox: {fileID: 0}
+  m_CastDistance: 0.05
+  m_drawGizmo: 0
+  m_boxCastEnabled: 0
 --- !u!114 &114337578718357164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4156,12 +4172,15 @@ MonoBehaviour:
   m_playerId: 0
   m_debug: 1
   m_data: {fileID: 11400000, guid: 659e9a32287e4e14bb50e9562b29fcdd, type: 2}
-  m_Animator: {fileID: 95717329772313344}
+  m_MouseAnimator: {fileID: 0}
+  m_bubbleStartAnimator: {fileID: 0}
+  m_bubbleEndAnimator: {fileID: 0}
   m_animatorParameterMapper: {fileID: 114365302900478718}
   m_Rigidbody2D: {fileID: 50057215398925274}
   m_transform: {fileID: 4728567935771392}
   m_movement: {fileID: 114030053571676896}
   m_action: {fileID: 114878074648573810}
+  m_menuManager: {fileID: 0}
   m_collidersProvider: {fileID: 114790229256639094}
   m_inputController: {fileID: 0}
 --- !u!114 &114338966013868470
@@ -4191,6 +4210,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4066b45605033074683c660eeecf229e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_mouse: {fileID: 0}
+  m_WhatIsBlocking:
+    serializedVersion: 2
+    m_Bits: 0
+  m_GroundColliderBox: {fileID: 0}
+  m_CastDistance: 0.05
+  m_drawGizmo: 0
+  m_boxCastEnabled: 0
 --- !u!114 &114349038456442054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4639,7 +4666,7 @@ MonoBehaviour:
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 58601579105974122}
   m_CastDistance: 0.05
-  m_debug: 0
+  m_drawGizmo: 1
 --- !u!114 &114565764480592694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4685,7 +4712,7 @@ MonoBehaviour:
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 58993513121048518}
   m_CastDistance: 0.05
-  m_debug: 0
+  m_drawGizmo: 1
 --- !u!114 &114597898902496834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4727,7 +4754,7 @@ MonoBehaviour:
   m_GroundColliderBox: {fileID: 61566304089969528}
   m_GroundColliderCircle: {fileID: 0}
   m_CastDistance: 0.05
-  m_debug: 0
+  m_drawGizmo: 1
 --- !u!114 &114626191550514422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4787,6 +4814,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4066b45605033074683c660eeecf229e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_mouse: {fileID: 0}
+  m_WhatIsBlocking:
+    serializedVersion: 2
+    m_Bits: 0
+  m_GroundColliderBox: {fileID: 0}
+  m_CastDistance: 0.05
+  m_drawGizmo: 0
+  m_boxCastEnabled: 0
 --- !u!114 &114643510083684988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4816,7 +4851,7 @@ MonoBehaviour:
   m_GroundColliderBox: {fileID: 61048821087277018}
   m_GroundColliderCircle: {fileID: 0}
   m_CastDistance: 0.05
-  m_debug: 0
+  m_drawGizmo: 1
 --- !u!114 &114658984628048688
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4905,7 +4940,7 @@ MonoBehaviour:
   m_GroundColliderBox: {fileID: 0}
   m_GroundColliderCircle: {fileID: 58669628543277508}
   m_CastDistance: 0.2
-  m_debug: 1
+  m_drawGizmo: 1
 --- !u!114 &114707724346684898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5067,6 +5102,7 @@ MonoBehaviour:
     Nibble: {fileID: 114434667391774218}
     EndClimb: {fileID: 114344365231957714}
     CanStand: {fileID: 0}
+    CeilingCheck: {fileID: 0}
   run:
     Container: {fileID: 1873118221803942}
     Push: {fileID: 114745465308600188}
@@ -5075,6 +5111,7 @@ MonoBehaviour:
     Nibble: {fileID: 114529522963670942}
     EndClimb: {fileID: 114802375295437140}
     CanStand: {fileID: 0}
+    CeilingCheck: {fileID: 0}
   push:
     Container: {fileID: 1994855976398274}
     Push: {fileID: 114731838770304738}
@@ -5083,6 +5120,7 @@ MonoBehaviour:
     Nibble: {fileID: 0}
     EndClimb: {fileID: 0}
     CanStand: {fileID: 0}
+    CeilingCheck: {fileID: 0}
   climb:
     Container: {fileID: 1474602628837186}
     Push: {fileID: 114947887902055730}
@@ -5091,6 +5129,7 @@ MonoBehaviour:
     Nibble: {fileID: 0}
     EndClimb: {fileID: 114636454052602134}
     CanStand: {fileID: 0}
+    CeilingCheck: {fileID: 0}
   jump:
     Container: {fileID: 1910801428792744}
     Push: {fileID: 114800271385358470}
@@ -5099,6 +5138,7 @@ MonoBehaviour:
     Nibble: {fileID: 0}
     EndClimb: {fileID: 114326082791675732}
     CanStand: {fileID: 0}
+    CeilingCheck: {fileID: 0}
   crouch:
     Container: {fileID: 1007198438315208}
     Push: {fileID: 114913521912419074}
@@ -5107,6 +5147,7 @@ MonoBehaviour:
     Nibble: {fileID: 114961209159813862}
     EndClimb: {fileID: 0}
     CanStand: {fileID: 0}
+    CeilingCheck: {fileID: 0}
 --- !u!114 &114796070458055570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5145,6 +5186,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4066b45605033074683c660eeecf229e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_mouse: {fileID: 0}
+  m_WhatIsBlocking:
+    serializedVersion: 2
+    m_Bits: 0
+  m_GroundColliderBox: {fileID: 0}
+  m_CastDistance: 0.05
+  m_drawGizmo: 0
+  m_boxCastEnabled: 0
 --- !u!114 &114806666585291222
 MonoBehaviour:
   m_ObjectHideFlags: 1

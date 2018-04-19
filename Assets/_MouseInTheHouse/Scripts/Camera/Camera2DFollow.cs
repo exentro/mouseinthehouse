@@ -16,6 +16,9 @@ public class Camera2DFollow : MonoBehaviour
     public float m_offsetZ = -10f;
     public Vector3 m_onMenuPos;
     public Transform m_endGame;
+    public Vector3 m_gardenCamPos;
+    public float m_gardenCamSize;
+    public float m_sizeTransitionSpeed;
 
     #endregion
 
@@ -25,11 +28,13 @@ public class Camera2DFollow : MonoBehaviour
         m_screenLength = Vector2.Distance(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)), Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)));
         m_screenHeight = Vector2.Distance(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)), Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)));
         m_camera1 = GetComponent<Camera>();
+        m_cameraSize = m_camera1.orthographicSize;
         m_camera2Follow = m_camera2.GetComponent<Camera2DAuxFollow>();
         m_camera3Follow = m_camera3.GetComponent<Camera2DAuxFollow>();
         m_camera2.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
         m_camera3.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
-        transform.position = m_onMenuPos;
+        if(m_onMenu)
+            transform.position = m_onMenuPos;
         m_camera1.orthographicSize = 28;
     }
 
@@ -55,6 +60,12 @@ public class Camera2DFollow : MonoBehaviour
         m_screenHeight = Vector2.Distance(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)), Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)));
     }
 
+    public void EndCinematic()
+    {
+        m_camera1.depth = 1;
+        m_onGardenTransition = true;
+    }
+
     public void EndGame()
     {
         m_onMenu = true;
@@ -71,7 +82,14 @@ public class Camera2DFollow : MonoBehaviour
     
     private void LateUpdate()
     {
-        if (!m_onMenu)
+        if (m_onGardenTransition)
+        {
+            t += Time.deltaTime;
+            //m_camera1.orthographicSize = Mathf.SmoothStep(m_cameraSize, m_gardenCamSize, t);
+            m_camera1.orthographicSize = Mathf.SmoothStep(m_cameraSize, m_gardenCamSize, t * m_sizeTransitionSpeed);
+            SmoothLookPoint(m_camera1, m_gardenCamPos);
+        }
+        else if (!m_onMenu)
         {
             float m_deltaX = Math.Abs(m_focusPlayer1.position.x - m_focusPlayer2.position.x);
 
@@ -185,12 +203,22 @@ public class Camera2DFollow : MonoBehaviour
         }
     }
 
+    private void OnGUI()
+    {
+        if (GUILayout.Button("click"))
+        {
+            EndCinematic();
+        }
+    }
+
+
     #region Private an Protected Members
 
     //private float m_offsetZ;
     private Vector3 m_currentVelocity;
 
     private Camera m_camera1;
+    private float m_cameraSize;
     private Camera2DAuxFollow m_camera2Follow;
     private Camera2DAuxFollow m_camera3Follow;
     private float m_screenLength;
@@ -198,7 +226,9 @@ public class Camera2DFollow : MonoBehaviour
     private bool m_splited = false;
     private bool m_merging = false;
     private bool m_onMenu = true;
+    private bool m_onGardenTransition = false;
     private Vector3 m_camSavedPos;
+    private float t = 0;
 
     #endregion
 

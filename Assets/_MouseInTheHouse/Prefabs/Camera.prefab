@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 124524491081138026}
   - component: {fileID: 81118039978387954}
   - component: {fileID: 114701022398375102}
+  - component: {fileID: 114022213146911808}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -41,6 +42,7 @@ GameObject:
   - component: {fileID: 20741369591283360}
   - component: {fileID: 124428668066683692}
   - component: {fileID: 114267073474726746}
+  - component: {fileID: 114151502918842738}
   m_Layer: 0
   m_Name: Aux Camera3
   m_TagString: Untagged
@@ -74,6 +76,7 @@ GameObject:
   - component: {fileID: 20742473159027536}
   - component: {fileID: 124092163057551626}
   - component: {fileID: 114023566561213694}
+  - component: {fileID: 114015285236311176}
   m_Layer: 0
   m_Name: Aux Camera2
   m_TagString: Untagged
@@ -88,7 +91,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1094892674890126}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 810.8, y: -31.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4380655542698198}
@@ -101,7 +104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1522068255561554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 50.369995, y: 1.6399994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4094399088666878}
@@ -154,9 +157,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 148
   orthographic: 1
-  orthographic size: 12.21
+  orthographic size: 13.8
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -192,7 +195,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 12.21
+  orthographic size: 13.8
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -228,7 +231,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 12.21
+  orthographic size: 13.8
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -251,6 +254,30 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1094892674890126}
   m_Enabled: 1
+--- !u!114 &114015285236311176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1709711172357242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: d6a5f4fc72bc117488af5e983a328ae6, type: 2}
+--- !u!114 &114022213146911808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1094892674890126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: d6a5f4fc72bc117488af5e983a328ae6, type: 2}
 --- !u!114 &114023566561213694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -263,6 +290,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_damping: 3
+--- !u!114 &114151502918842738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1512095202088982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: d6a5f4fc72bc117488af5e983a328ae6, type: 2}
 --- !u!114 &114267073474726746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -286,13 +325,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973e6ede5b9bf1c489ac140d97114dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_player1: {fileID: 0}
-  m_player2: {fileID: 0}
+  m_focusPlayer1: {fileID: 0}
+  m_focusPlayer2: {fileID: 0}
   m_damping: 3
   m_camera2: {fileID: 20742473159027536}
   m_camera3: {fileID: 20741369591283360}
   m_maxHeight: 44
-  m_minHeight: -9
+  m_minHeight: -70
+  m_offsetZ: -10
+  m_onMenuPos: {x: -17, y: 16, z: -10}
+  m_endGame: {fileID: 0}
+  m_gardenCamPos: {x: 1186, y: 38, z: 0}
+  m_gardenCamSize: 35
+  m_sizeTransitionSpeed: 0.4
 --- !u!124 &124092163057551626
 Behaviour:
   m_ObjectHideFlags: 1

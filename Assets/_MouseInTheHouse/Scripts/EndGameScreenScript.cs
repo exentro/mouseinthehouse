@@ -9,6 +9,7 @@ public class EndGameScreenScript : MonoBehaviour
     [SerializeField] private float m_timeBetweenTransitionAndCatEyes = 3f;
     [SerializeField] private float m_timeBetweenCatEyesAndCredits = 3f;
     [SerializeField] private FadeScreenTransitionScript m_fadeScript;
+    [SerializeField] private AudioScript m_audio;
     [SerializeField] private MenuManager m_menuManager;
     [SerializeField] private GameObject m_background;
     [SerializeField] private GameObject m_catEyes;
@@ -33,9 +34,12 @@ public class EndGameScreenScript : MonoBehaviour
     IEnumerator CatEyesCoroutine()
     {
         yield return new WaitForSeconds(m_timeBetweenTransitionAndCatEyes + m_transitionTime);
+        m_audio.m_audioSourceMusic.mute = true;
+        m_audio.m_audioSourceVinyl.Play();
+        yield return new WaitForSeconds(m_audio.m_audioSourceVinyl.clip.length + 0.5f);
+        m_audio.m_audioSourceCat.Play();
         m_catEyes.SetActive(true);
         m_background.SetActive(false);
-        m_cameraFollow.EndSound();
         yield return new WaitForSeconds(m_timeBetweenCatEyesAndCredits);
         m_menuManager.Credit();
     }
