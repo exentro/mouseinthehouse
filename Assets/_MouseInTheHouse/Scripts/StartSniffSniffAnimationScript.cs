@@ -30,11 +30,8 @@ public class StartSniffSniffAnimationScript : MonoBehaviour
     }
     IEnumerator MakeBubbleVisibleAndDisapear(MousePlayer mouse)
     {
-        mouse.BubbleStartAnimator.gameObject.SetActive(true);
         mouse.BubbleStartAnimator.SetBool("Visible", true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         mouse.BubbleStartAnimator.SetBool("Visible", false);
-        yield return new WaitForSeconds(1f);
-        mouse.BubbleStartAnimator.gameObject.SetActive(false);
     }
 }

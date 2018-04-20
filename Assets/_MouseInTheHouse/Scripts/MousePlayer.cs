@@ -28,6 +28,9 @@ public class MousePlayer : MonoBehaviour
         {
             m_MouseAnimator.SetInteger("PlayerId", m_data.ID);
         }
+
+        m_bubbleStartAnimator.SetInteger("PlayerId", m_data.ID);
+        m_bubbleEndAnimator.SetInteger("PlayerId", m_data.ID);
     }
 
     private void Start()
@@ -116,7 +119,18 @@ public class MousePlayer : MonoBehaviour
     }
 
     [SerializeField] private InputController m_inputController;
-
+    /*
+    [SerializeField] private GameObject m_bubbleStartGameObject;
+    public GameObject BubbleStartGameObject
+    {
+        get { return m_bubbleStartGameObject; }
+    }
+    [SerializeField] private GameObject m_bubbleEndGameObject;
+    public GameObject BubbleEndGameObject
+    {
+        get { return m_bubbleEndGameObject; }
+    }
+    */
     private IEnumerator m_coroutine;
     public bool ForcePlayerToMoveRight
     {
