@@ -369,7 +369,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1212494302110460
 GameObject:
   m_ObjectHideFlags: 1
@@ -1382,7 +1382,6 @@ GameObject:
   - component: {fileID: 4116764129448774}
   - component: {fileID: 61383584085074808}
   - component: {fileID: 114452593701231202}
-  - component: {fileID: 61582823893069278}
   m_Layer: 8
   m_Name: EndClimbDetection
   m_TagString: Untagged
@@ -1453,7 +1452,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1874152339529246
 GameObject:
   m_ObjectHideFlags: 1
@@ -1482,7 +1481,7 @@ GameObject:
   - component: {fileID: 114875834286283792}
   - component: {fileID: 50213394437777544}
   m_Layer: 8
-  m_Name: FMA_Gimli
+  m_Name: FMA_GimliBackUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1643,6 +1642,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4216040532489036}
   - component: {fileID: 61346289474439786}
+  - component: {fileID: 114771734000462356}
   m_Layer: 8
   m_Name: repere
   m_TagString: Untagged
@@ -2437,7 +2437,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1879959401207822}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 116.74, y: 47.94, z: 0}
+  m_LocalPosition: {x: 113.36, y: 19.78, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4755633994949634}
@@ -3353,7 +3353,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.13, y: 1.6315842}
+  m_Offset: {x: 1.13, y: 1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3364,7 +3364,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4000001, y: 0.1578064}
+  m_Size: {x: 0.4, y: 2}
   m_EdgeRadius: 0
 --- !u!61 &61323141087470140
 BoxCollider2D:
@@ -3490,31 +3490,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1.7, y: 2.2}
-  m_EdgeRadius: 0
---- !u!61 &61582823893069278
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1822722232788340}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 1.13, y: 2.0065289}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.4000001, y: 0.11297989}
   m_EdgeRadius: 0
 --- !u!61 &61599660523344004
 BoxCollider2D:
@@ -3885,7 +3860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.9264706, g: 0.19074395, b: 0.19074395, a: 0.381}
-  m_Length: 2.9545887
+  m_Length: 2.9545798
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4839967097797684}
   m_AttachedIK: {fileID: 0}
@@ -4003,7 +3978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8344396, g: 0.037305348, b: 0.8455882, a: 0.271}
-  m_Length: 0.56459427
+  m_Length: 0.56459457
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4452856281563730}
   m_AttachedIK: {fileID: 0}
@@ -4161,7 +4136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.051092125, g: 0.20742232, b: 0.46323532, a: 0.308}
-  m_Length: 1.8718064
+  m_Length: 1.8718092
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4756131400136588}
   m_AttachedIK: {fileID: 0}
@@ -4323,7 +4298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8344396, g: 0.037305348, b: 0.8455882, a: 0.271}
-  m_Length: 0.7493074
+  m_Length: 0.7493079
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4685926663974620}
   m_AttachedIK: {fileID: 0}
@@ -4370,7 +4345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.9264706, g: 0.19074395, b: 0.19074395, a: 0.381}
-  m_Length: 1.658852
+  m_Length: 1.6588435
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4778335813493244}
   m_AttachedIK: {fileID: 0}
@@ -4402,7 +4377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.9558824, g: 0.93862605, b: 0.33034167, a: 0.362}
-  m_Length: 1.1635295
+  m_Length: 1.1635294
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4840090833700216}
   m_AttachedIK: {fileID: 0}
@@ -4679,7 +4654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.06325693, g: 0.3655814, b: 0.8602941, a: 0.308}
-  m_Length: 2.2170215
+  m_Length: 2.217013
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4493791620960912}
   m_AttachedIK: {fileID: 0}
@@ -4695,7 +4670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8344396, g: 0.037305348, b: 0.8455882, a: 0.271}
-  m_Length: 1.109167
+  m_Length: 1.1091626
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4207370794720230}
   m_AttachedIK: {fileID: 0}
@@ -4803,7 +4778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.03952206, g: 0.31617647, b: 0.075773366, a: 0.284}
-  m_Length: 2.2092843
+  m_Length: 2.2092834
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4027038314980374}
   m_AttachedIK: {fileID: 0}
@@ -4852,9 +4827,9 @@ MonoBehaviour:
     m_Bits: 8193
   m_LayerClimbable:
     serializedVersion: 2
-    m_Bits: 1
-  m_AreaToTeleport: {fileID: 61383584085074808}
-  m_topClimbable: {fileID: 61582823893069278}
+    m_Bits: 0
+  m_AreaToTeleport: {fileID: 0}
+  m_topClimbable: {fileID: 0}
   m_CastDistance: 0.05
   m_drawGizmo: 0
   m_boxCastEnabled: 1
@@ -4946,7 +4921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.03952206, g: 0.31617647, b: 0.075773366, a: 0.284}
-  m_Length: 4.4561696
+  m_Length: 4.456162
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4310565093736616}
   m_AttachedIK: {fileID: 0}
@@ -4977,7 +4952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.9264706, g: 0.19074395, b: 0.19074395, a: 0.381}
-  m_Length: 1.633244
+  m_Length: 1.6332349
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4919915761180548}
   m_AttachedIK: {fileID: 0}
@@ -4993,7 +4968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.06325693, g: 0.3655814, b: 0.8602941, a: 0.308}
-  m_Length: 0.47000015
+  m_Length: 0.4700083
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4817587029236828}
   m_AttachedIK: {fileID: 0}
@@ -5080,7 +5055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.11245675, g: 0.58823526, b: 0.1748002, a: 0.284}
-  m_Length: 4.4561663
+  m_Length: 4.456174
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4235473711319212}
   m_AttachedIK: {fileID: 0}
@@ -5289,8 +5264,8 @@ MonoBehaviour:
   m_LayerClimbable:
     serializedVersion: 2
     m_Bits: 0
-  m_AreaToTeleport: {fileID: 61379509641325538}
-  m_topClimbable: {fileID: 61379509641325538}
+  m_AreaToTeleport: {fileID: 0}
+  m_topClimbable: {fileID: 0}
   m_CastDistance: 0.05
   m_drawGizmo: 1
   m_boxCastEnabled: 0
@@ -5333,8 +5308,8 @@ MonoBehaviour:
   m_LayerClimbable:
     serializedVersion: 2
     m_Bits: 0
-  m_AreaToTeleport: {fileID: 61771865494517404}
-  m_topClimbable: {fileID: 61771865494517404}
+  m_AreaToTeleport: {fileID: 0}
+  m_topClimbable: {fileID: 0}
   m_CastDistance: 0.05
   m_drawGizmo: 0
   m_boxCastEnabled: 0
@@ -5363,7 +5338,7 @@ MonoBehaviour:
   m_name: 
   m_playerId: 0
   m_debug: 1
-  m_data: {fileID: 11400000, guid: aaa436d640c177b49a4e5288e444751e, type: 2}
+  m_data: {fileID: 11400000, guid: 659e9a32287e4e14bb50e9562b29fcdd, type: 2}
   m_MouseAnimator: {fileID: 95086844680871670}
   m_bubbleStartAnimator: {fileID: 95194982636258866}
   m_bubbleEndAnimator: {fileID: 95003762106563940}
@@ -5375,6 +5350,29 @@ MonoBehaviour:
   m_menuManager: {fileID: 0}
   m_collidersProvider: {fileID: 114667467746229414}
   m_inputController: {fileID: 114875834286283792}
+--- !u!114 &114771734000462356
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1966227057967438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4066b45605033074683c660eeecf229e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_mouse: {fileID: 0}
+  m_WhatIsBlocking:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerClimbable:
+    serializedVersion: 2
+    m_Bits: 0
+  m_AreaToTeleport: {fileID: 0}
+  m_topClimbable: {fileID: 0}
+  m_CastDistance: 0.05
+  m_drawGizmo: 1
+  m_boxCastEnabled: 0
 --- !u!114 &114773435925949322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5419,7 +5417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.11245675, g: 0.58823526, b: 0.1748002, a: 0.284}
-  m_Length: 2.144199
+  m_Length: 2.1442032
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4419090545206574}
   m_AttachedIK: {fileID: 0}
@@ -5524,8 +5522,8 @@ MonoBehaviour:
   m_LayerClimbable:
     serializedVersion: 2
     m_Bits: 0
-  m_AreaToTeleport: {fileID: 61730060782441922}
-  m_topClimbable: {fileID: 61730060782441922}
+  m_AreaToTeleport: {fileID: 0}
+  m_topClimbable: {fileID: 0}
   m_CastDistance: 0.05
   m_drawGizmo: 1
   m_boxCastEnabled: 0
@@ -5594,7 +5592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8344396, g: 0.037305348, b: 0.8455882, a: 0.271}
-  m_Length: 1.0288928
+  m_Length: 1.0288985
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4798781470910656}
   m_AttachedIK: {fileID: 0}
@@ -5634,7 +5632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.051092125, g: 0.20742232, b: 0.46323532, a: 0.308}
-  m_Length: 0.4699852
+  m_Length: 0.46999264
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4937518939848962}
   m_AttachedIK: {fileID: 0}
@@ -5779,7 +5777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.06325693, g: 0.3655814, b: 0.8602941, a: 0.308}
-  m_Length: 1.871832
+  m_Length: 1.871835
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4249297549353638}
   m_AttachedIK: {fileID: 0}
@@ -5795,7 +5793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.03952206, g: 0.31617647, b: 0.075773366, a: 0.284}
-  m_Length: 2.144217
+  m_Length: 2.1442132
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4010922479331988}
   m_AttachedIK: {fileID: 0}
