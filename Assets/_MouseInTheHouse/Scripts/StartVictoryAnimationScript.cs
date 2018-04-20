@@ -45,10 +45,8 @@ public class StartVictoryAnimationScript : MonoBehaviour
     }
     IEnumerator MakeBubbleVisibleAndDisapear(MousePlayer mouse)
     {
-        mouse.BubbleEndAnimator.gameObject.SetActive(true);
         mouse.BubbleEndAnimator.SetBool("Visible", true);
         yield return new WaitForSeconds(5f);
         mouse.BubbleEndAnimator.SetBool("Visible", false);
-        mouse.BubbleEndAnimator.gameObject.SetActive(false);
     }
 }
