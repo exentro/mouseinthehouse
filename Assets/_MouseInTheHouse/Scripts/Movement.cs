@@ -233,20 +233,14 @@ public class Movement : MonoBehaviour
     {
         if (m_player.PlayerData.CanClimb)
         {
+            m_animator.SetBool(m_animatorParameters.Climb, m_colliders.CollidingClimbable());
+
+            m_animator.ResetTrigger(m_animatorParameters.ClimbEnd);
             if (m_colliders.ClimbingEnd())
             {
                 m_animator.SetTrigger(m_animatorParameters.ClimbEnd);
-            }
-            else
-            {
-                m_animator.SetBool(m_animatorParameters.Climb, m_colliders.CollidingClimbable());
-                m_animator.ResetTrigger(m_animatorParameters.ClimbEnd);
-            }            
+            }         
         }
-    }
-    public bool IsClimbing
-    {
-        get { return m_animator.GetBool(m_animatorParameters.Climb); }
     }
     public void Climb()
     {
