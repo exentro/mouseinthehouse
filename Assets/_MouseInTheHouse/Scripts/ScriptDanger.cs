@@ -12,6 +12,7 @@ public class ScriptDanger : MonoBehaviour
     
     [SerializeField] private bool m_startAsDanger = true;
     [SerializeField] private bool m_loop = true;
+    [SerializeField] private bool m_permanentDanger = true;
     private bool m_stop = false;
 
     [SerializeField] private float m_dangerTime = 5f;
@@ -83,26 +84,29 @@ public class ScriptDanger : MonoBehaviour
 
     void Update()
     {
-        if (!m_stop)
+        if(!m_permanentDanger)
         {
-            m_cooldown += Time.deltaTime;
+            if (!m_stop)
+            {
+                m_cooldown += Time.deltaTime;
 
-            if(m_active)
-            {
-                if (m_cooldown >= m_dangerTime)
+                if (m_active)
                 {
-                    Toggle();
-                    m_cooldown = 0f;
-                    if(!m_loop) m_stop = true;
+                    if (m_cooldown >= m_dangerTime)
+                    {
+                        Toggle();
+                        m_cooldown = 0f;
+                        if (!m_loop) m_stop = true;
+                    }
                 }
-            }
-            else
-            {
-                if (m_cooldown >= m_safeTime)
+                else
                 {
-                    Toggle();
-                    m_cooldown = 0f;
-                    if (!m_loop) m_stop = true;
+                    if (m_cooldown >= m_safeTime)
+                    {
+                        Toggle();
+                        m_cooldown = 0f;
+                        if (!m_loop) m_stop = true;
+                    }
                 }
             }
         }
