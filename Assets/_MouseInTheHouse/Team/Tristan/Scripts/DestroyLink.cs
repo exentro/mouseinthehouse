@@ -16,38 +16,20 @@ public class DestroyLink : MonoBehaviour
 
     #region System
 
-    private void Awake() 
-	{
-		
-	}
-
-	private void Start() 
-	{
-		
-	}
-	
-	private void Update()
-	{
-		
-	}
-
-	private void FixedUpdate()
-	{
-		
-	}
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print("Link collision");
-        JointAngleLimits2D limits;
-        for (int i = 0; i < m_hingeJointList.Length; i++)
+        if (collision.gameObject.layer == 8)
+        {
+            JointAngleLimits2D limits;
+            for (int i = 0; i < m_hingeJointList.Length; i++)
             {
-            limits = m_hingeJointList[i].limits;
-            limits.min = -90;
-            limits.max = 90;
-            m_hingeJointList[i].limits = limits;
+                limits = m_hingeJointList[i].limits;
+                limits.min = -90;
+                limits.max = 90;
+                m_hingeJointList[i].limits = limits;
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 
     #endregion

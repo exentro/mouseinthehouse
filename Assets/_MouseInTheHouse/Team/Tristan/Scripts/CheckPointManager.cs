@@ -38,7 +38,6 @@ public class CheckPointManager : MonoBehaviour
             player1Pos.x -= 1;
             m_player0.transform.position = player0Pos;
             m_player1.transform.position = player1Pos;
-            //m_camera.transform.position = CheckPointContainer.RespawnPoint;
         }
     }
 	
@@ -68,13 +67,10 @@ public class CheckPointManager : MonoBehaviour
                 }
             }
         }
-        print(selectedPoint.transform.position);
-        //TODO: Go to selectedPoint
         CheckPointContainer.RespawnPoint = selectedPoint.transform.position;
         CheckPointContainer.OnRetry = true;
         if (m_activateCheckpoint)
         {
-            //Vector3 cameraPos = m_camera.transform.position;
             Scene scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.name);
             Vector3 player0Pos = CheckPointContainer.RespawnPoint;
