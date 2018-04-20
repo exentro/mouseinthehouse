@@ -102,7 +102,6 @@ public class Camera2DFollow : MonoBehaviour
                 else
                     m_merging = false;
             }
-
             SmoothLookPoint(m_camera1, GetMidPoint(m_focusPlayer1.position, m_focusPlayer2.position));
             if (!m_merging) // 2 players on differents screens
                 SmoothLookEachPlayer();
