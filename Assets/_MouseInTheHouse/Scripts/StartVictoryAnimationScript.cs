@@ -7,7 +7,8 @@ public class StartVictoryAnimationScript : MonoBehaviour
     [SerializeField] private LayerMask m_PlayersLayer;
     [SerializeField] private EndGameScreenScript m_endGameScript;
     [SerializeField] private Camera2DFollow m_camera2DFollow;
-    
+    [SerializeField] private CheckPointManager m_checkPointManager;
+
     List<int> m_alreadyTriggeredForTheseID;
 
     private void Start()
@@ -38,6 +39,7 @@ public class StartVictoryAnimationScript : MonoBehaviour
                     {
                         m_camera2DFollow.EndCinematic();
                         m_endGameScript.StartEndGame();
+                        m_checkPointManager.m_gameEnded = true;
                     }
                 }
             }
