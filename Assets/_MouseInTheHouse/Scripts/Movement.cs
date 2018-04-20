@@ -236,7 +236,7 @@ public class Movement : MonoBehaviour
             m_animator.SetBool(m_animatorParameters.Climb, m_colliders.CollidingClimbable());
 
             m_animator.ResetTrigger(m_animatorParameters.ClimbEnd);
-            if (m_colliders.ClimbingEnd())
+            if (m_colliders.ClimbingEnd() && m_MovementInput.InputVertical > 0.1f)
             {
                 m_animator.SetTrigger(m_animatorParameters.ClimbEnd);
             }         
