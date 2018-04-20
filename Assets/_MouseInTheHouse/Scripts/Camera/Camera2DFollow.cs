@@ -14,9 +14,9 @@ public class Camera2DFollow : MonoBehaviour
     public float m_maxHeight;
     public float m_minHeight;
     public float m_offsetZ = -10f;
-    public Vector3 m_onMenuPos;
+    public Transform m_onMenuPos;
     public Transform m_endGame;
-    public Vector3 m_gardenCamPos;
+    public Transform m_gardenCamPos;
     public float m_gardenCamSize;
     public float m_sizeTransitionSpeed;
 
@@ -34,7 +34,7 @@ public class Camera2DFollow : MonoBehaviour
         m_camera2.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
         m_camera3.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
         if(m_onMenu)
-            transform.position = m_onMenuPos;
+            transform.position = m_onMenuPos.position;
         m_camera1.orthographicSize = 28;
     }
 
@@ -42,7 +42,7 @@ public class Camera2DFollow : MonoBehaviour
     {
         m_onMenu = true;
         m_camSavedPos = transform.position;
-        transform.position = m_onMenuPos;
+        transform.position = m_onMenuPos.position;
         m_camera1.orthographicSize = 28;
         m_camera1.depth = 1;
     }
@@ -68,18 +68,15 @@ public class Camera2DFollow : MonoBehaviour
 
     public void EndGame()
     {
+        m_camera1.orthographicSize = m_cameraSize;
         m_onMenu = true;
+        m_onGardenTransition = false;
         Vector3 camPos = m_endGame.position;
         camPos.z = m_offsetZ;
         transform.position = camPos;
     }
 
-    public void EndSound()
-    {
-
-    }
-
-    
+   
     private void LateUpdate()
     {
         if (m_onGardenTransition)
@@ -87,7 +84,10 @@ public class Camera2DFollow : MonoBehaviour
             t += Time.deltaTime;
             //m_camera1.orthographicSize = Mathf.SmoothStep(m_cameraSize, m_gardenCamSize, t);
             m_camera1.orthographicSize = Mathf.SmoothStep(m_cameraSize, m_gardenCamSize, t * m_sizeTransitionSpeed);
-            SmoothLookPoint(m_camera1, m_gardenCamPos);
+
+            Vector3 aheadTargetPos = m_gardenCamPos.position + Vector3.forward * m_offsetZ;
+            Vector3 newPos = Vector3.Lerp(m_camera1.transform.position, aheadTargetPos, m_damping * Time.deltaTime*.15f);
+            m_camera1.transform.position = newPos;
         }
         else if (!m_onMenu)
         {
@@ -203,13 +203,6 @@ public class Camera2DFollow : MonoBehaviour
         }
     }
 
-    private void OnGUI()
-    {
-        if (GUILayout.Button("click"))
-        {
-            EndCinematic();
-        }
-    }
 
 
     #region Private an Protected Members

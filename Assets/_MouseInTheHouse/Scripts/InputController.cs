@@ -77,6 +77,8 @@ public class InputController : MonoBehaviour
         {
             if (m_player.GetButtonDown("Submit"))
                 m_menuManager.CreditLeave();
+            if (m_player.GetButtonDown("Jump"))
+                m_menuManager.CreditLeave();
         }
         else
         {
@@ -86,6 +88,29 @@ public class InputController : MonoBehaviour
                 m_mousePlayer.Action.MenuPrevious();
             if (m_player.GetButtonDown("Submit"))
                 m_mousePlayer.Action.MenuSelect();
+            if (m_player.GetButtonDown("Jump"))
+                m_mousePlayer.Action.MenuSelect();
+            float axisValue = m_player.GetAxis("MoveHorizontal");
+            if (axisValue == 0)
+                m_isAxisInUse = false;
+            else if(axisValue == 1)
+            {
+                if (m_isAxisInUse == false)
+                {
+                    m_mousePlayer.Action.MenuNext();
+                    m_isAxisInUse = true;
+                }
+            }
+            else if (axisValue == - 1)
+            {
+                if (m_isAxisInUse == false)
+                {
+                    m_mousePlayer.Action.MenuPrevious();
+                    m_isAxisInUse = true;
+                }
+            }
         }
     }
+
+    private bool m_isAxisInUse = false;
 }

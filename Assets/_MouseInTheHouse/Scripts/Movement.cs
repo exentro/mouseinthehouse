@@ -92,7 +92,11 @@ public class Movement : MonoBehaviour
     private void CheckKinematic()
     {
         m_rigidbody2d.isKinematic = m_animator.GetBool(m_animatorParameters.Climb) && !m_animator.GetBool(m_animatorParameters.Jump) && !m_animator.GetBool(m_animatorParameters.Ground);
-        if (m_rigidbody2d.isKinematic) m_rigidbody2d.velocity = Vector2.zero;
+        
+        if (m_rigidbody2d.isKinematic)
+        {
+            m_rigidbody2d.velocity = Vector2.zero;
+        }
     }
     private void AffectPhysics()
     {
@@ -229,20 +233,14 @@ public class Movement : MonoBehaviour
     {
         if (m_player.PlayerData.CanClimb)
         {
+            m_animator.SetBool(m_animatorParameters.Climb, m_colliders.CollidingClimbable());
+
+            m_animator.ResetTrigger(m_animatorParameters.ClimbEnd);
             if (m_colliders.ClimbingEnd())
             {
                 m_animator.SetTrigger(m_animatorParameters.ClimbEnd);
-            }
-            else
-            {
-                m_animator.SetBool(m_animatorParameters.Climb, m_colliders.CollidingClimbable());
-                m_animator.ResetTrigger(m_animatorParameters.ClimbEnd);
-            }            
+            }         
         }
-    }
-    public bool IsClimbing
-    {
-        get { return m_animator.GetBool(m_animatorParameters.Climb); }
     }
     public void Climb()
     {
@@ -283,6 +281,7 @@ public class Movement : MonoBehaviour
     {
         m_animator.SetBool(m_animatorParameters.Danger, true);
         pushbackVelocity.x *= FacingRight ? -1 : 1;
+        m_rigidbody2d.isKinematic = false;
         m_rigidbody2d.velocity = pushbackVelocity;
     }
     #endregion
