@@ -14,7 +14,7 @@ public class Camera2DFollow : MonoBehaviour
     public float m_maxHeight;
     public float m_minHeight;
     public float m_offsetZ = -10f;
-    public Vector3 m_onMenuPos;
+    public Transform m_onMenuPos;
     public Transform m_endGame;
     public Transform m_gardenCamPos;
     public float m_gardenCamSize;
@@ -34,7 +34,7 @@ public class Camera2DFollow : MonoBehaviour
         m_camera2.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
         m_camera3.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
         if(m_onMenu)
-            transform.position = m_onMenuPos;
+            transform.position = m_onMenuPos.position;
         m_camera1.orthographicSize = 28;
     }
 
@@ -42,7 +42,7 @@ public class Camera2DFollow : MonoBehaviour
     {
         m_onMenu = true;
         m_camSavedPos = transform.position;
-        transform.position = m_onMenuPos;
+        transform.position = m_onMenuPos.position;
         m_camera1.orthographicSize = 28;
         m_camera1.depth = 1;
     }
@@ -203,13 +203,6 @@ public class Camera2DFollow : MonoBehaviour
         }
     }
 
-    private void OnGUI()
-    {
-        if (GUILayout.Button("click"))
-        {
-            EndCinematic();
-        }
-    }
 
 
     #region Private an Protected Members

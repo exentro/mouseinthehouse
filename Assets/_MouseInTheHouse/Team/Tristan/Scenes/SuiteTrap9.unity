@@ -9772,6 +9772,34 @@ Transform:
   m_PrefabParentObject: {fileID: 4919994694862880, guid: efc692716e2e80f47b2eee3e19d2ec17,
     type: 2}
   m_PrefabInternal: {fileID: 350459536}
+--- !u!1 &356988022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 356988023}
+  m_Layer: 0
+  m_Name: Focus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &356988023
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 356988022}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -53.6, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1701103985}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &358534714
 Prefab:
   m_ObjectHideFlags: 0
@@ -47569,6 +47597,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 682ed03529e322b43be6de5e06570c33, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &1701103985 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4032338016466058, guid: f32c07978dea7b741ab3b78671deadae,
+    type: 2}
+  m_PrefabInternal: {fileID: 1425537281}
 --- !u!1 &1701289733
 GameObject:
   m_ObjectHideFlags: 0
@@ -55019,6 +55052,11 @@ Prefab:
       propertyPath: m_sizeTransitionSpeed
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 114701022398375102, guid: c3b264fc2b658e542be9f484d10582ca,
+        type: 2}
+      propertyPath: m_onMenuPos
+      value: 
+      objectReference: {fileID: 356988023}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3b264fc2b658e542be9f484d10582ca, type: 2}
   m_IsPrefabParent: 0
