@@ -14,6 +14,7 @@ public class EndGameScreenScript : MonoBehaviour
     [SerializeField] private GameObject m_background;
     [SerializeField] private GameObject m_catEyes;
     [SerializeField] private Camera2DFollow m_cameraFollow;
+    [SerializeField] private CheckPointManager m_checkPointManager;
 
     public void StartEndGame()
     {

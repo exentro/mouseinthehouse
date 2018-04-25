@@ -92,6 +92,16 @@ public class CheckPointManager : MonoBehaviour
         SceneManager.LoadScene(scene.name);
     }
 
+    public void ResetGame()
+    {
+        if (m_gameEnded)
+        {
+            ResetCheckPoint();
+            m_gameEnded = false;
+            LoadScene();
+        }
+    }
+
     public void ResetCheckPoint()
     {
         foreach (GameObject point in m_checkpoints)
@@ -100,6 +110,12 @@ public class CheckPointManager : MonoBehaviour
             checkpoint.m_player0Triggered = false;
             checkpoint.m_player1Triggered = false;
         }
+    }
+
+    public void ResetPlayerPos()
+    {
+        m_player0.transform.position = Vector3.zero;
+        m_player1.transform.position = Vector3.zero;
     }
 
     #endregion

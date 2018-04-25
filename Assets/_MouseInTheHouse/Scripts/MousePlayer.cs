@@ -120,6 +120,12 @@ public class MousePlayer : MonoBehaviour
 
     [SerializeField] private InputController m_inputController;
     /*
+    public InputController InputController
+    {
+        get { return m_inputController; }
+    }
+    */
+    /*
     [SerializeField] private GameObject m_bubbleStartGameObject;
     public GameObject BubbleStartGameObject
     {

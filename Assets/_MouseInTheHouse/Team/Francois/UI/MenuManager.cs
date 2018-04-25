@@ -76,36 +76,38 @@ public class MenuManager : MonoBehaviour
 
     public void Credit()
     {
-        Debug.Log("Credit");
         m_fadeTransition.StartTransition(CreditEnter);
     }
 
     public void NewGame()
     {
         MenuIsActive = false;
-        Debug.Log("NewGame");
     }
 
     public void Resume()
     {
-        Debug.Log("Resume");
         MenuIsActive = false;
     }
 
     public void Quit()
     {
-        Debug.Log("Quit");
         Application.Quit();
     }
 
     [SerializeField] public GameObject PanelCredit;
     private void CreditEnter()
     {
+        MenuIsActive = true;
         PanelCredit.SetActive(true);
+        //MousePlayer.GetPlayer(0).InputController.AllowPlayerInput = true;
     }
     public void CreditLeave()
     {
         PanelCredit.SetActive(false);
+        if (m_checkPointManager.m_gameEnded)
+        {
+            m_checkPointManager.ResetGame();
+        }
     }
 
     //private void Update()
