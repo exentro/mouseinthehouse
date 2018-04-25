@@ -55,7 +55,8 @@ public class Camera2DFollow : MonoBehaviour
             m_camera1.depth = -1;
         else
             m_camera1.depth = 1;
-        transform.position = m_camSavedPos;
+        if(m_camSavedPos != Vector3.zero)
+            transform.position = m_camSavedPos;
         m_screenLength = Vector2.Distance(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)), Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)));
         m_screenHeight = Vector2.Distance(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)), Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)));
     }
@@ -102,11 +103,17 @@ public class Camera2DFollow : MonoBehaviour
                 else
                     m_merging = false;
             }
-            SmoothLookPoint(m_camera1, GetMidPoint(m_focusPlayer1.position, m_focusPlayer2.position));
+
+            Vector3 target = GetMidPoint(m_focusPlayer1.position, m_focusPlayer2.position);
+            if (Math.Abs(target.x - m_camera1.transform.position.x) > 5)
+            {
+                m_camera1.transform.position = target;
+            }
+            else
+                SmoothLookPoint(m_camera1, target);
             if (!m_merging) // 2 players on differents screens
                 SmoothLookEachPlayer();
         }
-
     }
 
     private void SmoothLookPoint(Camera camera, Vector3 target)
