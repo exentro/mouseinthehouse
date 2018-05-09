@@ -110,6 +110,7 @@ public class CheckPointManager : MonoBehaviour
             checkpoint.m_player0Triggered = false;
             checkpoint.m_player1Triggered = false;
         }
+        CheckPointContainer.RespawnPoint = Vector3.zero;
     }
 
     public void ResetPlayerPos()
